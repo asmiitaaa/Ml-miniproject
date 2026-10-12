@@ -1,0 +1,29 @@
+<routes>
+    <!-- Two-wheeler: dominant class, filters between lanes -->
+    <vType id="motorcycle" vClass="motorcycle" length="2.0" width="0.8"
+           accel="3.0" decel="4.5" maxSpeed="16.7" sigma="0.8"
+           minGap="1.0" minGapLat="0.25" latAlignment="arbitrary"
+           lcSublane="2.0" lcPushy="0.8" color="1,0.6,0"/>
+
+    <!-- Auto-rickshaw: slow, narrow, weaves -->
+    <vType id="auto" vClass="passenger" length="2.8" width="1.4"
+           accel="1.8" decel="3.5" maxSpeed="13.9" sigma="0.8"
+           minGap="1.2" minGapLat="0.3" latAlignment="arbitrary"
+           lcSublane="1.0" lcPushy="0.5" color="1,1,0"/>
+
+    <!-- Car -->
+    <vType id="car" vClass="passenger" length="4.5" width="1.8"
+           accel="2.0" decel="4.0" maxSpeed="16.7" sigma="0.6"
+           minGap="1.5" minGapLat="0.4" latAlignment="center" color="0.7,0.7,0.9"/>
+
+    <!-- City bus -->
+    <vType id="bus" vClass="bus" length="11.0" width="2.5"
+           accel="1.0" decel="3.0" maxSpeed="13.9" sigma="0.5"
+           minGap="2.0" minGapLat="0.5" latAlignment="center" color="0.2,0.6,0.2"/>
+
+    <!-- Bicycle: slow, hugs the road edge, filters like bikes -->
+    <vType id="bicycle" vClass="bicycle" length="1.8" width="0.65"
+           accel="1.2" decel="3.0" maxSpeed="5.5" sigma="0.7"
+           minGap="0.8" minGapLat="0.2" latAlignment="right"
+           lcSublane="1.5" lcPushy="0.6" color="0.3,0.8,1"/>
+</routes>
