@@ -1,0 +1,15 @@
+Development notes:
+
+Sumo is a program written in cpp. sumo, sumo-gui, netconvert etc are commands of this program
+INPUT AND OUTPUT TO SUMO 
+Input- road network(xml), and traffic demand(xml)
+Output- It calculates, for every second, for every vehicle where it is in our map, how fast it is going, etc 
+
+It performs these calculations using three models: 
+1. Car-following model
+2. Lane changing model 
+3. Sublane model 
+
+We change the parameters of these models to simulate complex indian traffic conditions.
+
+The format for vtypes.xml is already prescribed in the sumo documentation, we change the value according to our simulation needs. 
