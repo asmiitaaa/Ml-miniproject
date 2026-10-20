@@ -1,0 +1,44 @@
+# rl_agent/requirements.txt
+# ============================================================
+# Dependencies for the RL traffic signal control agent.
+# Install with:   pip install -r requirements.txt
+# ============================================================
+
+# Core RL framework and environment API
+gymnasium>=0.29.0
+
+# Deep RL algorithm library (includes PyTorch as a dependency)
+stable-baselines3>=2.3.0
+
+# Numerical computing (usually already installed with the above)
+numpy>=1.24.0
+
+# PyTorch — installed automatically by stable-baselines3.
+# If you need a specific CUDA version, install it manually FIRST:
+#   https://pytorch.org/get-started/locally/
+# Then install stable-baselines3 without the torch extra:
+#   pip install stable-baselines3[extra] --no-deps
+# For CPU-only (simplest, no GPU):
+torch>=2.0.0
+
+# Optional: progress bar during training
+# Uncomment if you want a tqdm progress bar in train.py
+# tqdm>=4.65.0
+
+# ============================================================
+# SUMO / TraCI (only needed when running in sumo mode)
+# ============================================================
+# traci is distributed as part of SUMO.  After installing SUMO:
+#   1. Set the SUMO_HOME environment variable to your SUMO install dir.
+#   2. Add %SUMO_HOME%\tools to your PYTHONPATH.
+#   3. Import traci in your code.
+#
+# Alternative: install the standalone traci package from PyPI:
+#   pip install traci
+#
+# Note: the standalone PyPI package may lag behind the SUMO release.
+# For production use, prefer the traci that ships with your SUMO version.
+# ============================================================
+
+# Testing
+pytest>=7.0.0
