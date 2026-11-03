@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  corridor.sumocfg
+  ================
+  SUMO configuration for the RL traffic-signal training run.
+
+  Intersection under RL control:
+    cluster_11484393853_11484393854_11484393855_11484393856_#11more
+
+  Run headless (no GUI) for training.
+  To inspect visually, change sumo to sumo-gui in train.py (use_gui=True).
+-->
+<configuration>
+
+    <input>
+        <!-- Road network generated from OpenStreetMap via netconvert -->
+        <net-file       value="../network/corridor.net.xml"/>
+        <!-- Traffic demand: flows for all 4 approaches -->
+        <route-files    value="../demand/routes.xml"/>
+        <!-- Indian vehicle type parameters -->
+        <additional-files value="../demand/vtypes.xml"/>
+    </input>
+
+    <time>
+        <!-- Simulate 1 hour (3600 seconds) per episode -->
+        <begin value="0"/>
+        <end   value="3600"/>
+        <step-length value="1.0"/>
+    </time>
+
+    <processing>
+        <!-- Ignore minor route errors so simulation doesn't abort -->
+        <ignore-route-errors value="true"/>
+        <!-- Lateral resolution for sublane model (Indian traffic weaving) -->
+        <lateral-resolution value="0.5"/>
+    </processing>
+
+    <report>
+        <!-- Suppress per-step terminal output — agent controls pacing -->
+        <no-step-log value="true"/>
+        <verbose      value="false"/>
+        <!-- Write per-lane stats every 60 s for post-run analysis -->
+        <lanedata-output value="output/lanedata.xml"/>
+    </report>
+
+</configuration>
+

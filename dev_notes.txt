@@ -13,3 +13,148 @@ It performs these calculations using three models:
 We change the parameters of these models to simulate complex indian traffic conditions.
 
 The format for vtypes.xml is already prescribed in the sumo documentation, we change the value according to our simulation needs. 
+
+---------------------------------------------------------------------------
+RL AGENT (added by Ananyaraj - branch: ananyaraj)
+---------------------------------------------------------------------------
+
+The RL agent lives in the rl_agent/ folder. It is separate from the SUMO
+network and demand files. The other team member handles those.
+
+GOAL:
+Use Reinforcement Learning (specifically DQN) to control a traffic signal
+at an intersection. The agent decides every 5 simulated seconds whether to
+keep the current green phase or request a switch to the next phase.
+
+FILES CREATED:
+  rl_agent/
+  ├── signal_logic.py     - Controls when the signal is ALLOWED to change.
+  │                         Enforces minimum green time and yellow interval.
+  ├── reward.py           - Calculates the reward: reward = -sum(waiting times)
+  │                         Negative because RL maximises reward but we want
+  │                         to minimise waiting time.
+  ├── environment.py      - The Gymnasium environment the RL agent interacts with.
+  │                         Has two modes: mock (works now) and sumo (later).
+  ├── train.py            - DQN training script using Stable-Baselines3.
+  ├── test_environment.py - Unit tests for all the above.
+  ├── requirements.txt    - Python dependencies.
+  └── models/             - Saved model weights after training.
+
+HOW IT WORKS:
+  Every 5 seconds (decision interval), the agent picks an action:
+    Action 0 = keep current phase
+    Action 1 = request a switch to the next phase
+
+  The signal controller (signal_logic.py) enforces safety:
+    - Minimum green: phase cannot switch before 10 seconds have elapsed.
+    - Yellow interval: before switching green phases, a 3-second yellow
+      phase runs automatically. The agent cannot skip or interrupt yellow.
+    - Phase cycle: GREEN_A -> YELLOW_A -> GREEN_B -> YELLOW_B -> GREEN_A
+
+  The observation the agent sees (13 numbers):
+    [queue lengths x4] + [halting vehicles x4] + [waiting times x4] + [phase]
+
+  The reward the agent gets each step:
+    reward = -(sum of waiting times across all 4 approaches)
+    Best possible reward = 0 (no one waiting). Bad = large negative number.
+
+OPERATING MODES:
+  mock mode  - Works RIGHT NOW without SUMO installed.
+               Observations are synthetic random numbers for testing.
+               Training ran successfully: 50,000 timesteps, ~77 seconds.
+               Model saved to rl_agent/models/dqn_traffic_mock.zip
+
+  sumo mode  - Requires SUMO installed + routes.xml from other team member.
+               Placeholder TODO comments in environment.py mark exactly
+               what values to fill in (traffic-light ID, lane IDs, phase map).
+
+WHAT IS STILL NEEDED TO USE SUMO:
+  1. routes.xml (traffic demand file) - from other team member
+  2. A .sumocfg file pointing at corridor.net.xml + routes.xml
+  3. SUMO installed on the machine (sumo.dlr.de)
+  4. Fill in sumo_config in environment.py:
+       - tl_id: traffic light ID from corridor.net.xml (<tlLogic id="...">)
+       - lane_ids: 4 lane IDs from corridor.net.xml for each approach
+       - phase_map: which SUMO phase index maps to GREEN_A/B, YELLOW_A/B
+  5. Change mode="mock" to mode="sumo" in train.py and retrain.
+
+DEPENDENCIES INSTALLED (pip):
+  gymnasium>=0.29.0
+  stable-baselines3>=2.9.0
+  numpy>=2.5.0
+  torch>=2.14.0
+  pytest>=9.0.0
+
+TEST RESULTS (mock mode):
+  All 16 unit tests passed.
+  Training completed: 50,000 timesteps in ~77 seconds, ~637 fps.
+  ep_rew_mean: -1.15e+05 (expected to be large negative in mock mode
+  since observations are random - this does NOT reflect real performance).
+
+
+---------------------------------------------------------------------------
+SUMO CONFIG VALUES (filled in 2026-11-03 - from corridor.net.xml + chat)
+---------------------------------------------------------------------------
+
+  tl_id:
+    cluster_11484393853_11484393854_11484393855_11484393856_#11more
+
+  lane_ids (one primary lane per approach):
+    "24480656#3_0"   <- Approach 0 (North)
+    "794634832#0_0"  <- Approach 1 (East)
+    "794634831#1_0"  <- Approach 2 (South)
+    "631316440#0_0"  <- Approach 3 (West)
+
+  phase_map (SignalController index -> SUMO tlLogic phase index):
+    0 -> 0  (GREEN_A  : 39 s, state rrrrGGGgrrrrGGGg)
+    1 -> 1  (YELLOW_A :  6 s, state rrrryyyyrrrryyyy)
+    2 -> 2  (GREEN_B  : 39 s, state GGGgrrrrGGGgrrrr)
+    3 -> 3  (YELLOW_B :  6 s, state yyyyrrrryyyyrrrr)
+
+  sumocfg_path: ../simulation/corridor.sumocfg
+
+FILES ADDED FOR SUMO RUN:
+  demand/routes.xml              - 12 traffic flows (4 approaches x 3 exits)
+                                   ~1260 veh/h total, Indian mix
+  simulation/corridor.sumocfg   - SUMO config (1 hour episode, headless)
+
+FIRST REAL TRAINING RUN (sumo mode):
+  mode          = "sumo"
+  max_steps     = 720  (720 x 5 s = 3600 s = 1 simulated hour)
+  timesteps     = 100,000
+  model output  = rl_agent/models/dqn_traffic_sumo_v1.zip
+  run command   : cd rl_agent && python train.py
+
+
+---------------------------------------------------------------------------
+SUMO CONFIG VALUES (filled in 2026-11-03 - from corridor.net.xml + chat)
+---------------------------------------------------------------------------
+
+  tl_id:
+    cluster_11484393853_11484393854_11484393855_11484393856_#11more
+
+  lane_ids (one primary lane per approach):
+    "24480656#3_0"   <- Approach 0 (North)
+    "794634832#0_0"  <- Approach 1 (East)
+    "794634831#1_0"  <- Approach 2 (South)
+    "631316440#0_0"  <- Approach 3 (West)
+
+  phase_map (SignalController index -> SUMO tlLogic phase index):
+    0 -> 0  (GREEN_A  : 39 s, state rrrrGGGgrrrrGGGg)
+    1 -> 1  (YELLOW_A :  6 s, state rrrryyyyrrrryyyy)
+    2 -> 2  (GREEN_B  : 39 s, state GGGgrrrrGGGgrrrr)
+    3 -> 3  (YELLOW_B :  6 s, state yyyyrrrryyyyrrrr)
+
+  sumocfg_path: ../simulation/corridor.sumocfg
+
+FILES ADDED FOR SUMO RUN:
+  demand/routes.xml              - 12 traffic flows (4 approaches x 3 exits)
+                                   ~1260 veh/h total, Indian mix
+  simulation/corridor.sumocfg   - SUMO config (1 hour episode, headless)
+
+FIRST REAL TRAINING RUN (sumo mode):
+  mode          = "sumo"
+  max_steps     = 720  (720 x 5 s = 3600 s = 1 simulated hour)
+  timesteps     = 100,000
+  model output  = rl_agent/models/dqn_traffic_sumo_v1.zip
+  run command   : cd rl_agent && python train.py

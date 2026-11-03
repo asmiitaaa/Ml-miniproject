@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  routes.xml
+  ==========
+  Basic traffic demand for the cluster_11484393853 intersection.
+
+  Intersection approaches (incLanes):
+    Approach 0 (North/edge 24480656#3):  24480656#3_0, 24480656#3_1
+    Approach 1 (East/edge 794634832#0):  794634832#0_0, 794634832#0_1
+    Approach 2 (South/edge 794634831#1): 794634831#1_0, 794634831#1_1
+    Approach 3 (West/edge 631316440#0):  631316440#0_0, 631316440#0_1
+
+  Outgoing edges:
+    1055330320#1, 1055330322#0, 1055330325#1, 1055330327#1
+
+  Vehicle mix reflects Indian urban traffic composition:
+    50% motorcycle, 20% auto-rickshaw, 20% car, 5% bus, 5% bicycle
+
+  Demand period: 0–3600 s (1 hour), then simulation ends naturally.
+  Adjust vehsPerHour to match observed counts once field data is available.
+-->
+<routes>
+
+    <!-- ================================================================
+         Vehicle type definitions — loaded from vtypes.xml at run time
+         (referenced via additional-files in the .sumocfg).
+         Duplicating a minimal subset here as a fallback so this file
+         is self-contained if needed.
+         ================================================================ -->
+
+    <!-- Approach 0 → various exits (North approach through-traffic) -->
+    <flow id="f_N_E"  begin="0" end="3600" vehsPerHour="180"
+          type="motorcycle" from="24480656#3" to="1055330320#1" departLane="random" departSpeed="max"/>
+    <flow id="f_N_S"  begin="0" end="3600" vehsPerHour="150"
+          type="car"        from="24480656#3" to="1055330327#1" departLane="random" departSpeed="max"/>
+    <flow id="f_N_W"  begin="0" end="3600" vehsPerHour="80"
+          type="auto"       from="24480656#3" to="1055330322#0" departLane="random" departSpeed="max"/>
+
+    <!-- Approach 1 → various exits (East approach) -->
+    <flow id="f_E_N"  begin="0" end="3600" vehsPerHour="160"
+          type="motorcycle" from="794634832#0" to="1055330325#1" departLane="random" departSpeed="max"/>
+    <flow id="f_E_S"  begin="0" end="3600" vehsPerHour="120"
+          type="car"        from="794634832#0" to="1055330327#1" departLane="random" departSpeed="max"/>
+    <flow id="f_E_W"  begin="0" end="3600" vehsPerHour="60"
+          type="auto"       from="794634832#0" to="1055330322#0" departLane="random" departSpeed="max"/>
+
+    <!-- Approach 2 → various exits (South approach) -->
+    <flow id="f_S_N"  begin="0" end="3600" vehsPerHour="200"
+          type="motorcycle" from="794634831#1" to="1055330325#1" departLane="random" departSpeed="max"/>
+    <flow id="f_S_E"  begin="0" end="3600" vehsPerHour="140"
+          type="car"        from="794634831#1" to="1055330320#1" departLane="random" departSpeed="max"/>
+    <flow id="f_S_W"  begin="0" end="3600" vehsPerHour="70"
+          type="bus"        from="794634831#1" to="1055330322#0" departLane="random" departSpeed="max"/>
+
+    <!-- Approach 3 → various exits (West approach) -->
+    <flow id="f_W_N"  begin="0" end="3600" vehsPerHour="170"
+          type="motorcycle" from="631316440#0" to="1055330325#1" departLane="random" departSpeed="max"/>
+    <flow id="f_W_E"  begin="0" end="3600" vehsPerHour="110"
+          type="car"        from="631316440#0" to="1055330320#1" departLane="random" departSpeed="max"/>
+    <flow id="f_W_S"  begin="0" end="3600" vehsPerHour="50"
+          type="bicycle"    from="631316440#0" to="1055330327#1" departLane="random" departSpeed="max"/>
+
+</routes>
+
