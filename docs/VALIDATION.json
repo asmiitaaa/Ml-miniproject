@@ -1,0 +1,62 @@
+{
+  "software_tests": {
+    "passed": 30,
+    "failed": 0,
+    "runtime_seconds": 18.64,
+    "scope": "parser/fairness/adapter/model-integrity/dashboard integration"
+  },
+  "full_experiment": {
+    "runs": 30,
+    "controllers": [
+      "fixed",
+      "actuated",
+      "dqn"
+    ],
+    "scenarios": [
+      "peak",
+      "offpeak"
+    ],
+    "seeds": [
+      11,
+      12,
+      13,
+      14,
+      15
+    ],
+    "duration_s_each": 3600,
+    "all_scheduled_vehicles_completed": true,
+    "baseline_waiting_time_checks": "PASS in both scenarios",
+    "flagged_runs": [
+      "peak/dqn/seed_11",
+      "peak/dqn/seed_15"
+    ],
+    "teleport_starts": 2,
+    "colliding_vehicle_detections": 4
+  },
+  "quick_test": {
+    "command": "Start-Project.ps1 -Mode QuickTest",
+    "status": "passed",
+    "controllers": 3,
+    "duration_s_each": 180,
+    "seed": 11
+  },
+  "raw_reimport": "All 30 runs reproduce metrics and controller warnings exactly",
+  "model": "Original 20k checkpoint unchanged; all 12 tensors match",
+  "demonstration": "actual native SUMO-GUI comparison in demonstrations/three_controller_final",
+  "pending_team_inputs": [
+    "DQN collision investigation",
+    "calibrated field demand",
+    "convergence and disjoint training/test seed evidence",
+    "corridor-wide mapping",
+    "institutional primary-reference checks",
+    "Turnitin similarity check and official student metadata"
+  ],
+  "gui_test": {
+    "command": "Start-Project.ps1 -Mode GUI",
+    "status": "passed",
+    "controller": "dqn",
+    "duration_s": 300,
+    "termination": "clean completion",
+    "renderer": "SUMO GUI, no snapshot requests"
+  }
+}

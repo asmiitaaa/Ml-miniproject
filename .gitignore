@@ -1,0 +1,16 @@
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+/results/
+scenarios/smoke/
+scenarios/provisional/
+scenarios/smoke_*.sumocfg
+scenarios/provisional_*.sumocfg
+recordings/
+demonstrations/
+*.log
+
+# Local source archives and unselected checkpoint copy
+/integrations/
+/models/dqn_traffic_sumo_v1_10000_steps.zip

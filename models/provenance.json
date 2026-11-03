@@ -1,0 +1,19 @@
+{
+  "source_remote": "https://github.com/asmiitaaa/Ml-miniproject",
+  "source_ref": "origin/ananyaraj",
+  "source_commit": "951ea33",
+  "selected_before_evaluation": "dqn_traffic_sumo_v1_20000_steps.zip",
+  "reason": "latest available checkpoint, not selected by evaluation score",
+  "source_files": {
+    "rl_agent/environment.py": "54f4d34f38248b128ed5e34ebbb2fb34770a84ce856a6d3fb2fb4b1e3320d941",
+    "rl_agent/requirements.txt": "e1070c642295a9ede186589f395dd69effca05cb66c50b43a12509452cab9a50",
+    "rl_agent/reward.py": "507c079c0433da37dae1418cddb18233965573213802757d655845206eff2496",
+    "rl_agent/signal_logic.py": "a01114793767cb3be8fa9867af44614a1c7612a2b23f03a643cec7a12a786794",
+    "rl_agent/test_environment.py": "09f0d64da14b995d8a5a1ce2a7ff638a4543ed503ee85efe64e48371dc706e39",
+    "rl_agent/train.py": "9312fcba265b6b84c5b7353cbcddb0f75f41946bfa1b582b25136a350940c455"
+  },
+  "model_files": {
+    "models/dqn_traffic_sumo_v1_20000_steps.zip": "082809d50a56e642a01729d5367e40e77856634acdb41edd1dd8a630668c9c2e"
+  },
+  "note": "Only the selected checkpoint copy is included here. Canonical teammate sources and other checkpoints are in rl_agent/ on the updated main branch."
+}

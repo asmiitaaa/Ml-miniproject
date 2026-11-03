@@ -1,0 +1,15 @@
+{
+  "final_evaluation_ready": false,
+  "warnings": [
+    "Training-replay yellow lasts 5s, shorter than the network's 6s nominal yellow. This reproduces checkpoint training but does not validate corridor clearance safety.",
+    "Policy controls only the trained junction's four primary lanes; other traffic signals retain the fixed plan. This is not validated corridor-wide deployment.",
+    "These runs are labelled demonstration/provisional or lack project provenance; they are not final corridor evidence.",
+    "Teleports occurred. Correct network/demand problems before using results in the report.",
+    "Collisions occurred. Inspect signal safety and simulation settings before trusting results."
+  ],
+  "standard_deviation": "sample standard deviation (ddof=1); undefined for n=1",
+  "improvement": "mean of seed-paired 100*(baseline-controller)/baseline; positive means lower is better; zero baseline omitted",
+  "queue_definition": "time-and-approach mean halting vehicles; maximum over all approach-time samples",
+  "co2_definition": "all simulated vehicle CO2 rates integrated over the fixed simulation step; kg",
+  "trip_definition": "completed, non-vaporized trips only; unfinished and pending departures reported separately"
+}

@@ -1,0 +1,610 @@
+{
+  "cached_routes": [
+    {
+      "cost_m": 281.99,
+      "depart_lane": 0,
+      "edges": [
+        "794634832#0",
+        "1055330320#1",
+        "631316440#0",
+        "1055330325#1"
+      ],
+      "pair": "f_E_N",
+      "vehicle_class": "bus"
+    },
+    {
+      "cost_m": 42.81,
+      "depart_lane": 0,
+      "edges": [
+        "794634832#0",
+        "1055330327#1"
+      ],
+      "pair": "f_E_S",
+      "vehicle_class": "bus"
+    },
+    {
+      "cost_m": 44.989999999999995,
+      "depart_lane": 1,
+      "edges": [
+        "794634832#0",
+        "1055330322#0"
+      ],
+      "pair": "f_E_W",
+      "vehicle_class": "bus"
+    },
+    {
+      "cost_m": 77.63,
+      "depart_lane": 0,
+      "edges": [
+        "24480656#3",
+        "1055330320#1"
+      ],
+      "pair": "f_N_E",
+      "vehicle_class": "bus"
+    },
+    {
+      "cost_m": 127.12,
+      "depart_lane": 0,
+      "edges": [
+        "24480656#3",
+        "1055330320#1",
+        "631316440#0",
+        "1055330327#1"
+      ],
+      "pair": "f_N_S",
+      "vehicle_class": "bus"
+    },
+    {
+      "cost_m": 60.18,
+      "depart_lane": 0,
+      "edges": [
+        "24480656#3",
+        "1055330322#0"
+      ],
+      "pair": "f_N_W",
+      "vehicle_class": "bus"
+    },
+    {
+      "cost_m": 87.68,
+      "depart_lane": 1,
+      "edges": [
+        "794634831#1",
+        "1055330320#1"
+      ],
+      "pair": "f_S_E",
+      "vehicle_class": "bus"
+    },
+    {
+      "cost_m": 238.10999999999999,
+      "depart_lane": 0,
+      "edges": [
+        "794634831#1",
+        "1055330325#1"
+      ],
+      "pair": "f_S_N",
+      "vehicle_class": "bus"
+    },
+    {
+      "cost_m": 139.35,
+      "depart_lane": 1,
+      "edges": [
+        "794634831#1",
+        "1055330320#1",
+        "631316440#0",
+        "1055330322#0"
+      ],
+      "pair": "f_S_W",
+      "vehicle_class": "bus"
+    },
+    {
+      "cost_m": 491.68999999999994,
+      "depart_lane": 0,
+      "edges": [
+        "631316440#0",
+        "1055330322#0",
+        "1055330323",
+        "-1447944692",
+        "27935333#1",
+        "1230809133#0",
+        "1230809133#1",
+        "-1230809134",
+        "27935856#2",
+        "-27935333#0",
+        "794634831#1",
+        "1055330320#1"
+      ],
+      "pair": "f_W_E",
+      "vehicle_class": "bus"
+    },
+    {
+      "cost_m": 219.55,
+      "depart_lane": 0,
+      "edges": [
+        "631316440#0",
+        "1055330325#1"
+      ],
+      "pair": "f_W_N",
+      "vehicle_class": "bus"
+    },
+    {
+      "cost_m": 49.49,
+      "depart_lane": 1,
+      "edges": [
+        "631316440#0",
+        "1055330327#1"
+      ],
+      "pair": "f_W_S",
+      "vehicle_class": "bus"
+    },
+    {
+      "cost_m": 281.99,
+      "depart_lane": 0,
+      "edges": [
+        "794634832#0",
+        "1055330320#1",
+        "631316440#0",
+        "1055330325#1"
+      ],
+      "pair": "f_E_N",
+      "vehicle_class": "motorcycle"
+    },
+    {
+      "cost_m": 42.81,
+      "depart_lane": 0,
+      "edges": [
+        "794634832#0",
+        "1055330327#1"
+      ],
+      "pair": "f_E_S",
+      "vehicle_class": "motorcycle"
+    },
+    {
+      "cost_m": 44.989999999999995,
+      "depart_lane": 1,
+      "edges": [
+        "794634832#0",
+        "1055330322#0"
+      ],
+      "pair": "f_E_W",
+      "vehicle_class": "motorcycle"
+    },
+    {
+      "cost_m": 77.63,
+      "depart_lane": 0,
+      "edges": [
+        "24480656#3",
+        "1055330320#1"
+      ],
+      "pair": "f_N_E",
+      "vehicle_class": "motorcycle"
+    },
+    {
+      "cost_m": 127.12,
+      "depart_lane": 0,
+      "edges": [
+        "24480656#3",
+        "1055330320#1",
+        "631316440#0",
+        "1055330327#1"
+      ],
+      "pair": "f_N_S",
+      "vehicle_class": "motorcycle"
+    },
+    {
+      "cost_m": 60.18,
+      "depart_lane": 0,
+      "edges": [
+        "24480656#3",
+        "1055330322#0"
+      ],
+      "pair": "f_N_W",
+      "vehicle_class": "motorcycle"
+    },
+    {
+      "cost_m": 87.68,
+      "depart_lane": 1,
+      "edges": [
+        "794634831#1",
+        "1055330320#1"
+      ],
+      "pair": "f_S_E",
+      "vehicle_class": "motorcycle"
+    },
+    {
+      "cost_m": 238.10999999999999,
+      "depart_lane": 0,
+      "edges": [
+        "794634831#1",
+        "1055330325#1"
+      ],
+      "pair": "f_S_N",
+      "vehicle_class": "motorcycle"
+    },
+    {
+      "cost_m": 139.35,
+      "depart_lane": 1,
+      "edges": [
+        "794634831#1",
+        "1055330320#1",
+        "631316440#0",
+        "1055330322#0"
+      ],
+      "pair": "f_S_W",
+      "vehicle_class": "motorcycle"
+    },
+    {
+      "cost_m": 491.68999999999994,
+      "depart_lane": 0,
+      "edges": [
+        "631316440#0",
+        "1055330322#0",
+        "1055330323",
+        "-1447944692",
+        "27935333#1",
+        "1230809133#0",
+        "1230809133#1",
+        "-1230809134",
+        "27935856#2",
+        "-27935333#0",
+        "794634831#1",
+        "1055330320#1"
+      ],
+      "pair": "f_W_E",
+      "vehicle_class": "motorcycle"
+    },
+    {
+      "cost_m": 219.55,
+      "depart_lane": 0,
+      "edges": [
+        "631316440#0",
+        "1055330325#1"
+      ],
+      "pair": "f_W_N",
+      "vehicle_class": "motorcycle"
+    },
+    {
+      "cost_m": 49.49,
+      "depart_lane": 1,
+      "edges": [
+        "631316440#0",
+        "1055330327#1"
+      ],
+      "pair": "f_W_S",
+      "vehicle_class": "motorcycle"
+    },
+    {
+      "cost_m": 281.99,
+      "depart_lane": 0,
+      "edges": [
+        "794634832#0",
+        "1055330320#1",
+        "631316440#0",
+        "1055330325#1"
+      ],
+      "pair": "f_E_N",
+      "vehicle_class": "passenger"
+    },
+    {
+      "cost_m": 42.81,
+      "depart_lane": 0,
+      "edges": [
+        "794634832#0",
+        "1055330327#1"
+      ],
+      "pair": "f_E_S",
+      "vehicle_class": "passenger"
+    },
+    {
+      "cost_m": 44.989999999999995,
+      "depart_lane": 1,
+      "edges": [
+        "794634832#0",
+        "1055330322#0"
+      ],
+      "pair": "f_E_W",
+      "vehicle_class": "passenger"
+    },
+    {
+      "cost_m": 77.63,
+      "depart_lane": 0,
+      "edges": [
+        "24480656#3",
+        "1055330320#1"
+      ],
+      "pair": "f_N_E",
+      "vehicle_class": "passenger"
+    },
+    {
+      "cost_m": 127.12,
+      "depart_lane": 0,
+      "edges": [
+        "24480656#3",
+        "1055330320#1",
+        "631316440#0",
+        "1055330327#1"
+      ],
+      "pair": "f_N_S",
+      "vehicle_class": "passenger"
+    },
+    {
+      "cost_m": 60.18,
+      "depart_lane": 0,
+      "edges": [
+        "24480656#3",
+        "1055330322#0"
+      ],
+      "pair": "f_N_W",
+      "vehicle_class": "passenger"
+    },
+    {
+      "cost_m": 87.68,
+      "depart_lane": 1,
+      "edges": [
+        "794634831#1",
+        "1055330320#1"
+      ],
+      "pair": "f_S_E",
+      "vehicle_class": "passenger"
+    },
+    {
+      "cost_m": 238.10999999999999,
+      "depart_lane": 0,
+      "edges": [
+        "794634831#1",
+        "1055330325#1"
+      ],
+      "pair": "f_S_N",
+      "vehicle_class": "passenger"
+    },
+    {
+      "cost_m": 139.35,
+      "depart_lane": 1,
+      "edges": [
+        "794634831#1",
+        "1055330320#1",
+        "631316440#0",
+        "1055330322#0"
+      ],
+      "pair": "f_S_W",
+      "vehicle_class": "passenger"
+    },
+    {
+      "cost_m": 491.68999999999994,
+      "depart_lane": 0,
+      "edges": [
+        "631316440#0",
+        "1055330322#0",
+        "1055330323",
+        "-1447944692",
+        "27935333#1",
+        "1230809133#0",
+        "1230809133#1",
+        "-1230809134",
+        "27935856#2",
+        "-27935333#0",
+        "794634831#1",
+        "1055330320#1"
+      ],
+      "pair": "f_W_E",
+      "vehicle_class": "passenger"
+    },
+    {
+      "cost_m": 219.55,
+      "depart_lane": 0,
+      "edges": [
+        "631316440#0",
+        "1055330325#1"
+      ],
+      "pair": "f_W_N",
+      "vehicle_class": "passenger"
+    },
+    {
+      "cost_m": 49.49,
+      "depart_lane": 1,
+      "edges": [
+        "631316440#0",
+        "1055330327#1"
+      ],
+      "pair": "f_W_S",
+      "vehicle_class": "passenger"
+    }
+  ],
+  "controlled_tls_ids": [
+    "cluster_11484393853_11484393854_11484393855_11484393856_#11more"
+  ],
+  "departure_horizon_s": 3000,
+  "drain_window_s": 600,
+  "evaluation_duration_s": 3600,
+  "evaluation_lateral_resolution_m": 0.4,
+  "fixture_kind": "uncalibrated-model-validation",
+  "frozen_types_sha256": "2eefdef1abd254bb805121a1abeed19b22bb3f17cb7a0e96185c9e8947a306ee",
+  "generation_seed": 42,
+  "mode_shares": {
+    "auto": 0.15,
+    "bus": 0.05,
+    "car": 0.3,
+    "motorcycle": 0.5
+  },
+  "network_sha256": "c5b50b1e897ae658bf0ddb5c6dad83e7f8abb14f5e8c93cf3ea2569c57b6c943",
+  "original_pair_weights": [
+    {
+      "from": "24480656#3",
+      "id": "f_N_E",
+      "to": "1055330320#1",
+      "weight": 180.0
+    },
+    {
+      "from": "24480656#3",
+      "id": "f_N_S",
+      "to": "1055330327#1",
+      "weight": 150.0
+    },
+    {
+      "from": "24480656#3",
+      "id": "f_N_W",
+      "to": "1055330322#0",
+      "weight": 80.0
+    },
+    {
+      "from": "794634832#0",
+      "id": "f_E_N",
+      "to": "1055330325#1",
+      "weight": 160.0
+    },
+    {
+      "from": "794634832#0",
+      "id": "f_E_S",
+      "to": "1055330327#1",
+      "weight": 120.0
+    },
+    {
+      "from": "794634832#0",
+      "id": "f_E_W",
+      "to": "1055330322#0",
+      "weight": 60.0
+    },
+    {
+      "from": "794634831#1",
+      "id": "f_S_N",
+      "to": "1055330325#1",
+      "weight": 200.0
+    },
+    {
+      "from": "794634831#1",
+      "id": "f_S_E",
+      "to": "1055330320#1",
+      "weight": 140.0
+    },
+    {
+      "from": "794634831#1",
+      "id": "f_S_W",
+      "to": "1055330322#0",
+      "weight": 70.0
+    },
+    {
+      "from": "631316440#0",
+      "id": "f_W_N",
+      "to": "1055330325#1",
+      "weight": 170.0
+    },
+    {
+      "from": "631316440#0",
+      "id": "f_W_E",
+      "to": "1055330320#1",
+      "weight": 110.0
+    },
+    {
+      "from": "631316440#0",
+      "id": "f_W_S",
+      "to": "1055330327#1",
+      "weight": 50.0
+    }
+  ],
+  "original_types_sha256": "c7a7fce26d9b842367bd95a59f52e8f3e9ede54c32d757a7ebe17a3fd83d2d4f",
+  "rejected_class_pair_combinations": [],
+  "routing": "sumolib getShortestPath with vClass and explicit connection-permission checks",
+  "scenarios": {
+    "offpeak": {
+      "departure_spacing_s": 6.0,
+      "last_requested_departure_s": 2994.0,
+      "pair_counts": {
+        "f_E_N": 57,
+        "f_E_S": 49,
+        "f_E_W": 28,
+        "f_N_E": 52,
+        "f_N_S": 38,
+        "f_N_W": 34,
+        "f_S_E": 40,
+        "f_S_N": 63,
+        "f_S_W": 28,
+        "f_W_E": 41,
+        "f_W_N": 60,
+        "f_W_S": 10
+      },
+      "route_file_sha256": "8b4f22774f775012e6821f8972bf11416ffc403f4fb90370b019eab1d0554311",
+      "schedule_sha256": "b0d11c076eecc7434af32fcd95afd4cd114f9cb56637df47e13419b8c6454c50",
+      "type_counts": {
+        "auto": 75,
+        "bus": 25,
+        "car": 150,
+        "motorcycle": 250
+      },
+      "vehicle_count": 500
+    },
+    "peak": {
+      "departure_spacing_s": 3.0,
+      "last_requested_departure_s": 2997.0,
+      "pair_counts": {
+        "f_E_N": 121,
+        "f_E_S": 98,
+        "f_E_W": 38,
+        "f_N_E": 122,
+        "f_N_S": 96,
+        "f_N_W": 52,
+        "f_S_E": 99,
+        "f_S_N": 123,
+        "f_S_W": 44,
+        "f_W_E": 70,
+        "f_W_N": 99,
+        "f_W_S": 38
+      },
+      "route_file_sha256": "6a1fb53a5c1cdc7ca0b9574e7b433a9fb28d428267b5ec7c8d3b8b6484291e97",
+      "schedule_sha256": "7b68a1affee2735dde94584df950065430d9ca4cda29f74e06caafd7bd48bc0b",
+      "type_counts": {
+        "auto": 150,
+        "bus": 50,
+        "car": 300,
+        "motorcycle": 500
+      },
+      "vehicle_count": 1000
+    }
+  },
+  "source_commit": "951ea33",
+  "source_demand_sha256": "d25561823fd8c8b27932d303bc31c97e239d597e8e661e421593c8251be4fd66",
+  "source_ref": "origin/ananyaraj",
+  "training_lateral_resolution_m": 0.5,
+  "valid_pairs_by_vehicle_class": {
+    "bus": [
+      "f_N_E",
+      "f_N_S",
+      "f_N_W",
+      "f_E_N",
+      "f_E_S",
+      "f_E_W",
+      "f_S_N",
+      "f_S_E",
+      "f_S_W",
+      "f_W_N",
+      "f_W_E",
+      "f_W_S"
+    ],
+    "motorcycle": [
+      "f_N_E",
+      "f_N_S",
+      "f_N_W",
+      "f_E_N",
+      "f_E_S",
+      "f_E_W",
+      "f_S_N",
+      "f_S_E",
+      "f_S_W",
+      "f_W_N",
+      "f_W_E",
+      "f_W_S"
+    ],
+    "passenger": [
+      "f_N_E",
+      "f_N_S",
+      "f_N_W",
+      "f_E_N",
+      "f_E_S",
+      "f_E_W",
+      "f_S_N",
+      "f_S_E",
+      "f_S_W",
+      "f_W_N",
+      "f_W_E",
+      "f_W_S"
+    ]
+  }
+}

@@ -1,0 +1,1 @@
+These are the 20 actual historical provisional baseline runs used by the dashboard integration test. Machine-specific paths and wall times were omitted. This small fixture avoids requiring ignored raw output files in a fresh checkout. It is not the full DQN comparison; that published dataset is under report/results.

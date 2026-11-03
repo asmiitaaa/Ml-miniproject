@@ -1,0 +1,30 @@
+{
+  "status": "complete",
+  "full_demonstration_complete": true,
+  "controllers": [
+    "fixed",
+    "actuated",
+    "dqn"
+  ],
+  "scenario": "peak",
+  "seed": 11,
+  "simulation_clocks_s": [
+    15,
+    30,
+    45,
+    60,
+    75,
+    90
+  ],
+  "demand_hash": "11e36ef8d3e5ed38f62188ae616430dd2de633597b033c0093c79cf5e2c90ed1",
+  "camera_boundary": [
+    476.59000000000003,
+    374.78,
+    776.59,
+    674.78
+  ],
+  "capture_method": "Native Windows window capture via Codex Computer Use",
+  "video": "comparison.mp4",
+  "video_sha256": "2fbb13b478f6627ba23d6840a4a6bf32c39461f5893026bab51576494f6a9ca4",
+  "note": "Six matched sampled-time native screenshots per controller; 90 simulated seconds shown in6 playback seconds. Actual GUI windows, not a generated traffic animation. Full-hour peak DQN safety flags remain in numerical results. GUI clock pixels reflect the latest render; per-frame TraCI sampling clocks are authoritative. Scientific metrics come from separate full-hour logged runs."
+}

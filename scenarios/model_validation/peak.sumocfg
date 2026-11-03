@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='utf-8'?>
+<configuration>
+  <input>
+    <net-file value="../../network/corridor.net.xml" />
+    <route-files value="vtypes.rou.xml,peak.rou.xml" />
+  </input>
+  <time>
+    <begin value="0" />
+    <end value="3600" />
+    <step-length value="1" />
+  </time>
+  <processing>
+    <lateral-resolution value="0.4" />
+    <ignore-route-errors value="false" />
+  </processing>
+</configuration>

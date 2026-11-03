@@ -1,0 +1,7 @@
+# Preserve generated binaries and the exact bytes of hashed experiment inputs.
+*.pdf binary
+*.zip binary
+*.png binary
+*.mp4 binary
+scenarios/model_validation/* -text
+report/results/*.csv -text

@@ -1,0 +1,37 @@
+{
+  "project_root": "..",
+  "experiment_label": "model-validation-single-junction-uncalibrated",
+  "duration_s": 3600,
+  "step_length_s": 1,
+  "lateral_resolution_m": 0.5,
+  "seeds": [
+    11,
+    12,
+    13,
+    14,
+    15
+  ],
+  "scenarios": {
+    "training_demand": {
+      "sumocfg": "simulation/corridor.sumocfg"
+    }
+  },
+  "controllers": {
+    "fixed": {},
+    "actuated": {
+      "min_green_s": 10,
+      "max_green_s": 60,
+      "max_gap_s": 3,
+      "control_tls_ids": [
+        "cluster_11484393853_11484393854_11484393855_11484393856_#11more"
+      ]
+    },
+    "dqn": {
+      "checkpoint": "models/dqn_traffic_sumo_v1_20000_steps.zip",
+      "factory": "traffic_eval.agent_adapter:create_controller",
+      "decision_interval_s": 5,
+      "min_green_s": 10,
+      "signal_mode": "training-replay"
+    }
+  }
+}

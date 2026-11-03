@@ -1,0 +1,14 @@
+{
+  "final_evaluation_ready": false,
+  "warnings": [
+    "These runs are labelled demonstration/provisional or lack project provenance; they are not final corridor evidence.",
+    "Three-way evaluation incomplete: a verified trained DQN and both baselines are required.",
+    "Some runs complete less than 95% of inserted/pending trips. Completed-trip means are censored; compare completion rates and increase the drain period.",
+    "Final evaluation requires both peak and offpeak scenarios."
+  ],
+  "standard_deviation": "sample standard deviation (ddof=1); undefined for n=1",
+  "improvement": "mean of seed-paired 100*(baseline-controller)/baseline; positive means lower is better; zero baseline omitted",
+  "queue_definition": "time-and-approach mean halting vehicles; maximum over all approach-time samples",
+  "co2_definition": "all simulated vehicle CO2 rates integrated over the fixed simulation step; kg",
+  "trip_definition": "completed, non-vaporized trips only; unfinished and pending departures reported separately"
+}

@@ -1,0 +1,17 @@
+{
+  "project_root": "..",
+  "experiment_label": "project-corridor",
+  "duration_s": 3600,
+  "step_length_s": 1,
+  "lateral_resolution_m": 0.4,
+  "seeds": [11, 22, 33, 44, 55],
+  "scenarios": {
+    "peak": {"sumocfg": "scenarios/peak.sumocfg", "demand_files": ["demand/vtypes.xml"]},
+    "offpeak": {"sumocfg": "scenarios/offpeak.sumocfg", "demand_files": ["demand/vtypes.xml"]}
+  },
+  "controllers": {
+    "fixed": {},
+    "actuated": {"min_green_s": 10, "max_green_s": 60, "max_gap_s": 3},
+    "dqn": {"checkpoint": "models/best_dqn.zip", "factory": "agent_adapter:create_controller", "decision_interval_s": 5}
+  }
+}

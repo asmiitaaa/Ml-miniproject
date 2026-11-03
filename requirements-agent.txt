@@ -1,0 +1,4 @@
+-r requirements.txt
+stable-baselines3==2.9.0
+torch>=2.3,<3
+gymnasium>=1,<2
