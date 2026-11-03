@@ -137,11 +137,25 @@ SUMO_CONFIG = {
 TRAINING_CONFIG = {
     "mode":               "sumo",   # ← flipped from mock to sumo
     "n_approaches":       4,
-    # 720 steps × 5 s = 3600 s = 1 simulated hour (matches sumocfg end time)
-    "max_steps":          720,
-    "min_green_seconds":  10.0,
-    "yellow_seconds":     3.0,
-    "decision_interval":  5.0,
+    # 1200 steps × 3 s = 3600 s = 1 simulated hour (matches sumocfg end time)
+    "max_steps":          1200,
+    # --- v2 SIGNAL TIMING (safety fix, 2026-11-03) ---------------------------
+    # The network's tlLogic specifies a 6 s yellow at this junction.  v1 was
+    # trained with yellow_seconds=3.0 and decision_interval=5.0, giving an
+    # effective 5 s yellow — SHORTER than the network's nominal clearance.
+    # Evaluation (soham/evaluation) detected collisions in 2/5 peak seeds,
+    # consistent with inadequate clearance at this 8-lane junction.
+    # v2 therefore uses:
+    #   yellow_seconds    = 6.0  → matches the network's nominal yellow
+    #   decision_interval = 3.0  → 6/3 is an integer, so the yellow lasts
+    #                              EXACTLY 6 s (no ceil-to-interval stretch)
+    #   min_green_seconds = 12.0 → multiple of the new interval
+    # Any checkpoint trained with this block is a v2 checkpoint and must be
+    # evaluated with the matching v2 adapter profile in traffic_eval.
+    # -------------------------------------------------------------------------
+    "min_green_seconds":  12.0,
+    "yellow_seconds":     6.0,
+    "decision_interval":  3.0,
     "sumo_config":        SUMO_CONFIG,
 }
 
@@ -160,7 +174,7 @@ DQN_CONFIG = {
 TOTAL_TIMESTEPS = 100_000     # First real SUMO run — increase later if results look good
 CHECKPOINT_FREQ = 10_000      # Save a model checkpoint every N steps
 MODEL_SAVE_DIR  = "models"
-MODEL_NAME      = "dqn_traffic_sumo_v1"
+MODEL_NAME      = "dqn_traffic_sumo_v2"   # v2 = corrected 6 s yellow / 3 s interval / 12 s min-green
 
 
 # ---------------------------------------------------------------------------
