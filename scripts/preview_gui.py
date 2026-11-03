@@ -18,6 +18,7 @@ import xml.etree.ElementTree as ET
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT))
 from traffic_eval.runner import load_config,check_inputs,input_files,prepare_network,find_sumo,fingerprint,resolve,sha256
+from traffic_eval.collisions import collision_args
 
 
 def atomic_json(path,data):
@@ -70,6 +71,7 @@ def main():
                      '--start','true','--quit-on-end','true','--delay',str(args.delay_ms),
                      '--breakpoints',str(args.seconds+10),'--window-size','720,760','--window-pos','20,20',
                      '--no-step-log','true','--duration-log.disable','true','--error-log',str(folder/'errors.log')]
+            command+=collision_args(cfg,folder)
             connection=policy=process=None
             record={'controller':controller,'scenario':args.scenario,'seed':args.seed,'demand_hash':digest,'frames':[],'command':command,'status':'running'}
             try:
@@ -88,7 +90,7 @@ def main():
                     if controller=='dqn':
                         module,factory=options['factory'].split(':',1)
                         checkpoint=resolve(cfg,options['checkpoint'])
-                        policy=getattr(importlib.import_module(module),factory)(connection=connection,checkpoint=str(checkpoint),options={**options,'seed':args.seed,'_step_length_s':1,'_run_dir':str(folder)})
+                        policy=getattr(importlib.import_module(module),factory)(connection=connection,checkpoint=str(checkpoint),options={**options,'seed':args.seed,'_step_length_s':1,'_run_dir':str(folder),'_lateral_resolution_m':cfg.get('lateral_resolution_m',.4)})
                         record['checkpoint_sha256']=sha256(checkpoint)
                         record['controller_metadata']=policy.metadata
                     for tick in range(1,args.seconds+1):

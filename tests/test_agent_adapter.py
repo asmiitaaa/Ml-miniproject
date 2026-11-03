@@ -9,6 +9,7 @@ import numpy as np
 
 from traffic_eval.agent_adapter import TrainedSignalController, TRAINED_TLS, TRAINED_LANES, OBS_HIGH
 from traffic_eval.runner import prepare_network
+from traffic_eval.timing import TIMING_PROFILES, timing_settings, validate_checkpoint_timing
 
 
 class FakeTrafficLight:
@@ -96,6 +97,59 @@ class ScopeTests(unittest.TestCase):
             self.assertEqual([logic.get('type') for logic in logics],['actuated','static'])
             self.assertEqual(logics[0].find('phase').get('minDur'),'10')
             self.assertIsNone(logics[1].find('phase').get('minDur'))
+
+
+class V2Tests(unittest.TestCase):
+    def model(self):
+        model=FakeModel()
+        model.timing_profile='v2';model.training_mode='sumo'
+        model.training_timing=TIMING_PROFILES['v2'].copy()
+        model.training_tls_id=TRAINED_TLS;model.training_lane_ids=TRAINED_LANES.copy()
+        return model
+
+    def test_v2_checkpoint_mapping_must_match_recorded_training(self):
+        connection=SimpleNamespace(trafficlight=FakeTrafficLight(),lane=FakeLane())
+        model=self.model();model.training_lane_ids=list(reversed(TRAINED_LANES))
+        with self.assertRaisesRegex(ValueError,'ordered training lanes'):
+            TrainedSignalController(connection,model,{'timing_profile':'v2'})
+
+    def test_v2_holds_green_twelve_seconds_and_yellow_exactly_six(self):
+        connection=SimpleNamespace(trafficlight=FakeTrafficLight(),lane=FakeLane())
+        controller=TrainedSignalController(connection,self.model(),{'timing_profile':'v2'})
+        timeline=[]
+        for now in range(37):
+            before=len(connection.trafficlight.applied);controller.step(now)
+            if len(connection.trafficlight.applied)>before:timeline.append((now,controller.phase))
+        self.assertEqual(timeline,[(0,0),(3,0),(6,0),(9,0),(12,1),(15,1),(18,2),(21,2),(24,2),(27,2),(30,3),(33,3),(36,0)])
+        self.assertEqual(controller.phase_elapsed,0)
+        self.assertEqual(controller.metadata['effective_evaluation_yellow_s'],6)
+        self.assertFalse(any('shorter' in warning for warning in controller.metadata['warnings']))
+
+    def test_v1_checkpoint_cannot_be_declared_v2(self):
+        with self.assertRaisesRegex(ValueError,'newly SUMO-trained'):
+            validate_checkpoint_timing(FakeModel(),'v2')
+
+    def test_v2_checkpoint_cannot_run_under_legacy_profile(self):
+        with self.assertRaisesRegex(ValueError,'cannot be evaluated'):
+            validate_checkpoint_timing(self.model(),'v1')
+
+    def test_v2_rejects_changed_contract_and_wrong_timing(self):
+        model=self.model();model.training_timing['yellow_s']=3
+        with self.assertRaisesRegex(ValueError,'does not match'):
+            validate_checkpoint_timing(model,'v2')
+        with self.assertRaisesRegex(ValueError,'requires decision_interval_s'):
+            timing_settings({'timing_profile':'v2','decision_interval_s':5})
+        with self.assertRaisesRegex(ValueError,'timing_profile must'):
+            timing_settings({'timing_profile':'v3'})
+
+    def test_v2_refuses_network_clearance_longer_than_training(self):
+        connection=SimpleNamespace(trafficlight=FakeTrafficLight(),lane=FakeLane())
+        original=connection.trafficlight.getAllProgramLogics
+        def longer(key):
+            programs=original(key);programs[0].phases[1].duration=7;return programs
+        connection.trafficlight.getAllProgramLogics=longer
+        with self.assertRaisesRegex(ValueError,'shorter than this network'):
+            TrainedSignalController(connection,self.model(),{'timing_profile':'v2'})
 
 
 if __name__=='__main__': unittest.main()

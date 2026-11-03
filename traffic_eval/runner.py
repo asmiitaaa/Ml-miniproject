@@ -18,6 +18,7 @@ import uuid
 import xml.etree.ElementTree as ET
 
 from .metrics import parse_run
+from .collisions import collision_action, collision_args, export_collisions
 
 
 def sha256(path):
@@ -74,7 +75,7 @@ def fingerprint(cfg, scenario, seed):
     _, _, files = input_files(cfg, scenario)
     hashes = {str(f):sha256(f) for f in files}
     shared = {k:cfg.get(k, d) for k,d in (("duration_s",3600),("step_length_s",1),("lateral_resolution_m",.4))}
-    shared.update(seed=seed, files=hashes, sumo_extra_args=cfg.get("sumo_extra_args",[]))
+    shared.update(seed=seed, files=hashes, sumo_extra_args=cfg.get("sumo_extra_args",[]),collision_action=collision_action(cfg))
     return hashlib.sha256(json.dumps(shared, sort_keys=True).encode()).hexdigest(), hashes
 
 
@@ -121,6 +122,7 @@ def find_sumo(cfg, gui=False):
 
 
 def check_inputs(cfg, controllers):
+    collision_action(cfg)
     for scenario in cfg["scenarios"].values(): input_files(cfg,scenario)
     for controller in controllers:
         if controller not in {"fixed", "actuated", "dqn"}: raise ValueError(f"Unsupported controller: {controller}")
@@ -196,10 +198,11 @@ def run_one(cfg, scenario_name, controller, seed, run_dir, gui=False):
                "--emission-output", str(run_dir/"emissions.xml"), "--emission-output.step-scaled", "false", "--summary-output", str(run_dir/"summary.xml"),
                "--no-step-log", "true", "--duration-log.disable", "true",
                "--log", str(run_dir/"sumo.log"), "--error-log", str(run_dir/"sumo-errors.log")]
+    command += collision_args(cfg,run_dir)
     if gui: command += ["--start", "true", "--quit-on-end", "true"]
     extra = cfg.get("sumo_extra_args", [])
     # Output/input/time/seed changes here would invalidate comparability.
-    blocked = ("--random", "--seed", "--net", "-n", "--route", "-r", "--additional", "-a", "--begin", "-b", "--end", "-e", "--step", "--emission", "--tripinfo", "--summary", "--configuration", "-c", "--lateral-resolution")
+    blocked = ("--random", "--seed", "--net", "-n", "--route", "-r", "--additional", "-a", "--begin", "-b", "--end", "-e", "--step", "--emission", "--tripinfo", "--summary", "--configuration", "-c", "--lateral-resolution", "--collision")
     if any(any(str(arg).startswith(b) for b in blocked) for arg in extra):
         raise ValueError("sumo_extra_args cannot override common inputs, outputs, seed, or timing")
     command += extra
@@ -208,6 +211,7 @@ def run_one(cfg, scenario_name, controller, seed, run_dir, gui=False):
                 "controller_options":options,"duration_s":duration,"step_length_s":step,
                 "controller_network_sha256":sha256(network_copy), "python_version":sys.version,
                 "experiment_label":cfg.get("experiment_label","project"),"status":"running"}
+    manifest.update(collision_action=collision_action(cfg),diagnostic_mode=collision_action(cfg)=="warn")
     if controller == "dqn":
         checkpoint = resolve(cfg, options["checkpoint"])
         manifest["checkpoint_sha256"] = sha256(checkpoint)
@@ -227,7 +231,7 @@ def run_one(cfg, scenario_name, controller, seed, run_dir, gui=False):
         if not any(approaches.values()): raise ValueError("No signal-controlled incoming approaches found")
         if controller == "dqn":
             module, function = options["factory"].split(":",1)
-            policy = getattr(importlib.import_module(module),function)(connection=connection,checkpoint=str(checkpoint),options={**options,"seed":seed,"_run_dir":str(run_dir),"_step_length_s":step})
+            policy = getattr(importlib.import_module(module),function)(connection=connection,checkpoint=str(checkpoint),options={**options,"seed":seed,"_run_dir":str(run_dir),"_step_length_s":step,"_lateral_resolution_m":cfg.get("lateral_resolution_m",.4)})
             manifest["controller_module_sha256"] = sha256(importlib.import_module(module).__file__)
             manifest["controller_metadata"] = getattr(policy,"metadata",{})
         with (run_dir/"queues.csv").open("w",newline="",encoding="utf-8") as handle:
@@ -251,18 +255,21 @@ def run_one(cfg, scenario_name, controller, seed, run_dir, gui=False):
         # Ensure common inputs were not changed mid-experiment.
         if fingerprint(cfg,scenario,seed)[0] != demand_hash:
             raise RuntimeError("Common scenario inputs changed during evaluation")
+        export_collisions(run_dir)
         result=parse_run(run_dir,step)
         result.update(scenario=scenario_name,controller=controller,seed=seed,demand_hash=demand_hash,
                       run_dir=str(run_dir),experiment_label=manifest["experiment_label"],teleports=teleports,collisions=collisions,
                       wall_time_s=time.monotonic()-started)
+        result.update(collision_action=manifest["collision_action"],diagnostic_mode=manifest["diagnostic_mode"])
         if policy is not None:
             metadata = getattr(policy,"metadata",{})
             result["controller_warnings"] = json.dumps(metadata.get("warnings",[]))
             result["model_num_timesteps"] = metadata.get("model_num_timesteps",0)
             result["controlled_tls_count"] = len(metadata.get("controlled_tls_ids",[]))
+            if "timing_profile" in metadata:result["timing_profile"]=metadata["timing_profile"]
             if hasattr(policy,"close"): policy.close()
         manifest.update(status="complete",metrics=result,
-                        output_sha256={name:sha256(run_dir/name) for name in ("tripinfo.xml","emissions.xml","queues.csv","summary.xml","dqn_actions.csv") if (run_dir/name).is_file()})
+                        output_sha256={name:sha256(run_dir/name) for name in ("tripinfo.xml","emissions.xml","queues.csv","summary.xml","dqn_actions.csv","collisions.xml","collisions.csv") if (run_dir/name).is_file()})
         return result
     except Exception as exc:
         manifest.update(status="failed",error=str(exc))
@@ -316,7 +323,7 @@ def import_results(raw_dir, output):
             row[key]=manifest[key]
         row["run_dir"]=str(manifest_path.parent.resolve())
         row.update({k:manifest.get("metrics",{}).get(k,0) for k in ("teleports","collisions")})
-        for key in ("controller_warnings","model_num_timesteps","controlled_tls_count"):
+        for key in ("controller_warnings","model_num_timesteps","controlled_tls_count","timing_profile","collision_action","diagnostic_mode"):
             if key in manifest.get("metrics",{}):row[key]=manifest["metrics"][key]
         records.append(row)
     if not records: raise ValueError("No completed run manifests found")

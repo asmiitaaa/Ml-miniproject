@@ -7,17 +7,20 @@ import sys
 
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT))
-from traffic_eval.runner import run_experiment
+from traffic_eval.runner import load_config, run_experiment
 
 
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--seconds',type=int,default=180)
     parser.add_argument('--output')
+    parser.add_argument('--config',default=str(ROOT/'configs/evaluation.model_validation.json'))
+    parser.add_argument('--checkpoint',help='Optional real checkpoint path; timing profile still comes from --config')
     args=parser.parse_args()
-    if args.seconds<30 or args.seconds%5:parser.error('Use at least 30 seconds, in multiples of 5')
-    cfg=json.loads((ROOT/'configs/evaluation.model_validation.json').read_text())
-    cfg.update(project_root=str(ROOT),duration_s=args.seconds,seeds=[11],experiment_label='quick-integration-test-not-final-results')
+    if args.seconds<30:parser.error('Use at least 30 seconds')
+    cfg=load_config(args.config)
+    cfg.update(project_root=cfg['_root'],duration_s=args.seconds,seeds=[11],experiment_label='quick-integration-test-not-final-results')
+    if args.checkpoint:cfg['controllers']['dqn']['checkpoint']=str(Path(args.checkpoint).resolve())
     cfg['scenarios']={'peak':cfg['scenarios']['peak']}
     out=Path(args.output).resolve() if args.output else ROOT/'results'/('quick_test_'+datetime.now().strftime('%Y%m%d_%H%M%S'))
     out.mkdir(parents=True,exist_ok=False)

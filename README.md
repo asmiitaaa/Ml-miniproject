@@ -8,7 +8,7 @@ Dependencies are already installed in the clone's `.venv`. Open PowerShell:
 
 ```powershell
 Set-Location C:\Users\soham\Ml-miniproject
-powershell -ExecutionPolicy Bypass -File .\Start-Project.ps1 -Mode QuickTest
+.\.venv\Scripts\python.exe scripts\quick_test.py
 ```
 
 This runs fixed-time, actuated and the actual 20,000-step DQN for 180simulated seconds with the same demand and seed. Expect `QUICK TEST PASSED` and a new `results/quick_test_...` folder. A short, one-seed test intentionally displays evidence-quality warnings; it does not replace the full experiment.
@@ -41,7 +41,8 @@ Two peak DQN runs (seeds 11 and 15) produced collision-related teleports. These 
 Python 3.10+ and internet are needed initially:
 
 ```powershell
-powershell -ExecutionPolicy Bypass -File .\Setup-Project.ps1
+python -m venv .venv
+.\.venv\Scripts\python.exe -m pip install -r requirements-lock.txt
 ```
 
 `requirements-lock.txt` records the tested environment. `requirements-agent.txt` installs the checkpoint runtime. `traffic_eval/model_loading.py` buffers nested tensor archive streams to fix the Windows PyTorch/SB3 stream-reader incompatibility. Every loaded tensor and the original checkpoint hash have been verified; no model weights are modified.
@@ -98,3 +99,9 @@ python -m venv .venv
 See `docs/REVIEW_NOTES.md` for scope, known limitations and reviewer commands.
 
 The small review video is committed at `report/media/comparison.mp4`, and the five static charts are in `report/figures/`. Full raw outputs and intermediate captures remain local.
+
+## v2 correction and team handover
+
+See [CHANGES.md](CHANGES.md) for the implemented v1/v2 timing contract, collision-event logs, completed checks and each member's remaining actions. The trainer now uses an isolated 0.4 m SUMO configuration and explicit seed 42. The original source scenario and v1 weights/results are preserved. A short v2 checkpoint used during verification is a learning smoke test, not a converged model.
+
+`configs/evaluation.v2.example.json` requires a newly trained v2 checkpoint with embedded timing metadata. It rejects v1 weights relabelled as v2. `configs/diagnostic.v1.warn.json` is a separate forensic experiment. The historical published results remain v1 results.

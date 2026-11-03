@@ -1,0 +1,42 @@
+{
+  "num_timesteps": 1200,
+  "_n_updates": 50,
+  "timing_profile": "v2",
+  "training_mode": "sumo",
+  "training_timing": {
+    "decision_interval_s": 3.0,
+    "min_green_s": 12.0,
+    "yellow_s": 6.0
+  },
+  "training_sumo_seed": 42,
+  "training_model_seed": 42,
+  "training_lateral_resolution_m": 0.4,
+  "training_status": "convergence-not-assessed",
+  "training_source_sha256": "cac6ea39d916653a718c652d70a88349a61128a04ff4f165b3fed3ddbe867245",
+  "training_config_sha256": "d4853829c4c4645a10c8a2406098c666dfc5d9f92c103b08e7312dffa6196d76",
+  "checkpoint_sha256": "c58c25ad8068fdc39edd1f1b5f9358fbc28a16d72b528f3389abbebbfbaf8dd0",
+  "purpose": "bounded-learning-smoke-test-not-convergence-or-performance-evidence",
+  "scripted_timing_transitions": [
+    [
+      0,
+      0
+    ],
+    [
+      12,
+      1
+    ],
+    [
+      18,
+      2
+    ],
+    [
+      30,
+      3
+    ],
+    [
+      36,
+      0
+    ]
+  ],
+  "scripted_timing_passed": true
+}

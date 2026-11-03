@@ -18,6 +18,7 @@ import xml.etree.ElementTree as ET
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from traffic_eval.runner import (check_inputs, find_sumo, fingerprint, input_files,
                                  load_config, prepare_network, resolve, sha256)
+from traffic_eval.collisions import collision_args
 
 
 def free_port():
@@ -85,8 +86,9 @@ def capture(cfg, scenario_name, controller, seed, output, args, expected_hash):
                "--log", str(directory / "sumo.log"), "--error-log", str(directory / "sumo-errors.log")]
     if args.capture_method == "scheduled":
         command += ["--gui-settings-file", str(snapshots)]
+    command += collision_args(cfg,directory)
     extra = cfg.get("sumo_extra_args", [])
-    blocked = ("--random", "--seed", "--net", "-n", "--route", "-r", "--additional", "-a", "--begin", "-b", "--end", "-e", "--step", "--emission", "--tripinfo", "--summary", "--configuration", "-c", "--lateral-resolution", "--remote-port", "--start", "--quit", "--window", "--gui", "--delay", "--breakpoints")
+    blocked = ("--random", "--seed", "--net", "-n", "--route", "-r", "--additional", "-a", "--begin", "-b", "--end", "-e", "--step", "--emission", "--tripinfo", "--summary", "--configuration", "-c", "--lateral-resolution", "--remote-port", "--start", "--quit", "--window", "--gui", "--delay", "--breakpoints", "--collision")
     if any(any(str(value).startswith(key) for key in blocked) for value in extra):
         raise ValueError("sumo_extra_args overrides recording inputs or camera/process settings")
     command += extra
@@ -118,7 +120,7 @@ def capture(cfg, scenario_name, controller, seed, output, args, expected_hash):
             if controller == "dqn":
                 module, factory = options["factory"].split(":", 1)
                 checkpoint = resolve(cfg, options["checkpoint"])
-                policy = getattr(importlib.import_module(module), factory)(connection=connection, checkpoint=str(checkpoint), options={**options, "seed": seed})
+                policy = getattr(importlib.import_module(module), factory)(connection=connection, checkpoint=str(checkpoint), options={**options, "seed": seed, "_step_length_s":step, "_lateral_resolution_m":cfg.get("lateral_resolution_m",.4)})
                 manifest["checkpoint_sha256"] = sha256(checkpoint)
                 manifest["controller_module_sha256"] = sha256(importlib.import_module(module).__file__)
             count = 0

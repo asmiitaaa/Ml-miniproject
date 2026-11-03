@@ -1,4 +1,4 @@
-"""Compatibility adapter for Ananyaraj's SUMO-trained v1 DQN checkpoints.
+"""Compatibility adapter for SUMO-trained v1 and v2 DQN checkpoints.
 
 This reproduces environment.py + signal_logic.py from origin/ananyaraj,
 including the decision-boundary ordering and clipped primary-lane features.
@@ -11,6 +11,7 @@ import math
 from pathlib import Path
 
 import numpy as np
+from .timing import timing_settings, validate_checkpoint_timing
 
 TRAINED_TLS = "cluster_11484393853_11484393854_11484393855_11484393856_#11more"
 TRAINED_LANES = ["24480656#3_0", "794634832#0_0", "794634831#1_0", "631316440#0_0"]
@@ -30,10 +31,9 @@ class TrainedSignalController:
             raise ValueError("This checkpoint adapter supports only its trained junction and ordered primary lanes. Corridor transfer needs a separately validated adapter and explicit approach mapping.")
         if options.get("control_tls_ids") and set(options["control_tls_ids"]) != {TRAINED_TLS}:
             raise ValueError("This adapter controls exactly its trained junction")
-        self.interval = float(options.get("decision_interval_s", 5))
-        self.min_green = float(options.get("min_green_s", 10))
-        if self.interval != 5 or self.min_green != 10:
-            raise ValueError("Checkpoint v1 was trained with decisions every 5 s and minimum green 10 s")
+        self.timing_profile, timing = timing_settings(options)
+        self.interval = timing["decision_interval_s"]
+        self.min_green = timing["min_green_s"]
         step_length = float(options.get("_step_length_s",1))
         if not math.isclose(self.interval/step_length, round(self.interval/step_length)):
             raise ValueError("Decision interval must be an integer multiple of simulation step")
@@ -55,20 +55,40 @@ class TrainedSignalController:
         self.signal_mode = options.get("signal_mode", "training-replay")
         if self.signal_mode not in ("training-replay", "network-clearance"):
             raise ValueError("signal_mode must be training-replay or network-clearance")
-        self.yellow = 3. if self.signal_mode == "training-replay" else max(3.,self.native_yellow)
+        if self.timing_profile == "v2" and self.signal_mode != "training-replay":
+            raise ValueError("v2 already uses the trained 6-second clearance; signal_mode overrides are not allowed")
+        self.yellow = timing["yellow_s"] if self.signal_mode == "training-replay" else max(timing["yellow_s"],self.native_yellow)
         effective_yellow = math.ceil(self.yellow/self.interval)*self.interval
+        if self.timing_profile == "v2" and effective_yellow < self.native_yellow:
+            raise ValueError("v2 yellow is shorter than this network's nominal clearance")
         warnings = []
+        if getattr(model,"training_status",None)=="smoke-test-only":
+            warnings.append("This checkpoint was trained only for a software smoke test; it is not a converged traffic policy.")
+        if getattr(model,"training_status",None)=="convergence-not-assessed":
+            warnings.append("Training convergence has not been assessed; a recorded step count alone does not establish policy quality.")
+        if self.timing_profile == "v2" and getattr(model,"training_sumo_seed",None) is None:
+            warnings.append("The training environment did not record an explicit SUMO seed; held-out seed separation is unverified.")
         if effective_yellow < self.native_yellow:
             warnings.append(f"Training-replay yellow lasts {effective_yellow:g}s, shorter than the network's {self.native_yellow:g}s nominal yellow. This reproduces checkpoint training but does not validate corridor clearance safety.")
         if self.signal_mode == "network-clearance":
             warnings.append("Network-clearance mode changes the checkpoint's training dynamics; evaluate separately and retrain before treating this as an equivalent policy.")
+        if self.timing_profile == "v1":
+            warnings.append("v1 is retained for legacy/forensic replay; it is not the corrected v2 controller.")
+        trained_resolution = getattr(model,"training_lateral_resolution_m",None)
+        evaluated_resolution = options.get("_lateral_resolution_m")
+        if trained_resolution is not None and evaluated_resolution is not None and not math.isclose(float(trained_resolution),float(evaluated_resolution)):
+            warnings.append(f"Training lateral resolution {trained_resolution}m differs from evaluation {evaluated_resolution}m; distribution shift requires review.")
         warnings.append("Policy controls only the trained junction's four primary lanes; other traffic signals retain the fixed plan. This is not validated corridor-wide deployment.")
-        self.metadata = {"adapter":"ananyaraj-sumo-v1", "signal_mode":self.signal_mode,
+        self.metadata = {"adapter":"ananyaraj-sumo-"+self.timing_profile, "timing_profile":self.timing_profile, "signal_mode":self.signal_mode,
+            "decision_interval_s":self.interval,"min_green_s":self.min_green,
             "controlled_tls_ids":[self.tls_id], "lane_ids":self.lane_ids,
             "observation_semantics":"primary-lane vehicle count x4, halting count x4, lane waiting time x4, internal green phase index",
-            "observation_clipping_high":OBS_HIGH.tolist(), "nominal_training_yellow_s":3,
+            "observation_clipping_high":OBS_HIGH.tolist(), "nominal_training_yellow_s":timing["yellow_s"],
             "effective_evaluation_yellow_s":effective_yellow, "network_nominal_yellow_s":self.native_yellow,
             "model_num_timesteps":int(getattr(model,"num_timesteps",0)), "warnings":warnings}
+        for key in ("training_status","training_sumo_seed","training_model_seed","training_lateral_resolution_m",
+                    "training_source_sha256","training_config_sha256","training_input_sha256"):
+            if hasattr(model,key):self.metadata[key]=getattr(model,key)
         self._validate_model()
         self.phase = 0
         self.phase_elapsed = 0.
@@ -83,6 +103,10 @@ class TrainedSignalController:
             self._writer.writerow(["time","tls_id","action","applied_phase","internal_elapsed_s",*[f"obs_{i}" for i in range(13)]])
 
     def _validate_model(self):
+        validate_checkpoint_timing(self.model,self.timing_profile)
+        if self.timing_profile == "v2" and (getattr(self.model,"training_tls_id",None)!=self.tls_id
+                or getattr(self.model,"training_lane_ids",None)!=self.lane_ids):
+            raise ValueError("v2 checkpoint junction or ordered training lanes do not match the adapter")
         if getattr(self.model.observation_space,"shape",None) != (13,):
             raise ValueError("Checkpoint observation shape must be (13,)")
         if not np.allclose(self.model.observation_space.low, np.zeros(13)) or not np.allclose(self.model.observation_space.high,OBS_HIGH):
@@ -117,7 +141,7 @@ class TrainedSignalController:
         if simulation_time+1e-8 < self.next_decision:
             return
         if not math.isclose(simulation_time,self.next_decision,abs_tol=1e-6):
-            raise ValueError("Simulation skipped a trained 5-second decision boundary")
+            raise ValueError(f"Simulation skipped a trained {self.interval:g}-second decision boundary")
         if not self.initial:
             self._advance_internal_fsm()
         self.initial = False
@@ -128,7 +152,7 @@ class TrainedSignalController:
             raise ValueError("DQN action must be 0 (hold) or 1 (request switch)")
         if action == 1 and self.phase not in (1,3):
             self.switch_requested = True
-        # In training the request is processed AFTER this 5s simulation block.
+        # In training the request is processed AFTER this decision block.
         # Freeze the phase so SUMO cannot advance independently in the block.
         self.connection.trafficlight.setPhase(self.tls_id,self.phase)
         self.connection.trafficlight.setPhaseDuration(self.tls_id,self.interval+1)
@@ -145,6 +169,10 @@ def create_controller(*, connection, checkpoint, options):
     """Factory consumed by traffic_eval.runner; SB3 imported only for DQN runs."""
     if "mock" in Path(checkpoint).name.lower():
         raise ValueError("Mock-trained checkpoint cannot control the evidence pipeline")
+    profile,_ = timing_settings(options)
+    name = Path(checkpoint).name.lower()
+    if ("_v1" in name and profile != "v1") or ("_v2" in name and profile != "v2"):
+        raise ValueError("Checkpoint filename and timing_profile disagree; use the matching trained model")
     import torch
     cpu_threads=int(options.get("cpu_threads",1))
     if cpu_threads <= 0:

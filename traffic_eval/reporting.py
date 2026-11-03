@@ -19,6 +19,12 @@ def validate_runs(frame: pd.DataFrame) -> None:
         raise ValueError("Every run requires a nonempty demand/config fingerprint")
     if frame.duplicated(["scenario", "controller", "seed"]).any():
         raise ValueError("Duplicate scenario/controller/seed rows; cannot pair results")
+    if "collision_action" in frame and frame.collision_action.fillna("teleport").nunique()>1:
+        raise ValueError("Do not mix collision-action diagnostic modes with normal evaluation; use separate output folders")
+    if "timing_profile" in frame:
+        for _,part in frame[frame.controller=="dqn"].groupby("scenario"):
+            if part.timing_profile.fillna("v1").nunique()>1:
+                raise ValueError("Do not average different DQN timing profiles in one scenario")
     for _, group in frame.groupby(["scenario", "seed"]):
         if group.demand_hash.nunique(dropna=False) != 1:
             raise ValueError("Demand/config fingerprints differ across controllers for a paired seed")
@@ -65,6 +71,8 @@ def write_report(input_dir: str | Path) -> dict:
             checks.append(row)
     pd.DataFrame(checks, columns=["scenario", "controller", "baseline", "metric", "n_pairs", "zero_or_missing_pairs", "improvement_pct_mean", "improvement_pct_std", "status"]).to_csv(root/"baseline_checks.csv", index=False)
     warnings = []
+    if "collision_action" in runs and runs.collision_action.eq("warn").any():
+        warnings.append("Collision-action warn is diagnostic only: it changes post-collision behavior and cannot establish policy performance or collision causality.")
     if "controller_warnings" in runs:
         policy_warnings = []
         for value in runs.controller_warnings.dropna().unique():

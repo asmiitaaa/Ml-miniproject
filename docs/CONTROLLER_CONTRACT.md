@@ -45,7 +45,7 @@ class EvaluationController:
         """Optional local cleanup; do not close the shared TraCI connection."""
 ```
 
-The harness calls `step(simulation_time)` **before every simulation step**, beginning at time zero. The adapter must implement the five-second decision cadence itself; it must still process pending yellow/minimum-green transitions on intervening steps. Calls may use a configurable fractional simulation step. Do not count Python function calls as seconds.
+The harness calls `step(simulation_time)` **before every simulation step**, beginning at time zero. The adapter implements its checkpoint's decision cadence: five seconds for legacy v1, three seconds for corrected v2. It must preserve the matching yellow/minimum-green semantics. Calls may use a configurable fractional simulation step. Do not count Python function calls as seconds. The concrete profiles and required embedded v2 metadata are documented in `ANANYARAJ_ADAPTER.md` and `CHANGES.md`.
 
 ## Required behavior
 

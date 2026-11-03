@@ -1,6 +1,6 @@
 # Review scope
 
-Soham's branch adds the evaluation harness, metrics, paired statistics, charts, dashboard, inference compatibility adapter, tests, report and run scripts. It does not change the trained model weights, original network/vehicle definitions, or Ananyaraj's canonical agent sources. The branch starts from updated main.
+Soham's branch adds the evaluation harness, metrics, paired statistics, charts, dashboard, inference compatibility adapter, tests, report and run scripts. The v2 follow-up also incorporates Asmita's timing change and updates the canonical trainer to record its timing/provenance and isolate outputs. Original model weights, network/vehicle definitions and historical v1 result tables remain unchanged. See `CHANGES.md` for the current handover.
 
 Published result tables under `report/results/` cover 30 one-hour runs: three controllers, two synthetic demand levels, five seeds. Both baseline waiting-time checks pass, and all vehicles completed. Two peak DQN runs (seeds 11 and 15) have collision-related teleports. Those findings remain visible; this is not a safety-approved final policy. Read `AGENT_HANDOFF.md` before merging or presenting performance claims. Calibration, training/test seed provenance, convergence evidence, network clearance and corridor mapping still need team review.
 

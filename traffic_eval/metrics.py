@@ -100,6 +100,9 @@ def parse_run(run_dir: str | Path, step_length_s: float = 1.0) -> dict:
     result.update(parse_emissions(path / "emissions.xml", step_length_s))
     result.update(parse_queues(path / "queues.csv"))
     result.update(parse_summary(path / "summary.xml"))
+    if (path/"collisions.xml").is_file():
+        from .collisions import collision_records
+        result["collision_events"] = len(collision_records(path/"collisions.xml"))
     total = result["completed_trips"] + result["unfinished_trips"] + result["pending_departures"]
     result["completion_rate"] = result["completed_trips"]/total if total else math.nan
     return result

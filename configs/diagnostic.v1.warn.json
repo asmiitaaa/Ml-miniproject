@@ -1,0 +1,53 @@
+{
+  "experiment_label": "v1-forensic-collision-diagnostic-not-performance",
+  "project_root": "..",
+  "duration_s": 3600,
+  "step_length_s": 1,
+  "lateral_resolution_m": 0.4,
+  "seeds": [
+    11,
+    15
+  ],
+  "scenarios": {
+    "peak": {
+      "sumocfg": "scenarios/model_validation/peak.sumocfg",
+      "demand_files": [
+        "scenarios/model_validation/fixture_manifest.json"
+      ]
+    }
+  },
+  "controllers": {
+    "fixed": {
+      "control_tls_ids": [
+        "cluster_11484393853_11484393854_11484393855_11484393856_#11more"
+      ]
+    },
+    "actuated": {
+      "control_tls_ids": [
+        "cluster_11484393853_11484393854_11484393855_11484393856_#11more"
+      ],
+      "min_green_s": 10,
+      "max_green_s": 60,
+      "max_gap_s": 3
+    },
+    "dqn": {
+      "control_tls_ids": [
+        "cluster_11484393853_11484393854_11484393855_11484393856_#11more"
+      ],
+      "checkpoint": "models/dqn_traffic_sumo_v1_20000_steps.zip",
+      "factory": "traffic_eval.agent_adapter:create_controller",
+      "tls_id": "cluster_11484393853_11484393854_11484393855_11484393856_#11more",
+      "lane_ids": [
+        "24480656#3_0",
+        "794634832#0_0",
+        "794634831#1_0",
+        "631316440#0_0"
+      ],
+      "decision_interval_s": 5,
+      "min_green_s": 10,
+      "signal_mode": "training-replay",
+      "timing_profile": "v1"
+    }
+  },
+  "collision_action": "warn"
+}

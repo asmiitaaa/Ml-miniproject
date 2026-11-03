@@ -1,0 +1,5 @@
+seed,collision_action,replay_duration_s,time,type,lane,pos,collider,victim,colliderType,victimType,colliderSpeed,victimSpeed,colliderBack,colliderFront,victimBack,victimFront
+11,teleport,2400,2311.00,collision,631316440#0_0,26.68,peak_0766,peak_0763,motorcycle,motorcycle,1.73,0.48,"608.11,526.46","610.06,526.42","609.80,525.62","611.75,525.58"
+11,warn,2400,2311.00,collision,631316440#0_0,26.68,peak_0766,peak_0763,motorcycle,motorcycle,1.73,0.48,"608.11,526.46","610.06,526.42","609.80,525.62","611.75,525.58"
+15,teleport,1200,1048.00,collision,631316440#0_0,33.30,peak_0339,peak_0346,motorcycle,motorcycle,4.37,0.01,"614.59,526.72","616.54,526.67","614.68,525.92","616.63,525.87"
+15,warn,1200,1048.00,collision,631316440#0_0,33.30,peak_0339,peak_0346,motorcycle,motorcycle,4.37,0.01,"614.59,526.72","616.54,526.67","614.68,525.92","616.63,525.87"

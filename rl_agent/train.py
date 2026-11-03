@@ -1,90 +1,33 @@
-"""
-train.py
-========
-DQN training script using Stable-Baselines3.
+"""Train SUMO-v2 DQN checkpoints with explicit timing and provenance metadata.
 
-What this script does
----------------------
-1. Instantiates TrafficSignalEnv in *mock* mode.
-2. Validates the environment against the Gymnasium API using check_env.
-3. Creates a DQN agent with MlpPolicy.
-4. Trains the agent for a configurable number of timesteps.
-5. Saves the trained model to disk.
-
-⚠  IMPORTANT DISCLAIMER
--------------------------
-Training in mock mode does NOT produce a traffic-control policy that
-works on a real intersection.  Mock observations are synthetic random
-numbers, not real traffic data.  The agent will learn to optimise
-mock rewards, which have no relationship to actual traffic conditions.
-
-Use this script to:
-  - Verify the environment API is correct.
-  - Confirm Stable-Baselines3 and Gymnasium integrate properly.
-  - Prototype the training loop before SUMO is available.
-
-To train on a real scenario, switch mode="sumo" and provide a valid
-sumo_config dictionary.
-
-DQN hyperparameters used
-------------------------
-Parameter             Value     Rationale
------------           -----     ---------
-policy                MlpPolicy Standard fully-connected net for flat obs.
-learning_rate         1e-3      Starting point; tune down (1e-4) if unstable.
-buffer_size           50_000    Replay buffer capacity.  Reduce if RAM is
-                                tight; increase for longer episodes.
-learning_starts       1_000     Steps of random action before learning
-                                begins — ensures diverse replay buffer.
-batch_size            64        Mini-batch size for gradient updates.
-                                Default in SB3; increase to 128 for stability.
-train_freq            4         Update the network every 4 env steps.
-target_update_interval 1_000   Steps between target network hard updates.
-exploration_fraction  0.2       Fraction of training spent linearly decaying
-                                epsilon from 1.0 to exploration_final_eps.
-exploration_final_eps 0.05      Final epsilon after decay (5% random actions).
-verbose               1         Print training progress to the terminal.
-
-Parameters NOT set here (using SB3 defaults):
-  gamma (discount factor) = 0.99
-  tau (soft update coeff) = 1.0  (hard update because target_update_interval)
-
-How to run
-----------
-  cd rl_agent
-  python train.py
-
-Outputs
--------
-  models/dqn_traffic_mock.zip   — saved Stable-Baselines3 model
-  models/dqn_traffic_mock_10000_steps.zip  — checkpoint at N steps
+Run from the repository root: .venv/Scripts/python.exe rl_agent/train.py
+Use --timesteps 24 --output-dir <scratch-folder> for a smoke test only.
+The default 100,000-step run still requires convergence and safety review.
 """
 
+import argparse
+from datetime import datetime, timezone
+import hashlib
+import importlib.util
 import os
+from pathlib import Path
 import sys
+import xml.etree.ElementTree as ET
 
-# ---------------------------------------------------------------------------
-# SUMO path bootstrap (eclipse-sumo pip package)
-# Sets SUMO_HOME and adds the Scripts folder to PATH so TraCI can find
-# the sumo binary regardless of whether the user configured it manually.
-# ---------------------------------------------------------------------------
-_SUMO_SCRIPTS = os.path.join(
-    os.path.expanduser("~"),
-    "AppData", "Roaming", "Python", "Python313", "Scripts",
-)
-_SUMO_HOME = os.path.join(
-    os.path.expanduser("~"),
-    "AppData", "Roaming", "Python", "Python313", "site-packages", "sumo",
-)
-if "SUMO_HOME" not in os.environ:
-    os.environ["SUMO_HOME"] = _SUMO_HOME
-if _SUMO_SCRIPTS not in os.environ.get("PATH", ""):
-    os.environ["PATH"] = _SUMO_SCRIPTS + os.pathsep + os.environ.get("PATH", "")
-# ---------------------------------------------------------------------------
+REPO = Path(__file__).resolve().parents[1]
+sys.path.insert(0,str(REPO))
+# Resolve the installed simulator rather than another user's Python313 path.
+spec = importlib.util.find_spec("sumo")
+if spec and spec.submodule_search_locations:
+    sumo_home = Path(next(iter(spec.submodule_search_locations)))
+    os.environ["SUMO_HOME"] = str(sumo_home)
+    os.environ["PATH"] = str(sumo_home/"bin") + os.pathsep + os.environ.get("PATH", "")
 
 from stable_baselines3 import DQN
 from stable_baselines3.common.env_checker import check_env
 from stable_baselines3.common.callbacks import CheckpointCallback
+from stable_baselines3.common.monitor import Monitor
+from traffic_eval.timing import TIMING_PROFILES
 
 from environment import TrafficSignalEnv
 
@@ -113,8 +56,8 @@ from environment import TrafficSignalEnv
 # ---------------------------------------------------------------------------
 
 SUMO_CONFIG = {
-    # Path is relative to the rl_agent/ working directory
-    "sumocfg_path": "../simulation/corridor.sumocfg",
+    # Resolve from this repository, regardless of the working directory.
+    "sumocfg_path": str(REPO / "simulation/corridor.sumocfg"),
 
     # Traffic-light ID at the controlled intersection
     "tl_id": "cluster_11484393853_11484393854_11484393855_11484393856_#11more",
@@ -144,7 +87,7 @@ TRAINING_CONFIG = {
     # trained with yellow_seconds=3.0 and decision_interval=5.0, giving an
     # effective 5 s yellow — SHORTER than the network's nominal clearance.
     # Evaluation (soham/evaluation) detected collisions in 2/5 peak seeds,
-    # consistent with inadequate clearance at this 8-lane junction.
+    # but their causal relationship to clearance is not established.
     # v2 therefore uses:
     #   yellow_seconds    = 6.0  → matches the network's nominal yellow
     #   decision_interval = 3.0  → 6/3 is an integer, so the yellow lasts
@@ -169,11 +112,14 @@ DQN_CONFIG = {
     "exploration_fraction":     0.2,
     "exploration_final_eps":    0.05,
     "verbose":                  1,
+    "seed":                     42,
 }
 
 TOTAL_TIMESTEPS = 100_000     # First real SUMO run — increase later if results look good
 CHECKPOINT_FREQ = 10_000      # Save a model checkpoint every N steps
-MODEL_SAVE_DIR  = "models"
+TRAINING_SUMO_SEED = 42       # Evaluation seeds 11-15 are held out from this run
+LATERAL_RESOLUTION_M = 0.4    # Match the methodology and evaluation fixtures
+MODEL_SAVE_DIR  = str(Path(__file__).resolve().parent / "models")
 MODEL_NAME      = "dqn_traffic_sumo_v2"   # v2 = corrected 6 s yellow / 3 s interval / 12 s min-green
 
 
@@ -181,50 +127,83 @@ MODEL_NAME      = "dqn_traffic_sumo_v2"   # v2 = corrected 6 s yellow / 3 s inte
 # Main training routine
 # ---------------------------------------------------------------------------
 
-def train() -> None:
-    # 1. Create the environment
-    print("=== Creating TrafficSignalEnv (sumo mode) ===")
-    env = TrafficSignalEnv(**TRAINING_CONFIG)
+def prepare_training_inputs(output):
+    """Resolve inputs and isolate output logs from the team's tracked files."""
+    original=Path(SUMO_CONFIG["sumocfg_path"])
+    tree=ET.parse(original)
+    hashes={"simulation/corridor.sumocfg":hashlib.sha256(original.read_bytes()).hexdigest()}
+    for option in tree.findall("./input/*"):
+        if option.tag in {"net-file","route-files","additional-files"}:
+            paths=[(original.parent/name.strip()).resolve() for name in option.get("value","").split(",") if name.strip()]
+            option.set("value",",".join(map(str,paths)))
+            for path in paths:
+                key=str(path.relative_to(REPO)).replace("\\","/")
+                hashes[key]=hashlib.sha256(path.read_bytes()).hexdigest()
+    # Only the private run configuration changes; original inputs stay intact.
+    tree.find("./processing/lateral-resolution").set("value",str(LATERAL_RESOLUTION_M))
+    tree.find("./processing/ignore-route-errors").set("value","false")
+    random_section=tree.find("random_number")
+    if random_section is None:random_section=ET.SubElement(tree.getroot(),"random_number")
+    for tag,value in (("seed",str(TRAINING_SUMO_SEED)),("random","false")):
+        option=random_section.find(tag)
+        if option is None:option=ET.SubElement(random_section,tag)
+        option.set("value",value)
+    resolution=LATERAL_RESOLUTION_M
+    for tag in ("lanedata-output","tripinfo-output","emission-output","summary-output","collision-output"):
+        for option in tree.findall(".//"+tag):option.set("value",str(output/(tag+".xml")))
+    if tree.find(".//collision-output") is None:
+        section=tree.find("output")
+        if section is None:section=ET.SubElement(tree.getroot(),"output")
+        ET.SubElement(section,"collision-output",value=str(output/"collisions.xml"))
+    processing=tree.find("processing")
+    collision=processing.find("collision.action")
+    if collision is None:collision=ET.SubElement(processing,"collision.action")
+    collision.set("value","teleport")
+    target=output/"training.sumocfg"
+    tree.write(target,encoding="utf-8",xml_declaration=True)
+    return target,hashes,resolution
 
-    # 2. Validate the environment against the Gymnasium API.
-    #    check_env will raise an error if anything is misconfigured.
-    print("=== Running check_env ===")
-    check_env(env, warn=True)
-    print("check_env passed OK\n")
 
-    # 3. Create the DQN agent
-    print("=== Creating DQN agent ===")
-    model = DQN(
-        policy="MlpPolicy",
-        env=env,
-        **DQN_CONFIG,
-    )
-
-    # 4. Checkpoint callback — saves model weights during training
-    os.makedirs(MODEL_SAVE_DIR, exist_ok=True)
-    checkpoint_cb = CheckpointCallback(
-        save_freq=CHECKPOINT_FREQ,
-        save_path=MODEL_SAVE_DIR,
-        name_prefix=MODEL_NAME,
-        verbose=1,
-    )
-
-    # 5. Train
-    print(f"=== Training for {TOTAL_TIMESTEPS:,} timesteps (SUMO mode) ===")
-    print("Intersection: cluster_11484393853_11484393854_11484393855_11484393856_#11more")
-    print("Model will be saved to:", os.path.join(MODEL_SAVE_DIR, MODEL_NAME + ".zip"), "\n")
-    model.learn(
-        total_timesteps=TOTAL_TIMESTEPS,
-        callback=checkpoint_cb,
-        progress_bar=False,  # Set True if tqdm is installed
-    )
-
-    # 6. Save the final model
-    final_path = os.path.join(MODEL_SAVE_DIR, MODEL_NAME)
-    model.save(final_path)
-    print(f"\n=== Training complete.  Model saved to {final_path}.zip ===")
-
-    env.close()
+def train(timesteps=TOTAL_TIMESTEPS, output_dir=MODEL_SAVE_DIR):
+    import torch
+    torch.set_num_threads(1)
+    if timesteps<=0:raise ValueError("timesteps must be positive")
+    output=Path(output_dir).resolve();output.mkdir(parents=True,exist_ok=True)
+    final=output/(MODEL_NAME+".zip")
+    if final.exists() or list(output.glob(MODEL_NAME+"_*_steps.zip")):
+        raise FileExistsError("v2 checkpoints already exist here; choose a fresh --output-dir")
+    run=output/"training_runs"/datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S_%fZ")
+    run.mkdir(parents=True)
+    configuration,inputs,resolution=prepare_training_inputs(run)
+    settings=dict(TRAINING_CONFIG, sumo_config={**SUMO_CONFIG,"sumocfg_path":str(configuration)})
+    env=Monitor(TrafficSignalEnv(**settings),str(run/"monitor.csv"))
+    try:
+        check_env(env,warn=True)
+        model=DQN(policy="MlpPolicy",env=env,device="cpu",**DQN_CONFIG)
+        # SB3 stores these attributes in every callback/final checkpoint.
+        model.timing_profile="v2"
+        model.training_mode=TRAINING_CONFIG["mode"]
+        model.training_timing={"decision_interval_s":float(TRAINING_CONFIG["decision_interval"]),
+                               "min_green_s":float(TRAINING_CONFIG["min_green_seconds"]),
+                               "yellow_s":float(TRAINING_CONFIG["yellow_seconds"])}
+        assert model.training_timing==TIMING_PROFILES["v2"]
+        model.training_lane_ids=list(SUMO_CONFIG["lane_ids"])
+        model.training_tls_id=SUMO_CONFIG["tl_id"]
+        model.training_lateral_resolution_m=resolution
+        model.training_input_sha256=inputs
+        model.training_source_sha256=hashlib.sha256(Path(__file__).read_bytes()).hexdigest()
+        model.training_config_sha256=hashlib.sha256(configuration.read_bytes()).hexdigest()
+        model.training_model_seed=DQN_CONFIG["seed"]
+        # Seed is explicit in the private SUMO configuration, on every reset.
+        model.training_sumo_seed=TRAINING_SUMO_SEED
+        model.training_status="smoke-test-only" if timesteps<DQN_CONFIG["learning_starts"] else "convergence-not-assessed"
+        callback=CheckpointCallback(save_freq=CHECKPOINT_FREQ,save_path=str(output),name_prefix=MODEL_NAME,verbose=1)
+        print(f"Training v2 for {timesteps} decisions. Output: {output}",flush=True)
+        model.learn(total_timesteps=timesteps,callback=callback,progress_bar=False)
+        model.save(final)
+        print(f"Saved {final}; status={model.training_status}. Training logs: {run}",flush=True)
+    finally:
+        env.close()
 
 
 # ---------------------------------------------------------------------------
@@ -232,36 +211,22 @@ def train() -> None:
 # ---------------------------------------------------------------------------
 
 def load_and_run_demo(model_path: str = None) -> None:
-    """
-    Load a previously saved model and run one episode to see it in action.
-
-    Parameters
-    ----------
-    model_path : str
-        Path to the .zip file (without extension).
-        Defaults to MODEL_SAVE_DIR/MODEL_NAME.
-    """
-    if model_path is None:
-        model_path = os.path.join(MODEL_SAVE_DIR, MODEL_NAME)
-
-    env   = TrafficSignalEnv(**TRAINING_CONFIG)
-    model = DQN.load(model_path, env=env)
-
-    obs, info = env.reset(seed=42)
-    total_reward = 0.0
-    done = False
-
-    print(f"\n=== Demo episode using model: {model_path} ===")
-    while not done:
-        action, _ = model.predict(obs, deterministic=True)
-        obs, reward, terminated, truncated, info = env.step(int(action))
-        total_reward += reward
-        done = terminated or truncated
-
-    print(f"Episode finished.  Total reward: {total_reward:.2f}")
-    print("(Reward reflects mock data only — not real traffic performance)")
-    env.close()
+    """Replay a genuine v2 policy through the same strict evaluation adapter."""
+    from traffic_eval.runner import load_config, run_one
+    checkpoint=Path(model_path) if model_path else Path(MODEL_SAVE_DIR)/(MODEL_NAME+".zip")
+    if checkpoint.suffix!=".zip":checkpoint=Path(str(checkpoint)+".zip")
+    cfg=load_config(REPO/"configs/evaluation.v2.example.json")
+    cfg["controllers"]["dqn"]["checkpoint"]=str(checkpoint.resolve())
+    cfg["experiment_label"]="v2-demo-not-final-evaluation"
+    output=REPO/"results"/("v2_demo_"+datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S_%fZ"))
+    result=run_one(cfg,"peak","dqn",11,output)
+    print(f"SUMO replay complete. Inspect metrics, warnings and collision logs: {output}")
+    print(result)
 
 
 if __name__ == "__main__":
-    train()
+    parser=argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--timesteps",type=int,default=TOTAL_TIMESTEPS)
+    parser.add_argument("--output-dir",default=MODEL_SAVE_DIR)
+    args=parser.parse_args()
+    train(args.timesteps,args.output_dir)

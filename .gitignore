@@ -14,3 +14,6 @@ demonstrations/
 # Local source archives and unselected checkpoint copy
 /integrations/
 /models/dqn_traffic_sumo_v1_10000_steps.zip
+
+# Trainer logs are local; genuine checkpoints are reviewed separately.
+/rl_agent/models/training_runs/
