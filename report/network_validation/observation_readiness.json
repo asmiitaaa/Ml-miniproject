@@ -1,0 +1,16 @@
+{
+  "row_count": 0,
+  "basic_data_checks_passed": false,
+  "missing_evidence": [
+    "peak/calibration: measured counts missing",
+    "peak/calibration: independent speed/travel-time measurements missing",
+    "peak/validation: measured counts missing",
+    "peak/validation: independent speed/travel-time measurements missing",
+    "offpeak/calibration: measured counts missing",
+    "offpeak/calibration: independent speed/travel-time measurements missing",
+    "offpeak/validation: measured counts missing",
+    "offpeak/validation: independent speed/travel-time measurements missing"
+  ],
+  "calibrated": false,
+  "interpretation": "Input checks only. Site matching, measurement quality, model fitting and independent validation still require review."
+}

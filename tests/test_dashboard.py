@@ -71,3 +71,11 @@ def test_complete_matrix_keeps_dqn_safety_warnings_visible(monkeypatch):
     app.sidebar.multiselect[1].set_value(['dqn']).run()
     assert not app.exception
     assert int(app.metric[0].value)==10
+
+
+def test_no_traffic_sites_are_visible_even_with_all_thirty_runs(monkeypatch):
+    current=ROOT/'report/training/corridor_results'
+    app=app_for(monkeypatch,current)
+    assert not app.exception
+    assert int(app.metric[0].value)==30
+    assert any('only 1 of 6' in warning.value for warning in app.warning)

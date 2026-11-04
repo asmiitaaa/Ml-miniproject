@@ -1,5 +1,11 @@
 # Dynamic Traffic Congestion Control: Soham's Evaluation Work
 
+## Traffic-coverage correction and calibration status
+
+The agent executes at all six mapped signal sites, but the existing peak/offpeak routes send vehicles through only the trained junction. The other five sites receive no traffic. The recorded delay reductions and zero observed events therefore describe this single-active-junction synthetic demand; they do not establish multi-intersection traffic performance. The dashboard now makes this limit visible.
+
+No measured traffic data have been provided. [The network/demand audit](report/network_validation/AUDIT.md) records connectivity, route legality, planned exposure and unresolved site checks. [Measurement inputs](data/observations/README.md) explain the required data. Calibration and full-corridor traffic validation remain incomplete.
+
 ## Current trained agent
 
 Ananyaraj's agent work is now implemented and trained as well. Use the new independent corridor policy and selected peak/off-peak models:

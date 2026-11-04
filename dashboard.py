@@ -284,6 +284,21 @@ def main() -> None:
                                     [len(frame), frame.scenario.nunique(), frame.controller.nunique(), frame.seed.nunique()]):
         column.metric(label, value)
     show_quality(frame)
+    coverage_path=result_path/'demand_coverage.json'
+    if not uploaded and coverage_path.is_file():
+        try:
+            from traffic_eval.demand_coverage import coverage_warnings
+            coverage=json.loads(coverage_path.read_text())
+            exposure=[]
+            for scenario in frame.scenario.unique():
+                if scenario not in coverage.get('scenarios',{}):continue
+                detail=coverage['scenarios'][scenario]
+                for message in coverage_warnings(detail):st.warning(f'{scenario}: {message}')
+                for signal,data in detail['signals'].items():exposure.append(dict(scenario=scenario,signal_id=signal,**data))
+            with st.expander('Planned traffic exposure by signal',expanded=False):
+                st.caption('Computed from the input routes; these are planned crossings, not observed field counts. A vehicle may cross a signal more than once.')
+                st.dataframe(pd.DataFrame(exposure),hide_index=True)
+        except (OSError,ValueError,KeyError):st.warning('The planned traffic-exposure audit could not be read.')
     quality_path = result_path / "quality_checks.json"
     if not uploaded and quality_path.is_file():
         try:

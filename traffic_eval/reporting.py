@@ -6,6 +6,7 @@ from pathlib import Path
 import pandas as pd
 
 from .metrics import METRICS
+from .demand_coverage import coverage_warnings
 
 
 def validate_runs(frame: pd.DataFrame) -> None:
@@ -71,6 +72,15 @@ def write_report(input_dir: str | Path) -> dict:
             checks.append(row)
     pd.DataFrame(checks, columns=["scenario", "controller", "baseline", "metric", "n_pairs", "zero_or_missing_pairs", "improvement_pct_mean", "improvement_pct_std", "status"]).to_csv(root/"baseline_checks.csv", index=False)
     warnings = []
+    if {'active_controlled_tls_count','controlled_tls_count'}.issubset(runs.columns):
+        if (runs.active_controlled_tls_count<runs.controlled_tls_count).any():
+            warnings.append('Some controlled signals receive no planned traffic. These results do not establish multi-intersection traffic performance.')
+    coverage_path=root/'demand_coverage.json'
+    if coverage_path.is_file():
+        coverage=json.loads(coverage_path.read_text())
+        for scenario in runs.scenario.unique():
+            if scenario in coverage.get('scenarios',{}):
+                warnings.extend(f'{scenario}: '+message for message in coverage_warnings(coverage['scenarios'][scenario]))
     if "collision_action" in runs and runs.collision_action.eq("warn").any():
         warnings.append("Collision-action warn is diagnostic only: it changes post-collision behavior and cannot establish policy performance or collision causality.")
     if "controller_warnings" in runs:

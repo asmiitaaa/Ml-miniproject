@@ -19,6 +19,7 @@ import xml.etree.ElementTree as ET
 
 from .metrics import parse_run
 from .collisions import collision_action, collision_args, export_collisions
+from .demand_coverage import from_config,coverage_warnings
 
 
 def sha256(path):
@@ -225,6 +226,8 @@ def run_one(cfg, scenario_name, controller, seed, run_dir, gui=False):
                 "controller_network_sha256":sha256(network_copy), "python_version":sys.version,
                 "experiment_label":cfg.get("experiment_label","project"),"status":"running"}
     manifest.update(collision_action=collision_action(cfg),diagnostic_mode=collision_action(cfg)=="warn")
+    coverage=from_config(cfg,scenario,options.get('control_tls_ids'))
+    manifest['planned_demand_coverage']=coverage
     if controller == "dqn":
         checkpoint = resolve(cfg, options["checkpoint"])
         manifest["checkpoint_sha256"] = sha256(checkpoint)
@@ -254,6 +257,8 @@ def run_one(cfg, scenario_name, controller, seed, run_dir, gui=False):
             policy = getattr(importlib.import_module(module),function)(connection=connection,checkpoint=str(checkpoint),options={**options,"seed":seed,"_run_dir":str(run_dir),"_step_length_s":step,"_lateral_resolution_m":cfg.get("lateral_resolution_m",.4)})
             manifest["controller_module_sha256"] = sha256(importlib.import_module(module).__file__)
             manifest["controller_metadata"] = getattr(policy,"metadata",{})
+            metadata=manifest['controller_metadata']
+            metadata['warnings']=list(dict.fromkeys(metadata.get('warnings',[])+coverage_warnings(coverage)))
         with (run_dir/"queues.csv").open("w",newline="",encoding="utf-8") as handle:
             writer=csv.writer(handle); writer.writerow(["time","tls_id","approach_id","queue_length"])
             while connection.simulation.getTime() < duration-1e-8:
@@ -282,6 +287,9 @@ def run_one(cfg, scenario_name, controller, seed, run_dir, gui=False):
                       run_dir=str(run_dir),experiment_label=manifest["experiment_label"],teleports=teleports,collisions=collisions,
                       wall_time_s=time.monotonic()-started)
         result.update(collision_action=manifest["collision_action"],diagnostic_mode=manifest["diagnostic_mode"])
+        result['active_controlled_tls_count']=coverage['active_selected_signal_count'] if not coverage['unsupported_definitions'] else None
+        result['controlled_tls_count']=coverage['selected_signal_count']
+        result['demand_coverage_kind']=coverage['kind']
         if policy is not None:
             metadata = getattr(policy,"metadata",{})
             result["controller_warnings"] = json.dumps(metadata.get("warnings",[]))
@@ -344,7 +352,7 @@ def import_results(raw_dir, output):
             row[key]=manifest[key]
         row["run_dir"]=str(manifest_path.parent.resolve())
         row.update({k:manifest.get("metrics",{}).get(k,0) for k in ("teleports","collisions")})
-        for key in ("controller_warnings","model_num_timesteps","controlled_tls_count","timing_profile","collision_action","diagnostic_mode"):
+        for key in ("controller_warnings","model_num_timesteps","controlled_tls_count","active_controlled_tls_count","demand_coverage_kind","timing_profile","collision_action","diagnostic_mode"):
             if key in manifest.get("metrics",{}):row[key]=manifest["metrics"][key]
         records.append(row)
     if not records: raise ValueError("No completed run manifests found")

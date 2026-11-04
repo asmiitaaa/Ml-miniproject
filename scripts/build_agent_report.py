@@ -26,9 +26,9 @@ def main():
         model=models[scenario]
         published.append(f"| {scenario} | {model['num_timesteps']:,} | {model['review']['full_training_curve']['plateau_detected']} | `{model['policy_tensors_sha256']}` |")
     dwells=sum(r['completed_phase_dwells'] for r in audit['runs'])
-    text=f'''# Ananyaraj's completed agent work
+    text=f'''# Agent implementation, training and traffic-coverage limits
 
-Completed 4 November 2026: Gymnasium/TraCI environment, trained checkpoints, hyperparameter comparison, independent corridor execution, validation-based model selection and complete simulation comparisons.
+Implemented and trained: Gymnasium/TraCI environment, checkpoints, hyperparameter comparison, independent signal execution and validation-based selection. **Scope correction:** the supplied peak/offpeak routes cross only one of the six controlled signal sites. The other five controllers execute without traffic. Existing comparisons establish performance only for this single-active-junction synthetic demand, not for interacting corridor traffic.
 
 ## Implementation
 
@@ -56,11 +56,11 @@ Selected archives include their validation review and source checkpoint hash. Re
 
 Training histories, settings, source/input hashes and convergence reviews are under [report/training]({TREE}report/training). Original source snapshots and per-episode training collision/trip logs remain in the ignored local trial folders under `results/agent_training`.
 
-## Held-out simulation results
+## Held-out results for the supplied single-active-junction demand
 
 Three controllers x two scenarios x five seeds completed for each model family: 30 runs for the selected v2 policies and another 30 for the independent corridor policies. Every scheduled vehicle completed. Both matrices recorded zero collision events, zero teleports and zero unfinished trips.
 
-The corridor waiting-time results below are seed means +/- sample standard deviations, in seconds:
+The waiting-time results below are seed means +/- sample standard deviations, in seconds. Only the trained junction carries traffic:
 
 {chr(10).join(table)}
 
@@ -100,27 +100,27 @@ Training can be reproduced with `rl_agent/train_corridor.py`; use fresh output f
 
 ## Practical limits
 
-The supplied demand is synthetic and uncalibrated. This is simulation evidence, so `final_evaluation_ready` remains false for field/corridor claims. Zero observed events on these seeds does not certify real-road safety. Detailed historical v1 records located incoming-lane motorcycle collisions; these results do not establish that yellow timing caused them. The selected policy was initially trained on one junction and then empirically tested independently across the available mapped sites; unseen networks require a new reviewed mapping and validation.
+The supplied demand is synthetic and uncalibrated. Only one junction carries traffic; zero-demand execution at five other sites is not a traffic-transfer validation. `final_evaluation_ready` remains false. Zero observed events on these seeds does not certify real-road safety. Detailed historical v1 records located incoming-lane motorcycle collisions; these results do not establish that yellow timing caused them. New demand must exercise the corridor and be checked against measured traffic before performance can be generalized. See [the network and coverage audit]({BASE}report/network_validation/AUDIT.md).
 
 Method references: [SB3 evaluation guidance](https://stable-baselines3.readthedocs.io/en/master/guide/rl_tips.html), [SUMO controlled signal links](https://sumo.dlr.de/docs/TraCI/Traffic_Lights_Value_Retrieval.html), [SUMO lane quantities](https://sumo.dlr.de/docs/TraCI/Lane_Value_Retrieval.html).
 '''
     text=text.replace(chr(92)*2,chr(92))
     (ROOT/'docs/ANANYARAJ_COMPLETION.md').write_text(text,encoding='utf-8')
-    changes='''# Completed agent training and corridor handover
+    changes='''# Agent software and calibration readiness
 
-Ananyaraj's agent implementation, full training, per-scenario checkpoint selection and simulation testing are complete. Read [the completion report](docs/ANANYARAJ_COMPLETION.md) for the exact methods, results and copy-paste commands.
+Agent implementation, full training, checkpoint selection and execution tests are available. A subsequent audit found that the existing routes cross only one of six controlled signal sites. The other five receive no traffic. The earlier description of a full corridor comparison overstated traffic coverage. Read [the agent report](docs/ANANYARAJ_COMPLETION.md) and [network/demand audit](report/network_validation/AUDIT.md).
 
 - Five genuine full DQN runs: 500,000 decisions total. Both successful baseline-setting training curves met the empirical plateau criterion; unstable tuning runs are retained.
 - New 17-feature all-lane environment and independent execution at all six mapped signal sites. Legacy v1/v2 checkpoints remain separate.
 - Selected peak/offpeak checkpoints are in `models/corridor_peak_best.zip` and `models/corridor_offpeak_best.zip`, with embedded validation provenance and verified unchanged policy tensors.
 - Ninety reserved-seed validation runs selected the v2 and corridor checkpoints; final test seeds were excluded from selection.
-- Both 30-run held-out comparisons completed all trips with zero observed collision events, teleports or unfinished trips.
+- Both 30-run comparisons completed all trips with zero observed collision events, teleports or unfinished trips, under the supplied single-active-junction demand.
 - Corridor DQN reduced waiting versus fixed-time by 43.86% peak and 53.31% offpeak. Actuated remained better than DQN in both scenarios.
 - Exact corridor phase traces passed the complete green, yellow and all-red sequence/duration audit.
 - `rl_agent/run_policy.py` produces baseline-compatible raw output. `Start-Project.ps1` now defaults to the selected corridor models and current results.
 - Current tables, training curves, hashes and reviews are under `report/training/`; original historical v1 tables and weights are preserved.
 
-86 software tests pass, and both the standalone policy command and the current quick-test command completed in real SUMO. Remaining project inputs are demand/network field calibration, institutional submission checks, and refreshing the historical v1 IEEE manuscript/video for the new results. These simulation results do not certify real-world safety. The earlier implementation-only handover is retained in Git history at 5b93af8.
+The earlier agent release passed 86 software tests; the audit adds regression checks for missing traffic exposure and invalid observation inputs. Real calibration is not complete because measured data are absent. Full-corridor demand, independent measured validation, network/site review, institutional submission checks and the final manuscript/video refresh remain. Historical training/model-selection records and raw metrics are preserved.
 '''
     (ROOT/'CHANGES.md').write_text(changes,encoding='utf-8')
     print(ROOT/'docs/ANANYARAJ_COMPLETION.md')

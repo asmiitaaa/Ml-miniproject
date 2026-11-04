@@ -1,0 +1,13 @@
+{
+  "regression_tests_passed": 97,
+  "upstream_deprecation_warnings": 5,
+  "original_run_csv_unchanged_except_checkout_line_endings": true,
+  "trained_policy_archives_byte_identical": true,
+  "scheduled_route_class_pairs_checked": 92,
+  "route_legality_errors": 0,
+  "active_signal_sites": 1,
+  "controlled_signal_sites": 6,
+  "measured_observation_rows": 0,
+  "calibrated": false,
+  "scope": "technical audit and measured-data preparation only"
+}

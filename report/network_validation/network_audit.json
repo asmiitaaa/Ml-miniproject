@@ -1,0 +1,74 @@
+{
+  "network_sha256": "c5b50b1e897ae658bf0ddb5c6dad83e7f8abb14f5e8c93cf3ea2569c57b6c943",
+  "network_location": {
+    "netOffset": "-785643.39,-1428388.21",
+    "convBoundary": "0.00,0.00,2101.09,1268.78",
+    "origBoundary": "77.632361,12.871118,77.666756,12.921114",
+    "projParameter": "+proj=utm +zone=43 +ellps=WGS84 +datum=WGS84 +units=m +no_defs"
+  },
+  "external_edges": 681,
+  "signal_sites": 6,
+  "nearby_signal_pairs": [
+    {
+      "signal_a": "10860559946",
+      "signal_b": "10860559948",
+      "distance_m": 38.91,
+      "status": "review_only_not_proof_of_duplicate_signals"
+    },
+    {
+      "signal_a": "10860559946",
+      "signal_b": "11476588184",
+      "distance_m": 46.64,
+      "status": "review_only_not_proof_of_duplicate_signals"
+    },
+    {
+      "signal_a": "10860559946",
+      "signal_b": "cluster_10860559949_11178931802_11178931803_2414626606_#2more",
+      "distance_m": 30.42,
+      "status": "review_only_not_proof_of_duplicate_signals"
+    },
+    {
+      "signal_a": "10860559948",
+      "signal_b": "cluster_10860559949_11178931802_11178931803_2414626606_#2more",
+      "distance_m": 29.09,
+      "status": "review_only_not_proof_of_duplicate_signals"
+    },
+    {
+      "signal_a": "11476588184",
+      "signal_b": "cluster_10860559949_11178931802_11178931803_2414626606_#2more",
+      "distance_m": 40.06,
+      "status": "review_only_not_proof_of_duplicate_signals"
+    }
+  ],
+  "route_class_pairs_checked": 92,
+  "route_legality_errors": [],
+  "connectivity": {
+    "passenger": {
+      "exit_code": 0,
+      "summary": "Total Edges: 584\nLargest Component: #1 Edge Count: 580 Coverage: 99.32%\nEdges\tIncidence\n1\t4\n580\t1"
+    },
+    "motorcycle": {
+      "exit_code": 0,
+      "summary": "Total Edges: 584\nLargest Component: #1 Edge Count: 580 Coverage: 99.32%\nEdges\tIncidence\n1\t4\n580\t1"
+    },
+    "bus": {
+      "exit_code": 0,
+      "summary": "Total Edges: 584\nLargest Component: #1 Edge Count: 580 Coverage: 99.32%\nEdges\tIncidence\n1\t4\n580\t1"
+    }
+  },
+  "field_geometry_verified": false,
+  "observed_traffic_data_available": false,
+  "calibrated": false,
+  "warnings": [
+    "Field lane counts, turn restrictions, signal coordination and speed limits still require site evidence.",
+    "peak: Planned demand crosses only 1 of 6 controlled signal sites. These results do not establish multi-intersection traffic performance.",
+    "offpeak: Planned demand crosses only 1 of 6 controlled signal sites. These results do not establish multi-intersection traffic performance."
+  ],
+  "isolated_passenger_edges": [
+    "-1055657462",
+    "-1103093325",
+    "1055657462",
+    "1103093325"
+  ],
+  "isolated_edges_used_in_current_routes": []
+}

@@ -1,0 +1,922 @@
+[
+  {
+    "scenario": "peak",
+    "route_id": "route_car_f_E_S",
+    "vclass": "passenger",
+    "edges_allow_class": true,
+    "connections_allow_class": true,
+    "od_reachable": true,
+    "route_length_m": 42.81,
+    "shortest_distance_m": 42.81
+  },
+  {
+    "scenario": "peak",
+    "route_id": "route_auto_f_S_E",
+    "vclass": "passenger",
+    "edges_allow_class": true,
+    "connections_allow_class": true,
+    "od_reachable": true,
+    "route_length_m": 87.68,
+    "shortest_distance_m": 87.68
+  },
+  {
+    "scenario": "peak",
+    "route_id": "route_car_f_E_W",
+    "vclass": "passenger",
+    "edges_allow_class": true,
+    "connections_allow_class": true,
+    "od_reachable": true,
+    "route_length_m": 44.99,
+    "shortest_distance_m": 44.99
+  },
+  {
+    "scenario": "peak",
+    "route_id": "route_car_f_N_E",
+    "vclass": "passenger",
+    "edges_allow_class": true,
+    "connections_allow_class": true,
+    "od_reachable": true,
+    "route_length_m": 77.63,
+    "shortest_distance_m": 77.63
+  },
+  {
+    "scenario": "peak",
+    "route_id": "route_motorcycle_f_E_N",
+    "vclass": "motorcycle",
+    "edges_allow_class": true,
+    "connections_allow_class": true,
+    "od_reachable": true,
+    "route_length_m": 281.99,
+    "shortest_distance_m": 281.99
+  },
+  {
+    "scenario": "peak",
+    "route_id": "route_motorcycle_f_W_N",
+    "vclass": "motorcycle",
+    "edges_allow_class": true,
+    "connections_allow_class": true,
+    "od_reachable": true,
+    "route_length_m": 219.55,
+    "shortest_distance_m": 219.55
+  },
+  {
+    "scenario": "peak",
+    "route_id": "route_motorcycle_f_N_W",
+    "vclass": "motorcycle",
+    "edges_allow_class": true,
+    "connections_allow_class": true,
+    "od_reachable": true,
+    "route_length_m": 60.18,
+    "shortest_distance_m": 60.18
+  },
+  {
+    "scenario": "peak",
+    "route_id": "route_auto_f_N_W",
+    "vclass": "passenger",
+    "edges_allow_class": true,
+    "connections_allow_class": true,
+    "od_reachable": true,
+    "route_length_m": 60.18,
+    "shortest_distance_m": 60.18
+  },
+  {
+    "scenario": "peak",
+    "route_id": "route_car_f_S_N",
+    "vclass": "passenger",
+    "edges_allow_class": true,
+    "connections_allow_class": true,
+    "od_reachable": true,
+    "route_length_m": 238.11,
+    "shortest_distance_m": 238.11
+  },
+  {
+    "scenario": "peak",
+    "route_id": "route_auto_f_N_S",
+    "vclass": "passenger",
+    "edges_allow_class": true,
+    "connections_allow_class": true,
+    "od_reachable": true,
+    "route_length_m": 127.12,
+    "shortest_distance_m": 127.12
+  },
+  {
+    "scenario": "peak",
+    "route_id": "route_car_f_N_S",
+    "vclass": "passenger",
+    "edges_allow_class": true,
+    "connections_allow_class": true,
+    "od_reachable": true,
+    "route_length_m": 127.12,
+    "shortest_distance_m": 127.12
+  },
+  {
+    "scenario": "peak",
+    "route_id": "route_motorcycle_f_N_E",
+    "vclass": "motorcycle",
+    "edges_allow_class": true,
+    "connections_allow_class": true,
+    "od_reachable": true,
+    "route_length_m": 77.63,
+    "shortest_distance_m": 77.63
+  },
+  {
+    "scenario": "peak",
+    "route_id": "route_motorcycle_f_W_E",
+    "vclass": "motorcycle",
+    "edges_allow_class": true,
+    "connections_allow_class": true,
+    "od_reachable": true,
+    "route_length_m": 491.69,
+    "shortest_distance_m": 491.69
+  },
+  {
+    "scenario": "peak",
+    "route_id": "route_auto_f_E_S",
+    "vclass": "passenger",
+    "edges_allow_class": true,
+    "connections_allow_class": true,
+    "od_reachable": true,
+    "route_length_m": 42.81,
+    "shortest_distance_m": 42.81
+  },
+  {
+    "scenario": "peak",
+    "route_id": "route_motorcycle_f_E_W",
+    "vclass": "motorcycle",
+    "edges_allow_class": true,
+    "connections_allow_class": true,
+    "od_reachable": true,
+    "route_length_m": 44.99,
+    "shortest_distance_m": 44.99
+  },
+  {
+    "scenario": "peak",
+    "route_id": "route_auto_f_E_N",
+    "vclass": "passenger",
+    "edges_allow_class": true,
+    "connections_allow_class": true,
+    "od_reachable": true,
+    "route_length_m": 281.99,
+    "shortest_distance_m": 281.99
+  },
+  {
+    "scenario": "peak",
+    "route_id": "route_car_f_W_N",
+    "vclass": "passenger",
+    "edges_allow_class": true,
+    "connections_allow_class": true,
+    "od_reachable": true,
+    "route_length_m": 219.55,
+    "shortest_distance_m": 219.55
+  },
+  {
+    "scenario": "peak",
+    "route_id": "route_motorcycle_f_S_W",
+    "vclass": "motorcycle",
+    "edges_allow_class": true,
+    "connections_allow_class": true,
+    "od_reachable": true,
+    "route_length_m": 139.35,
+    "shortest_distance_m": 139.35
+  },
+  {
+    "scenario": "peak",
+    "route_id": "route_car_f_S_E",
+    "vclass": "passenger",
+    "edges_allow_class": true,
+    "connections_allow_class": true,
+    "od_reachable": true,
+    "route_length_m": 87.68,
+    "shortest_distance_m": 87.68
+  },
+  {
+    "scenario": "peak",
+    "route_id": "route_motorcycle_f_S_N",
+    "vclass": "motorcycle",
+    "edges_allow_class": true,
+    "connections_allow_class": true,
+    "od_reachable": true,
+    "route_length_m": 238.11,
+    "shortest_distance_m": 238.11
+  },
+  {
+    "scenario": "peak",
+    "route_id": "route_motorcycle_f_E_S",
+    "vclass": "motorcycle",
+    "edges_allow_class": true,
+    "connections_allow_class": true,
+    "od_reachable": true,
+    "route_length_m": 42.81,
+    "shortest_distance_m": 42.81
+  },
+  {
+    "scenario": "peak",
+    "route_id": "route_car_f_E_N",
+    "vclass": "passenger",
+    "edges_allow_class": true,
+    "connections_allow_class": true,
+    "od_reachable": true,
+    "route_length_m": 281.99,
+    "shortest_distance_m": 281.99
+  },
+  {
+    "scenario": "peak",
+    "route_id": "route_motorcycle_f_W_S",
+    "vclass": "motorcycle",
+    "edges_allow_class": true,
+    "connections_allow_class": true,
+    "od_reachable": true,
+    "route_length_m": 49.49,
+    "shortest_distance_m": 49.49
+  },
+  {
+    "scenario": "peak",
+    "route_id": "route_bus_f_W_N",
+    "vclass": "bus",
+    "edges_allow_class": true,
+    "connections_allow_class": true,
+    "od_reachable": true,
+    "route_length_m": 219.55,
+    "shortest_distance_m": 219.55
+  },
+  {
+    "scenario": "peak",
+    "route_id": "route_auto_f_E_W",
+    "vclass": "passenger",
+    "edges_allow_class": true,
+    "connections_allow_class": true,
+    "od_reachable": true,
+    "route_length_m": 44.99,
+    "shortest_distance_m": 44.99
+  },
+  {
+    "scenario": "peak",
+    "route_id": "route_auto_f_S_W",
+    "vclass": "passenger",
+    "edges_allow_class": true,
+    "connections_allow_class": true,
+    "od_reachable": true,
+    "route_length_m": 139.35,
+    "shortest_distance_m": 139.35
+  },
+  {
+    "scenario": "peak",
+    "route_id": "route_car_f_N_W",
+    "vclass": "passenger",
+    "edges_allow_class": true,
+    "connections_allow_class": true,
+    "od_reachable": true,
+    "route_length_m": 60.18,
+    "shortest_distance_m": 60.18
+  },
+  {
+    "scenario": "peak",
+    "route_id": "route_auto_f_S_N",
+    "vclass": "passenger",
+    "edges_allow_class": true,
+    "connections_allow_class": true,
+    "od_reachable": true,
+    "route_length_m": 238.11,
+    "shortest_distance_m": 238.11
+  },
+  {
+    "scenario": "peak",
+    "route_id": "route_motorcycle_f_S_E",
+    "vclass": "motorcycle",
+    "edges_allow_class": true,
+    "connections_allow_class": true,
+    "od_reachable": true,
+    "route_length_m": 87.68,
+    "shortest_distance_m": 87.68
+  },
+  {
+    "scenario": "peak",
+    "route_id": "route_auto_f_N_E",
+    "vclass": "passenger",
+    "edges_allow_class": true,
+    "connections_allow_class": true,
+    "od_reachable": true,
+    "route_length_m": 77.63,
+    "shortest_distance_m": 77.63
+  },
+  {
+    "scenario": "peak",
+    "route_id": "route_motorcycle_f_N_S",
+    "vclass": "motorcycle",
+    "edges_allow_class": true,
+    "connections_allow_class": true,
+    "od_reachable": true,
+    "route_length_m": 127.12,
+    "shortest_distance_m": 127.12
+  },
+  {
+    "scenario": "peak",
+    "route_id": "route_auto_f_W_E",
+    "vclass": "passenger",
+    "edges_allow_class": true,
+    "connections_allow_class": true,
+    "od_reachable": true,
+    "route_length_m": 491.69,
+    "shortest_distance_m": 491.69
+  },
+  {
+    "scenario": "peak",
+    "route_id": "route_bus_f_N_S",
+    "vclass": "bus",
+    "edges_allow_class": true,
+    "connections_allow_class": true,
+    "od_reachable": true,
+    "route_length_m": 127.12,
+    "shortest_distance_m": 127.12
+  },
+  {
+    "scenario": "peak",
+    "route_id": "route_car_f_S_W",
+    "vclass": "passenger",
+    "edges_allow_class": true,
+    "connections_allow_class": true,
+    "od_reachable": true,
+    "route_length_m": 139.35,
+    "shortest_distance_m": 139.35
+  },
+  {
+    "scenario": "peak",
+    "route_id": "route_auto_f_W_N",
+    "vclass": "passenger",
+    "edges_allow_class": true,
+    "connections_allow_class": true,
+    "od_reachable": true,
+    "route_length_m": 219.55,
+    "shortest_distance_m": 219.55
+  },
+  {
+    "scenario": "peak",
+    "route_id": "route_car_f_W_E",
+    "vclass": "passenger",
+    "edges_allow_class": true,
+    "connections_allow_class": true,
+    "od_reachable": true,
+    "route_length_m": 491.69,
+    "shortest_distance_m": 491.69
+  },
+  {
+    "scenario": "peak",
+    "route_id": "route_car_f_W_S",
+    "vclass": "passenger",
+    "edges_allow_class": true,
+    "connections_allow_class": true,
+    "od_reachable": true,
+    "route_length_m": 49.49,
+    "shortest_distance_m": 49.49
+  },
+  {
+    "scenario": "peak",
+    "route_id": "route_bus_f_N_E",
+    "vclass": "bus",
+    "edges_allow_class": true,
+    "connections_allow_class": true,
+    "od_reachable": true,
+    "route_length_m": 77.63,
+    "shortest_distance_m": 77.63
+  },
+  {
+    "scenario": "peak",
+    "route_id": "route_bus_f_S_E",
+    "vclass": "bus",
+    "edges_allow_class": true,
+    "connections_allow_class": true,
+    "od_reachable": true,
+    "route_length_m": 87.68,
+    "shortest_distance_m": 87.68
+  },
+  {
+    "scenario": "peak",
+    "route_id": "route_bus_f_W_S",
+    "vclass": "bus",
+    "edges_allow_class": true,
+    "connections_allow_class": true,
+    "od_reachable": true,
+    "route_length_m": 49.49,
+    "shortest_distance_m": 49.49
+  },
+  {
+    "scenario": "peak",
+    "route_id": "route_bus_f_W_E",
+    "vclass": "bus",
+    "edges_allow_class": true,
+    "connections_allow_class": true,
+    "od_reachable": true,
+    "route_length_m": 491.69,
+    "shortest_distance_m": 491.69
+  },
+  {
+    "scenario": "peak",
+    "route_id": "route_auto_f_W_S",
+    "vclass": "passenger",
+    "edges_allow_class": true,
+    "connections_allow_class": true,
+    "od_reachable": true,
+    "route_length_m": 49.49,
+    "shortest_distance_m": 49.49
+  },
+  {
+    "scenario": "peak",
+    "route_id": "route_bus_f_S_N",
+    "vclass": "bus",
+    "edges_allow_class": true,
+    "connections_allow_class": true,
+    "od_reachable": true,
+    "route_length_m": 238.11,
+    "shortest_distance_m": 238.11
+  },
+  {
+    "scenario": "peak",
+    "route_id": "route_bus_f_E_N",
+    "vclass": "bus",
+    "edges_allow_class": true,
+    "connections_allow_class": true,
+    "od_reachable": true,
+    "route_length_m": 281.99,
+    "shortest_distance_m": 281.99
+  },
+  {
+    "scenario": "peak",
+    "route_id": "route_bus_f_E_S",
+    "vclass": "bus",
+    "edges_allow_class": true,
+    "connections_allow_class": true,
+    "od_reachable": true,
+    "route_length_m": 42.81,
+    "shortest_distance_m": 42.81
+  },
+  {
+    "scenario": "peak",
+    "route_id": "route_bus_f_S_W",
+    "vclass": "bus",
+    "edges_allow_class": true,
+    "connections_allow_class": true,
+    "od_reachable": true,
+    "route_length_m": 139.35,
+    "shortest_distance_m": 139.35
+  },
+  {
+    "scenario": "peak",
+    "route_id": "route_bus_f_N_W",
+    "vclass": "bus",
+    "edges_allow_class": true,
+    "connections_allow_class": true,
+    "od_reachable": true,
+    "route_length_m": 60.18,
+    "shortest_distance_m": 60.18
+  },
+  {
+    "scenario": "peak",
+    "route_id": "route_bus_f_E_W",
+    "vclass": "bus",
+    "edges_allow_class": true,
+    "connections_allow_class": true,
+    "od_reachable": true,
+    "route_length_m": 44.99,
+    "shortest_distance_m": 44.99
+  },
+  {
+    "scenario": "offpeak",
+    "route_id": "route_motorcycle_f_N_E",
+    "vclass": "motorcycle",
+    "edges_allow_class": true,
+    "connections_allow_class": true,
+    "od_reachable": true,
+    "route_length_m": 77.63,
+    "shortest_distance_m": 77.63
+  },
+  {
+    "scenario": "offpeak",
+    "route_id": "route_car_f_S_N",
+    "vclass": "passenger",
+    "edges_allow_class": true,
+    "connections_allow_class": true,
+    "od_reachable": true,
+    "route_length_m": 238.11,
+    "shortest_distance_m": 238.11
+  },
+  {
+    "scenario": "offpeak",
+    "route_id": "route_motorcycle_f_E_N",
+    "vclass": "motorcycle",
+    "edges_allow_class": true,
+    "connections_allow_class": true,
+    "od_reachable": true,
+    "route_length_m": 281.99,
+    "shortest_distance_m": 281.99
+  },
+  {
+    "scenario": "offpeak",
+    "route_id": "route_motorcycle_f_W_N",
+    "vclass": "motorcycle",
+    "edges_allow_class": true,
+    "connections_allow_class": true,
+    "od_reachable": true,
+    "route_length_m": 219.55,
+    "shortest_distance_m": 219.55
+  },
+  {
+    "scenario": "offpeak",
+    "route_id": "route_motorcycle_f_E_S",
+    "vclass": "motorcycle",
+    "edges_allow_class": true,
+    "connections_allow_class": true,
+    "od_reachable": true,
+    "route_length_m": 42.81,
+    "shortest_distance_m": 42.81
+  },
+  {
+    "scenario": "offpeak",
+    "route_id": "route_motorcycle_f_W_S",
+    "vclass": "motorcycle",
+    "edges_allow_class": true,
+    "connections_allow_class": true,
+    "od_reachable": true,
+    "route_length_m": 49.49,
+    "shortest_distance_m": 49.49
+  },
+  {
+    "scenario": "offpeak",
+    "route_id": "route_auto_f_N_E",
+    "vclass": "passenger",
+    "edges_allow_class": true,
+    "connections_allow_class": true,
+    "od_reachable": true,
+    "route_length_m": 77.63,
+    "shortest_distance_m": 77.63
+  },
+  {
+    "scenario": "offpeak",
+    "route_id": "route_motorcycle_f_W_E",
+    "vclass": "motorcycle",
+    "edges_allow_class": true,
+    "connections_allow_class": true,
+    "od_reachable": true,
+    "route_length_m": 491.69,
+    "shortest_distance_m": 491.69
+  },
+  {
+    "scenario": "offpeak",
+    "route_id": "route_motorcycle_f_N_S",
+    "vclass": "motorcycle",
+    "edges_allow_class": true,
+    "connections_allow_class": true,
+    "od_reachable": true,
+    "route_length_m": 127.12,
+    "shortest_distance_m": 127.12
+  },
+  {
+    "scenario": "offpeak",
+    "route_id": "route_car_f_N_E",
+    "vclass": "passenger",
+    "edges_allow_class": true,
+    "connections_allow_class": true,
+    "od_reachable": true,
+    "route_length_m": 77.63,
+    "shortest_distance_m": 77.63
+  },
+  {
+    "scenario": "offpeak",
+    "route_id": "route_car_f_E_S",
+    "vclass": "passenger",
+    "edges_allow_class": true,
+    "connections_allow_class": true,
+    "od_reachable": true,
+    "route_length_m": 42.81,
+    "shortest_distance_m": 42.81
+  },
+  {
+    "scenario": "offpeak",
+    "route_id": "route_motorcycle_f_S_E",
+    "vclass": "motorcycle",
+    "edges_allow_class": true,
+    "connections_allow_class": true,
+    "od_reachable": true,
+    "route_length_m": 87.68,
+    "shortest_distance_m": 87.68
+  },
+  {
+    "scenario": "offpeak",
+    "route_id": "route_bus_f_W_E",
+    "vclass": "bus",
+    "edges_allow_class": true,
+    "connections_allow_class": true,
+    "od_reachable": true,
+    "route_length_m": 491.69,
+    "shortest_distance_m": 491.69
+  },
+  {
+    "scenario": "offpeak",
+    "route_id": "route_motorcycle_f_S_W",
+    "vclass": "motorcycle",
+    "edges_allow_class": true,
+    "connections_allow_class": true,
+    "od_reachable": true,
+    "route_length_m": 139.35,
+    "shortest_distance_m": 139.35
+  },
+  {
+    "scenario": "offpeak",
+    "route_id": "route_car_f_N_S",
+    "vclass": "passenger",
+    "edges_allow_class": true,
+    "connections_allow_class": true,
+    "od_reachable": true,
+    "route_length_m": 127.12,
+    "shortest_distance_m": 127.12
+  },
+  {
+    "scenario": "offpeak",
+    "route_id": "route_auto_f_W_E",
+    "vclass": "passenger",
+    "edges_allow_class": true,
+    "connections_allow_class": true,
+    "od_reachable": true,
+    "route_length_m": 491.69,
+    "shortest_distance_m": 491.69
+  },
+  {
+    "scenario": "offpeak",
+    "route_id": "route_auto_f_S_E",
+    "vclass": "passenger",
+    "edges_allow_class": true,
+    "connections_allow_class": true,
+    "od_reachable": true,
+    "route_length_m": 87.68,
+    "shortest_distance_m": 87.68
+  },
+  {
+    "scenario": "offpeak",
+    "route_id": "route_auto_f_N_S",
+    "vclass": "passenger",
+    "edges_allow_class": true,
+    "connections_allow_class": true,
+    "od_reachable": true,
+    "route_length_m": 127.12,
+    "shortest_distance_m": 127.12
+  },
+  {
+    "scenario": "offpeak",
+    "route_id": "route_car_f_W_E",
+    "vclass": "passenger",
+    "edges_allow_class": true,
+    "connections_allow_class": true,
+    "od_reachable": true,
+    "route_length_m": 491.69,
+    "shortest_distance_m": 491.69
+  },
+  {
+    "scenario": "offpeak",
+    "route_id": "route_motorcycle_f_S_N",
+    "vclass": "motorcycle",
+    "edges_allow_class": true,
+    "connections_allow_class": true,
+    "od_reachable": true,
+    "route_length_m": 238.11,
+    "shortest_distance_m": 238.11
+  },
+  {
+    "scenario": "offpeak",
+    "route_id": "route_car_f_S_E",
+    "vclass": "passenger",
+    "edges_allow_class": true,
+    "connections_allow_class": true,
+    "od_reachable": true,
+    "route_length_m": 87.68,
+    "shortest_distance_m": 87.68
+  },
+  {
+    "scenario": "offpeak",
+    "route_id": "route_auto_f_S_N",
+    "vclass": "passenger",
+    "edges_allow_class": true,
+    "connections_allow_class": true,
+    "od_reachable": true,
+    "route_length_m": 238.11,
+    "shortest_distance_m": 238.11
+  },
+  {
+    "scenario": "offpeak",
+    "route_id": "route_car_f_W_N",
+    "vclass": "passenger",
+    "edges_allow_class": true,
+    "connections_allow_class": true,
+    "od_reachable": true,
+    "route_length_m": 219.55,
+    "shortest_distance_m": 219.55
+  },
+  {
+    "scenario": "offpeak",
+    "route_id": "route_car_f_S_W",
+    "vclass": "passenger",
+    "edges_allow_class": true,
+    "connections_allow_class": true,
+    "od_reachable": true,
+    "route_length_m": 139.35,
+    "shortest_distance_m": 139.35
+  },
+  {
+    "scenario": "offpeak",
+    "route_id": "route_motorcycle_f_N_W",
+    "vclass": "motorcycle",
+    "edges_allow_class": true,
+    "connections_allow_class": true,
+    "od_reachable": true,
+    "route_length_m": 60.18,
+    "shortest_distance_m": 60.18
+  },
+  {
+    "scenario": "offpeak",
+    "route_id": "route_auto_f_W_N",
+    "vclass": "passenger",
+    "edges_allow_class": true,
+    "connections_allow_class": true,
+    "od_reachable": true,
+    "route_length_m": 219.55,
+    "shortest_distance_m": 219.55
+  },
+  {
+    "scenario": "offpeak",
+    "route_id": "route_car_f_W_S",
+    "vclass": "passenger",
+    "edges_allow_class": true,
+    "connections_allow_class": true,
+    "od_reachable": true,
+    "route_length_m": 49.49,
+    "shortest_distance_m": 49.49
+  },
+  {
+    "scenario": "offpeak",
+    "route_id": "route_auto_f_E_S",
+    "vclass": "passenger",
+    "edges_allow_class": true,
+    "connections_allow_class": true,
+    "od_reachable": true,
+    "route_length_m": 42.81,
+    "shortest_distance_m": 42.81
+  },
+  {
+    "scenario": "offpeak",
+    "route_id": "route_car_f_E_W",
+    "vclass": "passenger",
+    "edges_allow_class": true,
+    "connections_allow_class": true,
+    "od_reachable": true,
+    "route_length_m": 44.99,
+    "shortest_distance_m": 44.99
+  },
+  {
+    "scenario": "offpeak",
+    "route_id": "route_car_f_E_N",
+    "vclass": "passenger",
+    "edges_allow_class": true,
+    "connections_allow_class": true,
+    "od_reachable": true,
+    "route_length_m": 281.99,
+    "shortest_distance_m": 281.99
+  },
+  {
+    "scenario": "offpeak",
+    "route_id": "route_motorcycle_f_E_W",
+    "vclass": "motorcycle",
+    "edges_allow_class": true,
+    "connections_allow_class": true,
+    "od_reachable": true,
+    "route_length_m": 44.99,
+    "shortest_distance_m": 44.99
+  },
+  {
+    "scenario": "offpeak",
+    "route_id": "route_car_f_N_W",
+    "vclass": "passenger",
+    "edges_allow_class": true,
+    "connections_allow_class": true,
+    "od_reachable": true,
+    "route_length_m": 60.18,
+    "shortest_distance_m": 60.18
+  },
+  {
+    "scenario": "offpeak",
+    "route_id": "route_auto_f_E_N",
+    "vclass": "passenger",
+    "edges_allow_class": true,
+    "connections_allow_class": true,
+    "od_reachable": true,
+    "route_length_m": 281.99,
+    "shortest_distance_m": 281.99
+  },
+  {
+    "scenario": "offpeak",
+    "route_id": "route_bus_f_N_E",
+    "vclass": "bus",
+    "edges_allow_class": true,
+    "connections_allow_class": true,
+    "od_reachable": true,
+    "route_length_m": 77.63,
+    "shortest_distance_m": 77.63
+  },
+  {
+    "scenario": "offpeak",
+    "route_id": "route_bus_f_S_N",
+    "vclass": "bus",
+    "edges_allow_class": true,
+    "connections_allow_class": true,
+    "od_reachable": true,
+    "route_length_m": 238.11,
+    "shortest_distance_m": 238.11
+  },
+  {
+    "scenario": "offpeak",
+    "route_id": "route_auto_f_S_W",
+    "vclass": "passenger",
+    "edges_allow_class": true,
+    "connections_allow_class": true,
+    "od_reachable": true,
+    "route_length_m": 139.35,
+    "shortest_distance_m": 139.35
+  },
+  {
+    "scenario": "offpeak",
+    "route_id": "route_bus_f_E_W",
+    "vclass": "bus",
+    "edges_allow_class": true,
+    "connections_allow_class": true,
+    "od_reachable": true,
+    "route_length_m": 44.99,
+    "shortest_distance_m": 44.99
+  },
+  {
+    "scenario": "offpeak",
+    "route_id": "route_auto_f_N_W",
+    "vclass": "passenger",
+    "edges_allow_class": true,
+    "connections_allow_class": true,
+    "od_reachable": true,
+    "route_length_m": 60.18,
+    "shortest_distance_m": 60.18
+  },
+  {
+    "scenario": "offpeak",
+    "route_id": "route_auto_f_E_W",
+    "vclass": "passenger",
+    "edges_allow_class": true,
+    "connections_allow_class": true,
+    "od_reachable": true,
+    "route_length_m": 44.99,
+    "shortest_distance_m": 44.99
+  },
+  {
+    "scenario": "offpeak",
+    "route_id": "route_bus_f_S_E",
+    "vclass": "bus",
+    "edges_allow_class": true,
+    "connections_allow_class": true,
+    "od_reachable": true,
+    "route_length_m": 87.68,
+    "shortest_distance_m": 87.68
+  },
+  {
+    "scenario": "offpeak",
+    "route_id": "route_bus_f_N_S",
+    "vclass": "bus",
+    "edges_allow_class": true,
+    "connections_allow_class": true,
+    "od_reachable": true,
+    "route_length_m": 127.12,
+    "shortest_distance_m": 127.12
+  },
+  {
+    "scenario": "offpeak",
+    "route_id": "route_bus_f_E_S",
+    "vclass": "bus",
+    "edges_allow_class": true,
+    "connections_allow_class": true,
+    "od_reachable": true,
+    "route_length_m": 42.81,
+    "shortest_distance_m": 42.81
+  },
+  {
+    "scenario": "offpeak",
+    "route_id": "route_bus_f_N_W",
+    "vclass": "bus",
+    "edges_allow_class": true,
+    "connections_allow_class": true,
+    "od_reachable": true,
+    "route_length_m": 60.18,
+    "shortest_distance_m": 60.18
+  },
+  {
+    "scenario": "offpeak",
+    "route_id": "route_bus_f_S_W",
+    "vclass": "bus",
+    "edges_allow_class": true,
+    "connections_allow_class": true,
+    "od_reachable": true,
+    "route_length_m": 139.35,
+    "shortest_distance_m": 139.35
+  }
+]

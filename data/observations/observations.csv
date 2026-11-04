@@ -1,0 +1,1 @@
+scenario,partition,session_id,observation_date,begin_s,end_s,measurement,edge_id,to_edge_id,vehicle_type,value,unit,source_kind,source_reference

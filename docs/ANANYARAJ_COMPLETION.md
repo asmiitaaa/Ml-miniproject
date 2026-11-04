@@ -1,6 +1,6 @@
-# Ananyaraj's completed agent work
+# Agent implementation, training and traffic-coverage limits
 
-Completed 4 November 2026: Gymnasium/TraCI environment, trained checkpoints, hyperparameter comparison, independent corridor execution, validation-based model selection and complete simulation comparisons.
+Implemented and trained: Gymnasium/TraCI environment, checkpoints, hyperparameter comparison, independent signal execution and validation-based selection. **Scope correction:** the supplied peak/offpeak routes cross only one of the six controlled signal sites. The other five controllers execute without traffic. Existing comparisons establish performance only for this single-active-junction synthetic demand, not for interacting corridor traffic.
 
 ## Implementation
 
@@ -31,11 +31,11 @@ Selected archives include their validation review and source checkpoint hash. Re
 
 Training histories, settings, source/input hashes and convergence reviews are under [report/training](https://github.com/asmiitaaa/Ml-miniproject/tree/soham/evaluation/report/training). Original source snapshots and per-episode training collision/trip logs remain in the ignored local trial folders under `results/agent_training`.
 
-## Held-out simulation results
+## Held-out results for the supplied single-active-junction demand
 
 Three controllers x two scenarios x five seeds completed for each model family: 30 runs for the selected v2 policies and another 30 for the independent corridor policies. Every scheduled vehicle completed. Both matrices recorded zero collision events, zero teleports and zero unfinished trips.
 
-The corridor waiting-time results below are seed means +/- sample standard deviations, in seconds:
+The waiting-time results below are seed means +/- sample standard deviations, in seconds. Only the trained junction carries traffic:
 
 | Scenario | Fixed waiting (s) | Actuated waiting (s) | DQN waiting (s) |
 | --- | ---: | ---: | ---: |
@@ -78,6 +78,6 @@ Training can be reproduced with `rl_agent/train_corridor.py`; use fresh output f
 
 ## Practical limits
 
-The supplied demand is synthetic and uncalibrated. This is simulation evidence, so `final_evaluation_ready` remains false for field/corridor claims. Zero observed events on these seeds does not certify real-road safety. Detailed historical v1 records located incoming-lane motorcycle collisions; these results do not establish that yellow timing caused them. The selected policy was initially trained on one junction and then empirically tested independently across the available mapped sites; unseen networks require a new reviewed mapping and validation.
+The supplied demand is synthetic and uncalibrated. Only one junction carries traffic; zero-demand execution at five other sites is not a traffic-transfer validation. `final_evaluation_ready` remains false. Zero observed events on these seeds does not certify real-road safety. Detailed historical v1 records located incoming-lane motorcycle collisions; these results do not establish that yellow timing caused them. New demand must exercise the corridor and be checked against measured traffic before performance can be generalized. See [the network and coverage audit](https://github.com/asmiitaaa/Ml-miniproject/blob/soham/evaluation/report/network_validation/AUDIT.md).
 
 Method references: [SB3 evaluation guidance](https://stable-baselines3.readthedocs.io/en/master/guide/rl_tips.html), [SUMO controlled signal links](https://sumo.dlr.de/docs/TraCI/Traffic_Lights_Value_Retrieval.html), [SUMO lane quantities](https://sumo.dlr.de/docs/TraCI/Lane_Value_Retrieval.html).

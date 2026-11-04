@@ -1,6 +1,8 @@
 {
   "final_evaluation_ready": false,
   "warnings": [
+    "offpeak: Planned demand crosses only 1 of 6 controlled signal sites. These results do not establish multi-intersection traffic performance.",
+    "peak: Planned demand crosses only 1 of 6 controlled signal sites. These results do not establish multi-intersection traffic performance.",
     "Demand is synthetic and uncalibrated; this is simulation validation, not field deployment.",
     "These runs are labelled demonstration/provisional or lack project provenance; they are not final corridor evidence."
   ],

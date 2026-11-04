@@ -1,0 +1,123 @@
+{
+  "kind": "planned_explicit_routes_not_field_counts",
+  "scenarios": {
+    "peak": {
+      "kind": "planned_explicit_routes_not_observed_traffic",
+      "vehicle_definitions": 1000,
+      "resolved_vehicles": 1000,
+      "excluded_departures_outside_horizon": 0,
+      "scheduled_departure_end_s": 3600,
+      "selected_tls_ids": [
+        "10860559946",
+        "10860559948",
+        "11476588184",
+        "cluster_10860559949_11178931802_11178931803_2414626606_#2more",
+        "cluster_11260122967_12067305543_12067305544_12067865287_#3more",
+        "cluster_11484393853_11484393854_11484393855_11484393856_#11more"
+      ],
+      "selected_signal_count": 6,
+      "active_selected_tls_ids": [
+        "cluster_11484393853_11484393854_11484393855_11484393856_#11more"
+      ],
+      "active_selected_signal_count": 1,
+      "signals": {
+        "10860559946": {
+          "planned_crossings": 0,
+          "distinct_vehicles": 0,
+          "vehicles_crossing_more_than_once": 0
+        },
+        "10860559948": {
+          "planned_crossings": 0,
+          "distinct_vehicles": 0,
+          "vehicles_crossing_more_than_once": 0
+        },
+        "11476588184": {
+          "planned_crossings": 0,
+          "distinct_vehicles": 0,
+          "vehicles_crossing_more_than_once": 0
+        },
+        "cluster_10860559949_11178931802_11178931803_2414626606_#2more": {
+          "planned_crossings": 0,
+          "distinct_vehicles": 0,
+          "vehicles_crossing_more_than_once": 0
+        },
+        "cluster_11260122967_12067305543_12067305544_12067865287_#3more": {
+          "planned_crossings": 0,
+          "distinct_vehicles": 0,
+          "vehicles_crossing_more_than_once": 0
+        },
+        "cluster_11484393853_11484393854_11484393855_11484393856_#11more": {
+          "planned_crossings": 1331,
+          "distinct_vehicles": 1000,
+          "vehicles_crossing_more_than_once": 331
+        }
+      },
+      "unsupported_definitions": [],
+      "errors": [],
+      "route_file_sha256": {
+        "vtypes.rou.xml": "2eefdef1abd254bb805121a1abeed19b22bb3f17cb7a0e96185c9e8947a306ee",
+        "peak.rou.xml": "6a1fb53a5c1cdc7ca0b9574e7b433a9fb28d428267b5ec7c8d3b8b6484291e97"
+      },
+      "coverage_complete": false
+    },
+    "offpeak": {
+      "kind": "planned_explicit_routes_not_observed_traffic",
+      "vehicle_definitions": 500,
+      "resolved_vehicles": 500,
+      "excluded_departures_outside_horizon": 0,
+      "scheduled_departure_end_s": 3600,
+      "selected_tls_ids": [
+        "10860559946",
+        "10860559948",
+        "11476588184",
+        "cluster_10860559949_11178931802_11178931803_2414626606_#2more",
+        "cluster_11260122967_12067305543_12067305544_12067865287_#3more",
+        "cluster_11484393853_11484393854_11484393855_11484393856_#11more"
+      ],
+      "selected_signal_count": 6,
+      "active_selected_tls_ids": [
+        "cluster_11484393853_11484393854_11484393855_11484393856_#11more"
+      ],
+      "active_selected_signal_count": 1,
+      "signals": {
+        "10860559946": {
+          "planned_crossings": 0,
+          "distinct_vehicles": 0,
+          "vehicles_crossing_more_than_once": 0
+        },
+        "10860559948": {
+          "planned_crossings": 0,
+          "distinct_vehicles": 0,
+          "vehicles_crossing_more_than_once": 0
+        },
+        "11476588184": {
+          "planned_crossings": 0,
+          "distinct_vehicles": 0,
+          "vehicles_crossing_more_than_once": 0
+        },
+        "cluster_10860559949_11178931802_11178931803_2414626606_#2more": {
+          "planned_crossings": 0,
+          "distinct_vehicles": 0,
+          "vehicles_crossing_more_than_once": 0
+        },
+        "cluster_11260122967_12067305543_12067305544_12067865287_#3more": {
+          "planned_crossings": 0,
+          "distinct_vehicles": 0,
+          "vehicles_crossing_more_than_once": 0
+        },
+        "cluster_11484393853_11484393854_11484393855_11484393856_#11more": {
+          "planned_crossings": 664,
+          "distinct_vehicles": 500,
+          "vehicles_crossing_more_than_once": 164
+        }
+      },
+      "unsupported_definitions": [],
+      "errors": [],
+      "route_file_sha256": {
+        "vtypes.rou.xml": "2eefdef1abd254bb805121a1abeed19b22bb3f17cb7a0e96185c9e8947a306ee",
+        "offpeak.rou.xml": "8b4f22774f775012e6821f8972bf11416ffc403f4fb90370b019eab1d0554311"
+      },
+      "coverage_complete": false
+    }
+  }
+}
