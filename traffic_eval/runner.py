@@ -76,6 +76,11 @@ def fingerprint(cfg, scenario, seed):
     hashes = {str(f):sha256(f) for f in files}
     shared = {k:cfg.get(k, d) for k,d in (("duration_s",3600),("step_length_s",1),("lateral_resolution_m",.4))}
     shared.update(seed=seed, files=hashes, sumo_extra_args=cfg.get("sumo_extra_args",[]),collision_action=collision_action(cfg))
+    floors=[options.get('yellow_floor_s') for options in cfg.get('controllers',{}).values()]
+    if any(value is not None for value in floors):
+        if any(value is None for value in floors) or len(set(map(float,floors)))!=1:
+            raise ValueError('All compared controllers must use the same yellow floor')
+        shared['common_yellow_floor_s']=float(floors[0])
     return hashlib.sha256(json.dumps(shared, sort_keys=True).encode()).hexdigest(), hashes
 
 
@@ -91,6 +96,14 @@ def prepare_network(source, destination, controller, options):
     for logic in logics:
         controlled = controller == "actuated" and logic.attrib["id"] in selected
         logic.set("type", "actuated" if controlled else "static")
+        # The corridor protocol uses this common clearance floor for ALL
+        # controllers. Source XML and historical v1/v2 configurations stay intact.
+        if "yellow_floor_s" in options:
+            floor=float(options["yellow_floor_s"])
+            if floor<=0:raise ValueError("yellow_floor_s must be positive")
+            for phase in logic.findall("phase"):
+                if any(c in phase.attrib["state"] for c in "yY"):
+                    phase.set("duration",str(max(floor,float(phase.attrib["duration"]))))
         if controlled:
             for phase in logic.findall("phase"):
                 state = phase.attrib["state"]
@@ -229,6 +242,13 @@ def run_one(cfg, scenario_name, controller, seed, run_dir, gui=False):
                 if not edge.startswith(":"): groups.setdefault(edge,[]).append(lane)
             approaches[tls] = groups
         if not any(approaches.values()): raise ValueError("No signal-controlled incoming approaches found")
+        # Subscriptions return the same last-step values in one SUMO response,
+        # avoiding a socket request per lane at every simulation step.
+        subscribed=hasattr(connection.lane,'subscribe')
+        if subscribed:
+            for lanes in approaches.values():
+                for group in lanes.values():
+                    for lane in group:connection.lane.subscribe(lane,[0x10,0x14,0x7a])
         if controller == "dqn":
             module, function = options["factory"].split(":",1)
             policy = getattr(importlib.import_module(module),function)(connection=connection,checkpoint=str(checkpoint),options={**options,"seed":seed,"_run_dir":str(run_dir),"_step_length_s":step,"_lateral_resolution_m":cfg.get("lateral_resolution_m",.4)})
@@ -244,7 +264,8 @@ def run_one(cfg, scenario_name, controller, seed, run_dir, gui=False):
                 collisions += connection.simulation.getCollidingVehiclesNumber()
                 for tls, groups in approaches.items():
                     for edge, lanes in groups.items():
-                        queue = sum(connection.lane.getLastStepHaltingNumber(lane) for lane in lanes)
+                        queue = sum(connection.lane.getSubscriptionResults(lane)[0x14] if subscribed
+                                    else connection.lane.getLastStepHaltingNumber(lane) for lane in lanes)
                         writer.writerow([connection.simulation.getTime(),tls,edge,queue])
         connection.close(wait=False); connection=None
         if process is not None:
@@ -269,7 +290,7 @@ def run_one(cfg, scenario_name, controller, seed, run_dir, gui=False):
             if "timing_profile" in metadata:result["timing_profile"]=metadata["timing_profile"]
             if hasattr(policy,"close"): policy.close()
         manifest.update(status="complete",metrics=result,
-                        output_sha256={name:sha256(run_dir/name) for name in ("tripinfo.xml","emissions.xml","queues.csv","summary.xml","dqn_actions.csv","collisions.xml","collisions.csv") if (run_dir/name).is_file()})
+                        output_sha256={name:sha256(run_dir/name) for name in ("tripinfo.xml","emissions.xml","queues.csv","summary.xml","dqn_actions.csv","phase_transitions.csv","collisions.xml","collisions.csv") if (run_dir/name).is_file()})
         return result
     except Exception as exc:
         manifest.update(status="failed",error=str(exc))

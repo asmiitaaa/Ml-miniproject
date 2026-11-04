@@ -1,8 +1,8 @@
 param(
     [ValidateSet('Dashboard','Test','QuickTest','GUI','Smoke','Baselines','Evaluate','Doctor','Record')]
     [string]$Mode = 'Dashboard',
-    [string]$Results = 'results\model_validation',
-    [string]$Config = 'configs\evaluation.model_validation.json',
+    [string]$Results = 'results\corridor_selected_evaluation',
+    [string]$Config = 'configs\evaluation.corridor.json',
     [ValidateSet('fixed','actuated','dqn')][string]$Controller = 'dqn'
 )
 $ErrorActionPreference = 'Stop'
@@ -11,11 +11,12 @@ $projectPython = Join-Path $PSScriptRoot '.venv\Scripts\python.exe'
 if (-not (Test-Path -LiteralPath $projectPython)) { & "$PSScriptRoot\Setup-Project.ps1" }
 switch ($Mode) {
     'Dashboard' {
+        if (-not (Test-Path -LiteralPath (Join-Path $Results 'runs.csv')) -and (Test-Path -LiteralPath 'report\training\corridor_results\runs.csv')) { $Results = 'report\training\corridor_results' }
         if (-not (Test-Path -LiteralPath (Join-Path $Results 'runs.csv')) -and (Test-Path -LiteralPath 'report\results\runs.csv')) { $Results = 'report\results' }
         & $projectPython -m streamlit run dashboard.py -- --results $Results
     }
     'Test' { & $projectPython -m pytest -q }
-    'QuickTest' { & $projectPython scripts\quick_test.py }
+    'QuickTest' { & $projectPython scripts\quick_test.py --config $Config }
     'GUI' { & $projectPython scripts\preview_gui.py --config $Config --scenario peak --controllers $Controller --seconds 300 --every 15 --delay-ms 0 --pace-ms 100 }
     'Doctor' { & $projectPython -m traffic_eval doctor --config $Config }
     'Smoke' {

@@ -1,0 +1,210 @@
+{
+  "validation_seeds": [
+    101,
+    102,
+    103
+  ],
+  "test_seeds": [
+    11,
+    12,
+    13,
+    14,
+    15
+  ],
+  "expected_completed": {
+    "peak": 1000,
+    "offpeak": 500
+  },
+  "selection_rule": "Require no collision detections/XML events/teleports, no unfinished or pending trips and exact expected completions on every validation seed; minimize mean completed-trip waiting time across validation seeds; tie-break lower training steps then candidate ID. Test seeds are excluded from selection.",
+  "config": "configs/evaluation.corridor.json",
+  "training_seeds": [
+    42,
+    43,
+    44,
+    142,
+    143,
+    144
+  ],
+  "candidates": [
+    {
+      "id": "peak_lr1e3_20000",
+      "checkpoint": "results/agent_training/peak_lr1e3/corridor_dqn_peak_20000_steps.zip",
+      "steps": 20000,
+      "monitor": "results/agent_training/peak_lr1e3/monitor.csv",
+      "scenarios": [
+        "peak"
+      ]
+    },
+    {
+      "id": "peak_lr1e3_40000",
+      "checkpoint": "results/agent_training/peak_lr1e3/corridor_dqn_peak_40000_steps.zip",
+      "steps": 40000,
+      "monitor": "results/agent_training/peak_lr1e3/monitor.csv",
+      "scenarios": [
+        "peak"
+      ]
+    },
+    {
+      "id": "peak_lr1e3_60000",
+      "checkpoint": "results/agent_training/peak_lr1e3/corridor_dqn_peak_60000_steps.zip",
+      "steps": 60000,
+      "monitor": "results/agent_training/peak_lr1e3/monitor.csv",
+      "scenarios": [
+        "peak"
+      ]
+    },
+    {
+      "id": "peak_lr1e3_80000",
+      "checkpoint": "results/agent_training/peak_lr1e3/corridor_dqn_peak_80000_steps.zip",
+      "steps": 80000,
+      "monitor": "results/agent_training/peak_lr1e3/monitor.csv",
+      "scenarios": [
+        "peak"
+      ]
+    },
+    {
+      "id": "peak_lr1e3_100000",
+      "checkpoint": "results/agent_training/peak_lr1e3/corridor_dqn_peak_100000_steps.zip",
+      "steps": 100000,
+      "monitor": "results/agent_training/peak_lr1e3/monitor.csv",
+      "scenarios": [
+        "peak"
+      ]
+    },
+    {
+      "id": "peak_lr3e4_20000",
+      "checkpoint": "results/agent_training/peak_lr3e4/corridor_dqn_peak_20000_steps.zip",
+      "steps": 20000,
+      "monitor": "results/agent_training/peak_lr3e4/monitor.csv",
+      "scenarios": [
+        "peak"
+      ]
+    },
+    {
+      "id": "peak_lr3e4_40000",
+      "checkpoint": "results/agent_training/peak_lr3e4/corridor_dqn_peak_40000_steps.zip",
+      "steps": 40000,
+      "monitor": "results/agent_training/peak_lr3e4/monitor.csv",
+      "scenarios": [
+        "peak"
+      ]
+    },
+    {
+      "id": "peak_lr3e4_60000",
+      "checkpoint": "results/agent_training/peak_lr3e4/corridor_dqn_peak_60000_steps.zip",
+      "steps": 60000,
+      "monitor": "results/agent_training/peak_lr3e4/monitor.csv",
+      "scenarios": [
+        "peak"
+      ]
+    },
+    {
+      "id": "peak_lr3e4_80000",
+      "checkpoint": "results/agent_training/peak_lr3e4/corridor_dqn_peak_80000_steps.zip",
+      "steps": 80000,
+      "monitor": "results/agent_training/peak_lr3e4/monitor.csv",
+      "scenarios": [
+        "peak"
+      ]
+    },
+    {
+      "id": "peak_lr3e4_100000",
+      "checkpoint": "results/agent_training/peak_lr3e4/corridor_dqn_peak_100000_steps.zip",
+      "steps": 100000,
+      "monitor": "results/agent_training/peak_lr3e4/monitor.csv",
+      "scenarios": [
+        "peak"
+      ]
+    },
+    {
+      "id": "offpeak_lr1e3_20000",
+      "checkpoint": "results/agent_training/offpeak_lr1e3/corridor_dqn_offpeak_20000_steps.zip",
+      "steps": 20000,
+      "monitor": "results/agent_training/offpeak_lr1e3/monitor.csv",
+      "scenarios": [
+        "offpeak"
+      ]
+    },
+    {
+      "id": "offpeak_lr1e3_40000",
+      "checkpoint": "results/agent_training/offpeak_lr1e3/corridor_dqn_offpeak_40000_steps.zip",
+      "steps": 40000,
+      "monitor": "results/agent_training/offpeak_lr1e3/monitor.csv",
+      "scenarios": [
+        "offpeak"
+      ]
+    },
+    {
+      "id": "offpeak_lr1e3_60000",
+      "checkpoint": "results/agent_training/offpeak_lr1e3/corridor_dqn_offpeak_60000_steps.zip",
+      "steps": 60000,
+      "monitor": "results/agent_training/offpeak_lr1e3/monitor.csv",
+      "scenarios": [
+        "offpeak"
+      ]
+    },
+    {
+      "id": "offpeak_lr1e3_80000",
+      "checkpoint": "results/agent_training/offpeak_lr1e3/corridor_dqn_offpeak_80000_steps.zip",
+      "steps": 80000,
+      "monitor": "results/agent_training/offpeak_lr1e3/monitor.csv",
+      "scenarios": [
+        "offpeak"
+      ]
+    },
+    {
+      "id": "offpeak_lr1e3_100000",
+      "checkpoint": "results/agent_training/offpeak_lr1e3/corridor_dqn_offpeak_100000_steps.zip",
+      "steps": 100000,
+      "monitor": "results/agent_training/offpeak_lr1e3/monitor.csv",
+      "scenarios": [
+        "offpeak"
+      ]
+    },
+    {
+      "id": "offpeak_lr3e4_20000",
+      "checkpoint": "results/agent_training/offpeak_lr3e4/corridor_dqn_offpeak_20000_steps.zip",
+      "steps": 20000,
+      "monitor": "results/agent_training/offpeak_lr3e4/monitor.csv",
+      "scenarios": [
+        "offpeak"
+      ]
+    },
+    {
+      "id": "offpeak_lr3e4_40000",
+      "checkpoint": "results/agent_training/offpeak_lr3e4/corridor_dqn_offpeak_40000_steps.zip",
+      "steps": 40000,
+      "monitor": "results/agent_training/offpeak_lr3e4/monitor.csv",
+      "scenarios": [
+        "offpeak"
+      ]
+    },
+    {
+      "id": "offpeak_lr3e4_60000",
+      "checkpoint": "results/agent_training/offpeak_lr3e4/corridor_dqn_offpeak_60000_steps.zip",
+      "steps": 60000,
+      "monitor": "results/agent_training/offpeak_lr3e4/monitor.csv",
+      "scenarios": [
+        "offpeak"
+      ]
+    },
+    {
+      "id": "offpeak_lr3e4_80000",
+      "checkpoint": "results/agent_training/offpeak_lr3e4/corridor_dqn_offpeak_80000_steps.zip",
+      "steps": 80000,
+      "monitor": "results/agent_training/offpeak_lr3e4/monitor.csv",
+      "scenarios": [
+        "offpeak"
+      ]
+    },
+    {
+      "id": "offpeak_lr3e4_100000",
+      "checkpoint": "results/agent_training/offpeak_lr3e4/corridor_dqn_offpeak_100000_steps.zip",
+      "steps": 100000,
+      "monitor": "results/agent_training/offpeak_lr3e4/monitor.csv",
+      "scenarios": [
+        "offpeak"
+      ]
+    }
+  ]
+}

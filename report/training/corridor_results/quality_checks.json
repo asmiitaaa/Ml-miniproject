@@ -1,0 +1,12 @@
+{
+  "final_evaluation_ready": false,
+  "warnings": [
+    "Demand is synthetic and uncalibrated; this is simulation validation, not field deployment.",
+    "These runs are labelled demonstration/provisional or lack project provenance; they are not final corridor evidence."
+  ],
+  "standard_deviation": "sample standard deviation (ddof=1); undefined for n=1",
+  "improvement": "mean of seed-paired 100*(baseline-controller)/baseline; positive means lower is better; zero baseline omitted",
+  "queue_definition": "time-and-approach mean halting vehicles; maximum over all approach-time samples",
+  "co2_definition": "all simulated vehicle CO2 rates integrated over the fixed simulation step; kg",
+  "trip_definition": "completed, non-vaporized trips only; unfinished and pending departures reported separately"
+}

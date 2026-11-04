@@ -1,0 +1,346 @@
+{
+  "source_network_sha256": "c5b50b1e897ae658bf0ddb5c6dad83e7f8abb14f5e8c93cf3ea2569c57b6c943",
+  "slot_order": [
+    "north",
+    "east",
+    "south",
+    "west"
+  ],
+  "yellow_floor_s": 6.0,
+  "signals": {
+    "10860559946": {
+      "slots": [
+        [],
+        [
+          "1501340738_0",
+          "1501340738_1"
+        ],
+        [],
+        []
+      ],
+      "lane_links": {
+        "1501340738_0": [
+          0
+        ],
+        "1501340738_1": [
+          1
+        ]
+      },
+      "phases": [
+        {
+          "state": "GG",
+          "duration": 79.0,
+          "green": true
+        },
+        {
+          "state": "yy",
+          "duration": 6.0,
+          "green": false
+        },
+        {
+          "state": "rr",
+          "duration": 5.0,
+          "green": false
+        }
+      ]
+    },
+    "10860559948": {
+      "slots": [
+        [
+          "1206400802#2_0",
+          "1206400802#2_1"
+        ],
+        [],
+        [],
+        []
+      ],
+      "lane_links": {
+        "1206400802#2_0": [
+          0
+        ],
+        "1206400802#2_1": [
+          1
+        ]
+      },
+      "phases": [
+        {
+          "state": "GG",
+          "duration": 82.0,
+          "green": true
+        },
+        {
+          "state": "yy",
+          "duration": 6.0,
+          "green": false
+        },
+        {
+          "state": "rr",
+          "duration": 5.0,
+          "green": false
+        }
+      ]
+    },
+    "11476588184": {
+      "slots": [
+        [],
+        [],
+        [
+          "1473869989_0",
+          "1473869989_1"
+        ],
+        []
+      ],
+      "lane_links": {
+        "1473869989_0": [
+          0
+        ],
+        "1473869989_1": [
+          1
+        ]
+      },
+      "phases": [
+        {
+          "state": "GG",
+          "duration": 82.0,
+          "green": true
+        },
+        {
+          "state": "yy",
+          "duration": 6.0,
+          "green": false
+        },
+        {
+          "state": "rr",
+          "duration": 5.0,
+          "green": false
+        }
+      ]
+    },
+    "cluster_10860559949_11178931802_11178931803_2414626606_#2more": {
+      "slots": [
+        [
+          "1206400802#3_0",
+          "1206400802#3_1"
+        ],
+        [
+          "1110166139_0",
+          "1110166139_1"
+        ],
+        [
+          "1206400800#1_0",
+          "1206400800#1_1"
+        ],
+        [
+          "916909920#0_0",
+          "916909920#0_1"
+        ]
+      ],
+      "lane_links": {
+        "1110166139_0": [
+          0,
+          1
+        ],
+        "1110166139_1": [
+          2,
+          3,
+          4
+        ],
+        "1206400800#1_0": [
+          5,
+          6
+        ],
+        "1206400800#1_1": [
+          7,
+          8
+        ],
+        "1206400802#3_0": [
+          14,
+          15
+        ],
+        "1206400802#3_1": [
+          16,
+          17
+        ],
+        "916909920#0_0": [
+          9,
+          10
+        ],
+        "916909920#0_1": [
+          11,
+          12,
+          13
+        ]
+      },
+      "phases": [
+        {
+          "state": "rGgGrrrrrrGgGrrrrr",
+          "duration": 27.0,
+          "green": true
+        },
+        {
+          "state": "ryyyrrrrrryyyrrrrr",
+          "duration": 6.0,
+          "green": false
+        },
+        {
+          "state": "GrrrgrrrrGrrrgrrrr",
+          "duration": 6.0,
+          "green": true
+        },
+        {
+          "state": "yrrryrrrryrrryrrrr",
+          "duration": 6.0,
+          "green": false
+        },
+        {
+          "state": "rrrrrgGGgrrrrrgGGg",
+          "duration": 27.0,
+          "green": true
+        },
+        {
+          "state": "rrrrrgyygrrrrrgyyg",
+          "duration": 6.0,
+          "green": false
+        },
+        {
+          "state": "rrrrrGrrgrrrrrGrrg",
+          "duration": 6.0,
+          "green": true
+        },
+        {
+          "state": "rrrrryrryrrrrryrry",
+          "duration": 6.0,
+          "green": false
+        }
+      ]
+    },
+    "cluster_11260122967_12067305543_12067305544_12067865287_#3more": {
+      "slots": [
+        [
+          "1509685699_0",
+          "1509685699_1"
+        ],
+        [],
+        [
+          "1473496401_0",
+          "1473496401_1"
+        ],
+        []
+      ],
+      "lane_links": {
+        "1473496401_0": [
+          0
+        ],
+        "1473496401_1": [
+          1,
+          2
+        ],
+        "1509685699_0": [
+          3,
+          4
+        ],
+        "1509685699_1": [
+          5
+        ]
+      },
+      "phases": [
+        {
+          "state": "GGGgGG",
+          "duration": 78.0,
+          "green": true
+        },
+        {
+          "state": "yyygGG",
+          "duration": 6.0,
+          "green": false
+        },
+        {
+          "state": "rrrGGG",
+          "duration": 6.0,
+          "green": true
+        },
+        {
+          "state": "rrryGG",
+          "duration": 6.0,
+          "green": false
+        }
+      ]
+    },
+    "cluster_11484393853_11484393854_11484393855_11484393856_#11more": {
+      "slots": [
+        [
+          "24480656#3_0",
+          "24480656#3_1"
+        ],
+        [
+          "794634832#0_0",
+          "794634832#0_1"
+        ],
+        [
+          "794634831#1_0",
+          "794634831#1_1"
+        ],
+        [
+          "631316440#0_0",
+          "631316440#0_1"
+        ]
+      ],
+      "lane_links": {
+        "24480656#3_0": [
+          0,
+          1
+        ],
+        "24480656#3_1": [
+          2,
+          3
+        ],
+        "631316440#0_0": [
+          12,
+          13
+        ],
+        "631316440#0_1": [
+          14,
+          15
+        ],
+        "794634831#1_0": [
+          8,
+          9
+        ],
+        "794634831#1_1": [
+          10,
+          11
+        ],
+        "794634832#0_0": [
+          4,
+          5
+        ],
+        "794634832#0_1": [
+          6,
+          7
+        ]
+      },
+      "phases": [
+        {
+          "state": "rrrrGGGgrrrrGGGg",
+          "duration": 39.0,
+          "green": true
+        },
+        {
+          "state": "rrrryyyyrrrryyyy",
+          "duration": 6.0,
+          "green": false
+        },
+        {
+          "state": "GGGgrrrrGGGgrrrr",
+          "duration": 39.0,
+          "green": true
+        },
+        {
+          "state": "yyyyrrrryyyyrrrr",
+          "duration": 6.0,
+          "green": false
+        }
+      ]
+    }
+  }
+}

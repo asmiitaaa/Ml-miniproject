@@ -1,0 +1,573 @@
+{
+  "selection_rule": "Require no collision detections/XML events/teleports, no unfinished or pending trips and exact expected completions on every validation seed; minimize mean completed-trip waiting time across validation seeds; tie-break lower training steps then candidate ID. Test seeds are excluded from selection.",
+  "validation_seeds": [
+    101,
+    102,
+    103
+  ],
+  "test_seeds": [
+    11,
+    12,
+    13,
+    14,
+    15
+  ],
+  "failures": [],
+  "scenarios": {
+    "peak": {
+      "selected": {
+        "candidate": "peak_lr1e3_20000",
+        "checkpoint": "results/agent_training/peak_lr1e3/corridor_dqn_peak_20000_steps.zip",
+        "checkpoint_sha256": "64ca6cedf74a09bd31c7e06c6e39ac0ec1be64310d349154c69167b1980fc53e",
+        "steps": 20000,
+        "eligible": true,
+        "mean_waiting_s": 10.256666666666668,
+        "collision_events": 0,
+        "teleports": 0,
+        "completed_trips": [
+          1000,
+          1000,
+          1000
+        ],
+        "convergence": {
+          "episodes_reviewed": 16,
+          "decision_limit": 20000,
+          "criterion": "at least 40 complete episodes; last-two-10-episode mean drift <=10%, last-20 CV <=25%, final mean improves on initial mean",
+          "interpretation": "empirical training-curve plateau heuristic, not a proof of optimality or safety",
+          "plateau_detected": false,
+          "reason": "not enough completed episodes at this checkpoint"
+        }
+      },
+      "ranking": [
+        {
+          "candidate": "peak_lr1e3_20000",
+          "checkpoint": "results/agent_training/peak_lr1e3/corridor_dqn_peak_20000_steps.zip",
+          "checkpoint_sha256": "64ca6cedf74a09bd31c7e06c6e39ac0ec1be64310d349154c69167b1980fc53e",
+          "steps": 20000,
+          "eligible": true,
+          "mean_waiting_s": 10.256666666666668,
+          "collision_events": 0,
+          "teleports": 0,
+          "completed_trips": [
+            1000,
+            1000,
+            1000
+          ],
+          "convergence": {
+            "episodes_reviewed": 16,
+            "decision_limit": 20000,
+            "criterion": "at least 40 complete episodes; last-two-10-episode mean drift <=10%, last-20 CV <=25%, final mean improves on initial mean",
+            "interpretation": "empirical training-curve plateau heuristic, not a proof of optimality or safety",
+            "plateau_detected": false,
+            "reason": "not enough completed episodes at this checkpoint"
+          }
+        },
+        {
+          "candidate": "peak_lr3e4_20000",
+          "checkpoint": "results/agent_training/peak_lr3e4/corridor_dqn_peak_20000_steps.zip",
+          "checkpoint_sha256": "852050c726fb6d1bef331a667dfc4790c846598e8882992fac2a3deedf2fadf3",
+          "steps": 20000,
+          "eligible": true,
+          "mean_waiting_s": 10.256666666666668,
+          "collision_events": 0,
+          "teleports": 0,
+          "completed_trips": [
+            1000,
+            1000,
+            1000
+          ],
+          "convergence": {
+            "episodes_reviewed": 16,
+            "decision_limit": 20000,
+            "criterion": "at least 40 complete episodes; last-two-10-episode mean drift <=10%, last-20 CV <=25%, final mean improves on initial mean",
+            "interpretation": "empirical training-curve plateau heuristic, not a proof of optimality or safety",
+            "plateau_detected": false,
+            "reason": "not enough completed episodes at this checkpoint"
+          }
+        },
+        {
+          "candidate": "peak_lr1e3_40000",
+          "checkpoint": "results/agent_training/peak_lr1e3/corridor_dqn_peak_40000_steps.zip",
+          "checkpoint_sha256": "87e2556570c5b22d8e328a7c81e2881b315901237e4757403b16de74aea6ff1c",
+          "steps": 40000,
+          "eligible": true,
+          "mean_waiting_s": 10.256666666666668,
+          "collision_events": 0,
+          "teleports": 0,
+          "completed_trips": [
+            1000,
+            1000,
+            1000
+          ],
+          "convergence": {
+            "episodes_reviewed": 33,
+            "decision_limit": 40000,
+            "criterion": "at least 40 complete episodes; last-two-10-episode mean drift <=10%, last-20 CV <=25%, final mean improves on initial mean",
+            "interpretation": "empirical training-curve plateau heuristic, not a proof of optimality or safety",
+            "plateau_detected": false,
+            "reason": "not enough completed episodes at this checkpoint"
+          }
+        },
+        {
+          "candidate": "peak_lr1e3_60000",
+          "checkpoint": "results/agent_training/peak_lr1e3/corridor_dqn_peak_60000_steps.zip",
+          "checkpoint_sha256": "1c5eda483b898a6b0608ad8bcf987d38fb918a847fa0f2455c6b8c01f4f31f96",
+          "steps": 60000,
+          "eligible": true,
+          "mean_waiting_s": 10.256666666666668,
+          "collision_events": 0,
+          "teleports": 0,
+          "completed_trips": [
+            1000,
+            1000,
+            1000
+          ],
+          "convergence": {
+            "episodes_reviewed": 50,
+            "decision_limit": 60000,
+            "criterion": "at least 40 complete episodes; last-two-10-episode mean drift <=10%, last-20 CV <=25%, final mean improves on initial mean",
+            "interpretation": "empirical training-curve plateau heuristic, not a proof of optimality or safety",
+            "initial_10_mean": -30374.4,
+            "final_10_mean": -30249.1,
+            "last_20_cv": 0.01045345438482572,
+            "last_two_10_relative_drift": 0.0019126279773131639,
+            "plateau_detected": true
+          }
+        },
+        {
+          "candidate": "peak_lr3e4_60000",
+          "checkpoint": "results/agent_training/peak_lr3e4/corridor_dqn_peak_60000_steps.zip",
+          "checkpoint_sha256": "d37467e8a948fd5f91d5d93cda2ec8f09b861526b1c6e5ee4e8bca071b330815",
+          "steps": 60000,
+          "eligible": true,
+          "mean_waiting_s": 10.256666666666668,
+          "collision_events": 0,
+          "teleports": 0,
+          "completed_trips": [
+            1000,
+            1000,
+            1000
+          ],
+          "convergence": {
+            "episodes_reviewed": 50,
+            "decision_limit": 60000,
+            "criterion": "at least 40 complete episodes; last-two-10-episode mean drift <=10%, last-20 CV <=25%, final mean improves on initial mean",
+            "interpretation": "empirical training-curve plateau heuristic, not a proof of optimality or safety",
+            "initial_10_mean": -31028.0,
+            "final_10_mean": -33940.5,
+            "last_20_cv": 0.18442601231570943,
+            "last_two_10_relative_drift": 0.19891506661766917,
+            "plateau_detected": false
+          }
+        },
+        {
+          "candidate": "peak_lr1e3_80000",
+          "checkpoint": "results/agent_training/peak_lr1e3/corridor_dqn_peak_80000_steps.zip",
+          "checkpoint_sha256": "954fce87c79420336703fe92ed101ca6be68643d9fd20feabefd8cfdf290161f",
+          "steps": 80000,
+          "eligible": true,
+          "mean_waiting_s": 10.256666666666668,
+          "collision_events": 0,
+          "teleports": 0,
+          "completed_trips": [
+            1000,
+            1000,
+            1000
+          ],
+          "convergence": {
+            "episodes_reviewed": 66,
+            "decision_limit": 80000,
+            "criterion": "at least 40 complete episodes; last-two-10-episode mean drift <=10%, last-20 CV <=25%, final mean improves on initial mean",
+            "interpretation": "empirical training-curve plateau heuristic, not a proof of optimality or safety",
+            "initial_10_mean": -30374.4,
+            "final_10_mean": -30178.6,
+            "last_20_cv": 0.01061172239687038,
+            "last_two_10_relative_drift": 0.0023333669823607387,
+            "plateau_detected": true
+          }
+        },
+        {
+          "candidate": "peak_lr3e4_80000",
+          "checkpoint": "results/agent_training/peak_lr3e4/corridor_dqn_peak_80000_steps.zip",
+          "checkpoint_sha256": "1f28fae32fd247d88e593abd41cdbcb6a15920ce81765ce21b1e01a63b1c3d9f",
+          "steps": 80000,
+          "eligible": true,
+          "mean_waiting_s": 10.256666666666668,
+          "collision_events": 0,
+          "teleports": 0,
+          "completed_trips": [
+            1000,
+            1000,
+            1000
+          ],
+          "convergence": {
+            "episodes_reviewed": 66,
+            "decision_limit": 80000,
+            "criterion": "at least 40 complete episodes; last-two-10-episode mean drift <=10%, last-20 CV <=25%, final mean improves on initial mean",
+            "interpretation": "empirical training-curve plateau heuristic, not a proof of optimality or safety",
+            "initial_10_mean": -31028.0,
+            "final_10_mean": -30572.6,
+            "last_20_cv": 0.1243888490222635,
+            "last_two_10_relative_drift": 0.10473296024276206,
+            "plateau_detected": false
+          }
+        },
+        {
+          "candidate": "peak_lr1e3_100000",
+          "checkpoint": "results/agent_training/peak_lr1e3/corridor_dqn_peak_100000_steps.zip",
+          "checkpoint_sha256": "d4da773a8d6f8f3cbd88dfec5497cf3348f7963c4ba64469fd1e8ea30c299b35",
+          "steps": 100000,
+          "eligible": true,
+          "mean_waiting_s": 10.256666666666668,
+          "collision_events": 0,
+          "teleports": 0,
+          "completed_trips": [
+            1000,
+            1000,
+            1000
+          ],
+          "convergence": {
+            "episodes_reviewed": 83,
+            "decision_limit": 100000,
+            "criterion": "at least 40 complete episodes; last-two-10-episode mean drift <=10%, last-20 CV <=25%, final mean improves on initial mean",
+            "interpretation": "empirical training-curve plateau heuristic, not a proof of optimality or safety",
+            "initial_10_mean": -30374.4,
+            "final_10_mean": -30249.1,
+            "last_20_cv": 0.01045345438482572,
+            "last_two_10_relative_drift": 0.0019126279773131639,
+            "plateau_detected": true
+          }
+        },
+        {
+          "candidate": "peak_lr3e4_100000",
+          "checkpoint": "results/agent_training/peak_lr3e4/corridor_dqn_peak_100000_steps.zip",
+          "checkpoint_sha256": "6299f0a86a131f803d8927f516cdc45e22ea00dced8fede5a8b4e33904b99797",
+          "steps": 100000,
+          "eligible": true,
+          "mean_waiting_s": 10.256666666666668,
+          "collision_events": 0,
+          "teleports": 0,
+          "completed_trips": [
+            1000,
+            1000,
+            1000
+          ],
+          "convergence": {
+            "episodes_reviewed": 83,
+            "decision_limit": 100000,
+            "criterion": "at least 40 complete episodes; last-two-10-episode mean drift <=10%, last-20 CV <=25%, final mean improves on initial mean",
+            "interpretation": "empirical training-curve plateau heuristic, not a proof of optimality or safety",
+            "initial_10_mean": -31028.0,
+            "final_10_mean": -36718.2,
+            "last_20_cv": 0.36596930310431797,
+            "last_two_10_relative_drift": 0.1808786604044504,
+            "plateau_detected": false
+          }
+        },
+        {
+          "candidate": "peak_lr3e4_40000",
+          "checkpoint": "results/agent_training/peak_lr3e4/corridor_dqn_peak_40000_steps.zip",
+          "checkpoint_sha256": "ea236d8b2ab069712531d24cb9f6dc74d81f5b6c9dab62070af77a22438538f0",
+          "steps": 40000,
+          "eligible": true,
+          "mean_waiting_s": 26.026333333333337,
+          "collision_events": 0,
+          "teleports": 0,
+          "completed_trips": [
+            1000,
+            1000,
+            1000
+          ],
+          "convergence": {
+            "episodes_reviewed": 33,
+            "decision_limit": 40000,
+            "criterion": "at least 40 complete episodes; last-two-10-episode mean drift <=10%, last-20 CV <=25%, final mean improves on initial mean",
+            "interpretation": "empirical training-curve plateau heuristic, not a proof of optimality or safety",
+            "plateau_detected": false,
+            "reason": "not enough completed episodes at this checkpoint"
+          }
+        }
+      ]
+    },
+    "offpeak": {
+      "selected": {
+        "candidate": "offpeak_lr1e3_100000",
+        "checkpoint": "results/agent_training/offpeak_lr1e3/corridor_dqn_offpeak_100000_steps.zip",
+        "checkpoint_sha256": "e3953c0f53e7c28608928ff8ae427e423ba0aecd92292819f9aa244585d84761",
+        "steps": 100000,
+        "eligible": true,
+        "mean_waiting_s": 8.434,
+        "collision_events": 0,
+        "teleports": 0,
+        "completed_trips": [
+          500,
+          500,
+          500
+        ],
+        "convergence": {
+          "episodes_reviewed": 83,
+          "decision_limit": 100000,
+          "criterion": "at least 40 complete episodes; last-two-10-episode mean drift <=10%, last-20 CV <=25%, final mean improves on initial mean",
+          "interpretation": "empirical training-curve plateau heuristic, not a proof of optimality or safety",
+          "initial_10_mean": -13790.4,
+          "final_10_mean": -11595.2,
+          "last_20_cv": 0.06206277285499909,
+          "last_two_10_relative_drift": 0.07973237611423695,
+          "plateau_detected": true
+        }
+      },
+      "ranking": [
+        {
+          "candidate": "offpeak_lr1e3_100000",
+          "checkpoint": "results/agent_training/offpeak_lr1e3/corridor_dqn_offpeak_100000_steps.zip",
+          "checkpoint_sha256": "e3953c0f53e7c28608928ff8ae427e423ba0aecd92292819f9aa244585d84761",
+          "steps": 100000,
+          "eligible": true,
+          "mean_waiting_s": 8.434,
+          "collision_events": 0,
+          "teleports": 0,
+          "completed_trips": [
+            500,
+            500,
+            500
+          ],
+          "convergence": {
+            "episodes_reviewed": 83,
+            "decision_limit": 100000,
+            "criterion": "at least 40 complete episodes; last-two-10-episode mean drift <=10%, last-20 CV <=25%, final mean improves on initial mean",
+            "interpretation": "empirical training-curve plateau heuristic, not a proof of optimality or safety",
+            "initial_10_mean": -13790.4,
+            "final_10_mean": -11595.2,
+            "last_20_cv": 0.06206277285499909,
+            "last_two_10_relative_drift": 0.07973237611423695,
+            "plateau_detected": true
+          }
+        },
+        {
+          "candidate": "offpeak_lr1e3_20000",
+          "checkpoint": "results/agent_training/offpeak_lr1e3/corridor_dqn_offpeak_20000_steps.zip",
+          "checkpoint_sha256": "666f6b4b67cdcedf2d91b7e0a0924ade842632b35164071843fdeab5d35bbf09",
+          "steps": 20000,
+          "eligible": true,
+          "mean_waiting_s": 8.592,
+          "collision_events": 0,
+          "teleports": 0,
+          "completed_trips": [
+            500,
+            500,
+            500
+          ],
+          "convergence": {
+            "episodes_reviewed": 16,
+            "decision_limit": 20000,
+            "criterion": "at least 40 complete episodes; last-two-10-episode mean drift <=10%, last-20 CV <=25%, final mean improves on initial mean",
+            "interpretation": "empirical training-curve plateau heuristic, not a proof of optimality or safety",
+            "plateau_detected": false,
+            "reason": "not enough completed episodes at this checkpoint"
+          }
+        },
+        {
+          "candidate": "offpeak_lr1e3_60000",
+          "checkpoint": "results/agent_training/offpeak_lr1e3/corridor_dqn_offpeak_60000_steps.zip",
+          "checkpoint_sha256": "66a2b97c60cea32e744c8e474685d20cfc0d945b5e0b6086afad1b4408b57b4f",
+          "steps": 60000,
+          "eligible": true,
+          "mean_waiting_s": 8.622,
+          "collision_events": 0,
+          "teleports": 0,
+          "completed_trips": [
+            500,
+            500,
+            500
+          ],
+          "convergence": {
+            "episodes_reviewed": 50,
+            "decision_limit": 60000,
+            "criterion": "at least 40 complete episodes; last-two-10-episode mean drift <=10%, last-20 CV <=25%, final mean improves on initial mean",
+            "interpretation": "empirical training-curve plateau heuristic, not a proof of optimality or safety",
+            "initial_10_mean": -13790.4,
+            "final_10_mean": -13429.1,
+            "last_20_cv": 0.02787480073041433,
+            "last_two_10_relative_drift": 0.005780260485123643,
+            "plateau_detected": true
+          }
+        },
+        {
+          "candidate": "offpeak_lr1e3_80000",
+          "checkpoint": "results/agent_training/offpeak_lr1e3/corridor_dqn_offpeak_80000_steps.zip",
+          "checkpoint_sha256": "afd88548e775355781ba968f55275906241ba9c5741cf6ef6107fa11d0d1b4c8",
+          "steps": 80000,
+          "eligible": true,
+          "mean_waiting_s": 8.937333333333333,
+          "collision_events": 0,
+          "teleports": 0,
+          "completed_trips": [
+            500,
+            500,
+            500
+          ],
+          "convergence": {
+            "episodes_reviewed": 66,
+            "decision_limit": 80000,
+            "criterion": "at least 40 complete episodes; last-two-10-episode mean drift <=10%, last-20 CV <=25%, final mean improves on initial mean",
+            "interpretation": "empirical training-curve plateau heuristic, not a proof of optimality or safety",
+            "initial_10_mean": -13790.4,
+            "final_10_mean": -12271.6,
+            "last_20_cv": 0.05314252906823941,
+            "last_two_10_relative_drift": 0.04385996373562869,
+            "plateau_detected": true
+          }
+        },
+        {
+          "candidate": "offpeak_lr1e3_40000",
+          "checkpoint": "results/agent_training/offpeak_lr1e3/corridor_dqn_offpeak_40000_steps.zip",
+          "checkpoint_sha256": "d51c2400bfea37614575bfa562703df2de0e6d4b553da84722be2c0376083140",
+          "steps": 40000,
+          "eligible": true,
+          "mean_waiting_s": 9.009333333333334,
+          "collision_events": 0,
+          "teleports": 0,
+          "completed_trips": [
+            500,
+            500,
+            500
+          ],
+          "convergence": {
+            "episodes_reviewed": 33,
+            "decision_limit": 40000,
+            "criterion": "at least 40 complete episodes; last-two-10-episode mean drift <=10%, last-20 CV <=25%, final mean improves on initial mean",
+            "interpretation": "empirical training-curve plateau heuristic, not a proof of optimality or safety",
+            "plateau_detected": false,
+            "reason": "not enough completed episodes at this checkpoint"
+          }
+        },
+        {
+          "candidate": "offpeak_lr3e4_20000",
+          "checkpoint": "results/agent_training/offpeak_lr3e4/corridor_dqn_offpeak_20000_steps.zip",
+          "checkpoint_sha256": "9ed3b7d21de7728d36e21521abba9abb16e03f60b5a8934d84e7ebe70e9297c6",
+          "steps": 20000,
+          "eligible": true,
+          "mean_waiting_s": 9.543333333333333,
+          "collision_events": 0,
+          "teleports": 0,
+          "completed_trips": [
+            500,
+            500,
+            500
+          ],
+          "convergence": {
+            "episodes_reviewed": 16,
+            "decision_limit": 20000,
+            "criterion": "at least 40 complete episodes; last-two-10-episode mean drift <=10%, last-20 CV <=25%, final mean improves on initial mean",
+            "interpretation": "empirical training-curve plateau heuristic, not a proof of optimality or safety",
+            "plateau_detected": false,
+            "reason": "not enough completed episodes at this checkpoint"
+          }
+        },
+        {
+          "candidate": "offpeak_lr3e4_40000",
+          "checkpoint": "results/agent_training/offpeak_lr3e4/corridor_dqn_offpeak_40000_steps.zip",
+          "checkpoint_sha256": "29e5477c427c7e4cea524e6404de98f9430d3ebcaddd4baf70ba11b6e22a3951",
+          "steps": 40000,
+          "eligible": true,
+          "mean_waiting_s": 9.543333333333333,
+          "collision_events": 0,
+          "teleports": 0,
+          "completed_trips": [
+            500,
+            500,
+            500
+          ],
+          "convergence": {
+            "episodes_reviewed": 33,
+            "decision_limit": 40000,
+            "criterion": "at least 40 complete episodes; last-two-10-episode mean drift <=10%, last-20 CV <=25%, final mean improves on initial mean",
+            "interpretation": "empirical training-curve plateau heuristic, not a proof of optimality or safety",
+            "plateau_detected": false,
+            "reason": "not enough completed episodes at this checkpoint"
+          }
+        },
+        {
+          "candidate": "offpeak_lr3e4_60000",
+          "checkpoint": "results/agent_training/offpeak_lr3e4/corridor_dqn_offpeak_60000_steps.zip",
+          "checkpoint_sha256": "b72fcdce4e93fb00c5e98891118fe7091d364bf15c8c1ef118018b6c3662fa7f",
+          "steps": 60000,
+          "eligible": true,
+          "mean_waiting_s": 9.543333333333333,
+          "collision_events": 0,
+          "teleports": 0,
+          "completed_trips": [
+            500,
+            500,
+            500
+          ],
+          "convergence": {
+            "episodes_reviewed": 50,
+            "decision_limit": 60000,
+            "criterion": "at least 40 complete episodes; last-two-10-episode mean drift <=10%, last-20 CV <=25%, final mean improves on initial mean",
+            "interpretation": "empirical training-curve plateau heuristic, not a proof of optimality or safety",
+            "initial_10_mean": -14120.5,
+            "final_10_mean": -14490.9,
+            "last_20_cv": 0.16261071496343255,
+            "last_two_10_relative_drift": 0.17305710260313745,
+            "plateau_detected": false
+          }
+        },
+        {
+          "candidate": "offpeak_lr3e4_80000",
+          "checkpoint": "results/agent_training/offpeak_lr3e4/corridor_dqn_offpeak_80000_steps.zip",
+          "checkpoint_sha256": "f43de42965afa7072e2ad778121e7e5b3cee56eb9d0072006e8398d501aa544b",
+          "steps": 80000,
+          "eligible": true,
+          "mean_waiting_s": 9.543333333333333,
+          "collision_events": 0,
+          "teleports": 0,
+          "completed_trips": [
+            500,
+            500,
+            500
+          ],
+          "convergence": {
+            "episodes_reviewed": 66,
+            "decision_limit": 80000,
+            "criterion": "at least 40 complete episodes; last-two-10-episode mean drift <=10%, last-20 CV <=25%, final mean improves on initial mean",
+            "interpretation": "empirical training-curve plateau heuristic, not a proof of optimality or safety",
+            "initial_10_mean": -14120.5,
+            "final_10_mean": -15323.7,
+            "last_20_cv": 0.13359438858493244,
+            "last_two_10_relative_drift": 0.062312004145161394,
+            "plateau_detected": false
+          }
+        },
+        {
+          "candidate": "offpeak_lr3e4_100000",
+          "checkpoint": "results/agent_training/offpeak_lr3e4/corridor_dqn_offpeak_100000_steps.zip",
+          "checkpoint_sha256": "01b657eac0a35349e29b3f46c445573da21385db1bd7c68799294eb0eb0d8ee0",
+          "steps": 100000,
+          "eligible": true,
+          "mean_waiting_s": 9.543333333333333,
+          "collision_events": 0,
+          "teleports": 0,
+          "completed_trips": [
+            500,
+            500,
+            500
+          ],
+          "convergence": {
+            "episodes_reviewed": 83,
+            "decision_limit": 100000,
+            "criterion": "at least 40 complete episodes; last-two-10-episode mean drift <=10%, last-20 CV <=25%, final mean improves on initial mean",
+            "interpretation": "empirical training-curve plateau heuristic, not a proof of optimality or safety",
+            "initial_10_mean": -14120.5,
+            "final_10_mean": -14122.0,
+            "last_20_cv": 0.20785577784621773,
+            "last_two_10_relative_drift": 0.12158113334286601,
+            "plateau_detected": false
+          }
+        }
+      ]
+    }
+  },
+  "plan_sha256": "038479ff9bd263b3c99d56bef86ddbce3c05eec18c3c7dea23753a1279131c07",
+  "config_sha256": "a2be5ca55cf4a1187e957fe7dc8986caec2898eb5ec52505fb2842ba41f1854e"
+}

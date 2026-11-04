@@ -1,0 +1,77 @@
+{
+  "runs": [
+    {
+      "scenario": "offpeak",
+      "seed": 11,
+      "signals": 6,
+      "completed_phase_dwells": 1732,
+      "violations": 0
+    },
+    {
+      "scenario": "offpeak",
+      "seed": 12,
+      "signals": 6,
+      "completed_phase_dwells": 1732,
+      "violations": 0
+    },
+    {
+      "scenario": "offpeak",
+      "seed": 13,
+      "signals": 6,
+      "completed_phase_dwells": 1732,
+      "violations": 0
+    },
+    {
+      "scenario": "offpeak",
+      "seed": 14,
+      "signals": 6,
+      "completed_phase_dwells": 1732,
+      "violations": 0
+    },
+    {
+      "scenario": "offpeak",
+      "seed": 15,
+      "signals": 6,
+      "completed_phase_dwells": 1732,
+      "violations": 0
+    },
+    {
+      "scenario": "peak",
+      "seed": 11,
+      "signals": 6,
+      "completed_phase_dwells": 2601,
+      "violations": 0
+    },
+    {
+      "scenario": "peak",
+      "seed": 12,
+      "signals": 6,
+      "completed_phase_dwells": 2601,
+      "violations": 0
+    },
+    {
+      "scenario": "peak",
+      "seed": 13,
+      "signals": 6,
+      "completed_phase_dwells": 2601,
+      "violations": 0
+    },
+    {
+      "scenario": "peak",
+      "seed": 14,
+      "signals": 6,
+      "completed_phase_dwells": 2601,
+      "violations": 0
+    },
+    {
+      "scenario": "peak",
+      "seed": 15,
+      "signals": 6,
+      "completed_phase_dwells": 2601,
+      "violations": 0
+    }
+  ],
+  "dqn_runs_audited": 10,
+  "violations": 0,
+  "note": "Last, unfinished phase in each run is right-censored and excluded from dwell tests. The controller also verifies the actual SUMO phase before every one-second update."
+}

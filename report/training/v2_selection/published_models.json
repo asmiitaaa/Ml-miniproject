@@ -1,0 +1,97 @@
+{
+  "peak": {
+    "checkpoint": "models/dqn_traffic_sumo_v2_peak_best.zip",
+    "checkpoint_sha256": "75e6f7e0eabdc8e0a1d38f2b6d5aeb248b63524a04fd75d96e8672d3b72efc8c",
+    "policy_tensors_sha256": "78aed65c8774004c88a689a0b615ffe4c2fef581d007ae80f73c9da7507288f7",
+    "num_timesteps": 80000,
+    "tensor_roundtrip_identical": true,
+    "review": {
+      "scenario": "peak",
+      "source_checkpoint_sha256": "5cd9958004cac2f9c1d7884157fdf847ae3b0ca08706aa0eec539dfcefd13915",
+      "validation_seeds": [
+        101,
+        102,
+        103
+      ],
+      "reserved_test_seeds": [
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "selection_rule": "Require no collision detections/XML events/teleports, no unfinished or pending trips and exact expected completions on every validation seed; minimize mean completed-trip waiting time across validation seeds; tie-break lower training steps then candidate ID. Test seeds are excluded from selection.",
+      "validation_mean_waiting_s": 10.027333333333333,
+      "validation_collision_events": 0,
+      "validation_teleports": 0,
+      "full_training_curve": {
+        "episodes_reviewed": 83,
+        "decision_limit": 100000,
+        "criterion": "at least 40 complete episodes; last-two-10-episode mean drift <=10%, last-20 CV <=25%, final mean improves on initial mean",
+        "interpretation": "empirical training-curve plateau heuristic, not a proof of optimality or safety",
+        "initial_10_mean": -22304.6,
+        "final_10_mean": -20722.2,
+        "last_20_cv": 0.05700963145483151,
+        "last_two_10_relative_drift": 0.009896639896279686,
+        "plateau_detected": true
+      },
+      "selected_checkpoint_curve": {
+        "episodes_reviewed": 66,
+        "decision_limit": 80000,
+        "criterion": "at least 40 complete episodes; last-two-10-episode mean drift <=10%, last-20 CV <=25%, final mean improves on initial mean",
+        "interpretation": "empirical training-curve plateau heuristic, not a proof of optimality or safety",
+        "initial_10_mean": -22304.6,
+        "final_10_mean": -21086.3,
+        "last_20_cv": 0.04828482707900217,
+        "last_two_10_relative_drift": 0.07055253881126092,
+        "plateau_detected": true
+      }
+    }
+  },
+  "offpeak": {
+    "checkpoint": "models/dqn_traffic_sumo_v2_offpeak_best.zip",
+    "checkpoint_sha256": "1d3f42fe1aad4523d379d4efde72fd5546a9ad1d7fe0c4260deebe46d9d8c0a0",
+    "policy_tensors_sha256": "ff279a164d4a2e4ef0f7df247ce28fa3f7835296e6c652611e58b1657eb18a56",
+    "num_timesteps": 40000,
+    "tensor_roundtrip_identical": true,
+    "review": {
+      "scenario": "offpeak",
+      "source_checkpoint_sha256": "f3b8ce242e8e4f7cb83559c6cd9fbfb526ae3375f5c594feb1b600ad76e260f3",
+      "validation_seeds": [
+        101,
+        102,
+        103
+      ],
+      "reserved_test_seeds": [
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "selection_rule": "Require no collision detections/XML events/teleports, no unfinished or pending trips and exact expected completions on every validation seed; minimize mean completed-trip waiting time across validation seeds; tie-break lower training steps then candidate ID. Test seeds are excluded from selection.",
+      "validation_mean_waiting_s": 8.711333333333334,
+      "validation_collision_events": 0,
+      "validation_teleports": 0,
+      "full_training_curve": {
+        "episodes_reviewed": 83,
+        "decision_limit": 100000,
+        "criterion": "at least 40 complete episodes; last-two-10-episode mean drift <=10%, last-20 CV <=25%, final mean improves on initial mean",
+        "interpretation": "empirical training-curve plateau heuristic, not a proof of optimality or safety",
+        "initial_10_mean": -22304.6,
+        "final_10_mean": -20722.2,
+        "last_20_cv": 0.05700963145483151,
+        "last_two_10_relative_drift": 0.009896639896279686,
+        "plateau_detected": true
+      },
+      "selected_checkpoint_curve": {
+        "episodes_reviewed": 33,
+        "decision_limit": 40000,
+        "criterion": "at least 40 complete episodes; last-two-10-episode mean drift <=10%, last-20 CV <=25%, final mean improves on initial mean",
+        "interpretation": "empirical training-curve plateau heuristic, not a proof of optimality or safety",
+        "plateau_detected": false,
+        "reason": "not enough completed episodes at this checkpoint"
+      }
+    }
+  }
+}

@@ -1,0 +1,71 @@
+{
+  "experiment_label": "uncalibrated-independent-corridor-validation",
+  "project_root": "..",
+  "duration_s": 3600,
+  "step_length_s": 1,
+  "lateral_resolution_m": 0.4,
+  "seeds": [
+    11,
+    12,
+    13,
+    14,
+    15
+  ],
+  "scenarios": {
+    "peak": {
+      "sumocfg": "scenarios/model_validation/peak.sumocfg",
+      "demand_files": [
+        "scenarios/model_validation/fixture_manifest.json"
+      ],
+      "dqn_checkpoint": "models/corridor_peak_best.zip"
+    },
+    "offpeak": {
+      "sumocfg": "scenarios/model_validation/offpeak.sumocfg",
+      "demand_files": [
+        "scenarios/model_validation/fixture_manifest.json"
+      ],
+      "dqn_checkpoint": "models/corridor_offpeak_best.zip"
+    }
+  },
+  "controllers": {
+    "fixed": {
+      "control_tls_ids": [
+        "10860559946",
+        "10860559948",
+        "11476588184",
+        "cluster_10860559949_11178931802_11178931803_2414626606_#2more",
+        "cluster_11260122967_12067305543_12067305544_12067865287_#3more",
+        "cluster_11484393853_11484393854_11484393855_11484393856_#11more"
+      ],
+      "yellow_floor_s": 6
+    },
+    "actuated": {
+      "control_tls_ids": [
+        "10860559946",
+        "10860559948",
+        "11476588184",
+        "cluster_10860559949_11178931802_11178931803_2414626606_#2more",
+        "cluster_11260122967_12067305543_12067305544_12067865287_#3more",
+        "cluster_11484393853_11484393854_11484393855_11484393856_#11more"
+      ],
+      "min_green_s": 12,
+      "max_green_s": 60,
+      "max_gap_s": 3,
+      "yellow_floor_s": 6
+    },
+    "dqn": {
+      "factory": "rl_agent.corridor:create_controller",
+      "control_tls_ids": [
+        "10860559946",
+        "10860559948",
+        "11476588184",
+        "cluster_10860559949_11178931802_11178931803_2414626606_#2more",
+        "cluster_11260122967_12067305543_12067305544_12067865287_#3more",
+        "cluster_11484393853_11484393854_11484393855_11484393856_#11more"
+      ],
+      "yellow_floor_s": 6,
+      "checkpoint": "models/corridor_peak_best.zip"
+    }
+  },
+  "collision_action": "teleport"
+}

@@ -1,0 +1,97 @@
+{
+  "peak": {
+    "checkpoint": "models/corridor_peak_best.zip",
+    "checkpoint_sha256": "e736f88218650f861e23a9c410f05e67ea083345242def9bb3aa53d65015e07a",
+    "policy_tensors_sha256": "d8a479a6251ac76e857ee1919c90c600aa04c50cdcacfd28c9dba1916f6655a3",
+    "num_timesteps": 20000,
+    "tensor_roundtrip_identical": true,
+    "review": {
+      "scenario": "peak",
+      "source_checkpoint_sha256": "64ca6cedf74a09bd31c7e06c6e39ac0ec1be64310d349154c69167b1980fc53e",
+      "validation_seeds": [
+        101,
+        102,
+        103
+      ],
+      "reserved_test_seeds": [
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "selection_rule": "Require no collision detections/XML events/teleports, no unfinished or pending trips and exact expected completions on every validation seed; minimize mean completed-trip waiting time across validation seeds; tie-break lower training steps then candidate ID. Test seeds are excluded from selection.",
+      "validation_mean_waiting_s": 10.256666666666668,
+      "validation_collision_events": 0,
+      "validation_teleports": 0,
+      "full_training_curve": {
+        "episodes_reviewed": 83,
+        "decision_limit": 100000,
+        "criterion": "at least 40 complete episodes; last-two-10-episode mean drift <=10%, last-20 CV <=25%, final mean improves on initial mean",
+        "interpretation": "empirical training-curve plateau heuristic, not a proof of optimality or safety",
+        "initial_10_mean": -30374.4,
+        "final_10_mean": -30249.1,
+        "last_20_cv": 0.01045345438482572,
+        "last_two_10_relative_drift": 0.0019126279773131639,
+        "plateau_detected": true
+      },
+      "selected_checkpoint_curve": {
+        "episodes_reviewed": 16,
+        "decision_limit": 20000,
+        "criterion": "at least 40 complete episodes; last-two-10-episode mean drift <=10%, last-20 CV <=25%, final mean improves on initial mean",
+        "interpretation": "empirical training-curve plateau heuristic, not a proof of optimality or safety",
+        "plateau_detected": false,
+        "reason": "not enough completed episodes at this checkpoint"
+      }
+    }
+  },
+  "offpeak": {
+    "checkpoint": "models/corridor_offpeak_best.zip",
+    "checkpoint_sha256": "e7b29f84a6aee334e969979ec84dea222afb15e555c75dbfe5a7cf001b026e61",
+    "policy_tensors_sha256": "d4d3b85e19f440613a18338dfcbd5271bbc71b76f80248aee9082745e8950b2f",
+    "num_timesteps": 100000,
+    "tensor_roundtrip_identical": true,
+    "review": {
+      "scenario": "offpeak",
+      "source_checkpoint_sha256": "e3953c0f53e7c28608928ff8ae427e423ba0aecd92292819f9aa244585d84761",
+      "validation_seeds": [
+        101,
+        102,
+        103
+      ],
+      "reserved_test_seeds": [
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "selection_rule": "Require no collision detections/XML events/teleports, no unfinished or pending trips and exact expected completions on every validation seed; minimize mean completed-trip waiting time across validation seeds; tie-break lower training steps then candidate ID. Test seeds are excluded from selection.",
+      "validation_mean_waiting_s": 8.434,
+      "validation_collision_events": 0,
+      "validation_teleports": 0,
+      "full_training_curve": {
+        "episodes_reviewed": 83,
+        "decision_limit": 100000,
+        "criterion": "at least 40 complete episodes; last-two-10-episode mean drift <=10%, last-20 CV <=25%, final mean improves on initial mean",
+        "interpretation": "empirical training-curve plateau heuristic, not a proof of optimality or safety",
+        "initial_10_mean": -13790.4,
+        "final_10_mean": -11595.2,
+        "last_20_cv": 0.06206277285499909,
+        "last_two_10_relative_drift": 0.07973237611423695,
+        "plateau_detected": true
+      },
+      "selected_checkpoint_curve": {
+        "episodes_reviewed": 83,
+        "decision_limit": 100000,
+        "criterion": "at least 40 complete episodes; last-two-10-episode mean drift <=10%, last-20 CV <=25%, final mean improves on initial mean",
+        "interpretation": "empirical training-curve plateau heuristic, not a proof of optimality or safety",
+        "initial_10_mean": -13790.4,
+        "final_10_mean": -11595.2,
+        "last_20_cv": 0.06206277285499909,
+        "last_two_10_relative_drift": 0.07973237611423695,
+        "plateau_detected": true
+      }
+    }
+  }
+}

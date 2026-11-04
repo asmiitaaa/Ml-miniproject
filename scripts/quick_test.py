@@ -20,7 +20,10 @@ def main():
     if args.seconds<30:parser.error('Use at least 30 seconds')
     cfg=load_config(args.config)
     cfg.update(project_root=cfg['_root'],duration_s=args.seconds,seeds=[11],experiment_label='quick-integration-test-not-final-results')
-    if args.checkpoint:cfg['controllers']['dqn']['checkpoint']=str(Path(args.checkpoint).resolve())
+    if args.checkpoint:
+        checkpoint=str(Path(args.checkpoint).resolve())
+        cfg['controllers']['dqn']['checkpoint']=checkpoint
+        for scenario in cfg['scenarios'].values():scenario['dqn_checkpoint']=checkpoint
     cfg['scenarios']={'peak':cfg['scenarios']['peak']}
     out=Path(args.output).resolve() if args.output else ROOT/'results'/('quick_test_'+datetime.now().strftime('%Y%m%d_%H%M%S'))
     out.mkdir(parents=True,exist_ok=False)
@@ -28,7 +31,7 @@ def main():
     run_experiment(configuration,out,['fixed','actuated','dqn'])
     print(f'QUICK TEST PASSED: all 3 controllers ran {args.seconds}s with seed 11.')
     print(f'Results: {out}')
-    print('One-seed short tests intentionally show evidence-quality warnings. Full results remain in results/model_validation.')
+    print(f'One-seed short tests intentionally show evidence-quality warnings. Full experiment configuration: {args.config}')
 
 
 if __name__=='__main__':main()

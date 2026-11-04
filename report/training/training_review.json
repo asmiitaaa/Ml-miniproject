@@ -1,0 +1,308 @@
+{
+  "peak_lr1e3": {
+    "manifest": {
+      "scenario": "peak",
+      "total_timesteps": 100000,
+      "model_seed": 42,
+      "training_seeds": [
+        42,
+        43,
+        44
+      ],
+      "feature_schema": "all-lanes-cardinal-served-fraction-17-v1",
+      "timing": {
+        "decision_interval_s": 3.0,
+        "min_green_s": 12.0,
+        "max_green_s": 60.0,
+        "yellow_floor_s": 6.0
+      },
+      "hyperparameters": {
+        "learning_rate": 0.001,
+        "buffer_size": 50000,
+        "learning_starts": 1000,
+        "batch_size": 64,
+        "train_freq": 4,
+        "target_update_interval": 1000,
+        "exploration_fraction": 0.3,
+        "exploration_final_eps": 0.05,
+        "seed": 42
+      },
+      "validation_seeds": [
+        101,
+        102,
+        103
+      ],
+      "test_seeds": [
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "training_control_tls_ids": [
+        "cluster_11484393853_11484393854_11484393855_11484393856_#11more"
+      ],
+      "source_sha256": {
+        "rl_agent/corridor.py": "3c0b17148cfc97c2e3c0566757b95ce3ef450deade42654637988560bfe5ecf3",
+        "rl_agent/corridor_env.py": "28720826b3424275e5a7dafa5efb55719daef04db6cf0b4222fe66ad7fe03842",
+        "rl_agent/train_corridor.py": "57cb8e1fd1d0e92295035a07c2618a22b5dd58efb6f29fef742f80cbcb049c1a"
+      },
+      "input_sha256": {
+        "network/corridor.net.xml": "c5b50b1e897ae658bf0ddb5c6dad83e7f8abb14f5e8c93cf3ea2569c57b6c943",
+        "scenarios/model_validation/fixture_manifest.json": "d4ef0c2b4631ff842c5cbdc3f761988be48cfa22ed5af3f788045784885b53c7",
+        "scenarios/model_validation/peak.rou.xml": "6a1fb53a5c1cdc7ca0b9574e7b433a9fb28d428267b5ec7c8d3b8b6484291e97",
+        "scenarios/model_validation/peak.sumocfg": "8d1b5233ffdd8b2280417e0c97bf59872dab31bc20b39a5f4cb7b33818db3d5d",
+        "scenarios/model_validation/vtypes.rou.xml": "2eefdef1abd254bb805121a1abeed19b22bb3f17cb7a0e96185c9e8947a306ee"
+      },
+      "status": "complete",
+      "actual_timesteps": 100000,
+      "optimizer_updates": 24750,
+      "final_checkpoint": "corridor_dqn_peak_final.zip",
+      "final_checkpoint_sha256": "a8e6855385fa2509196baca24ea7936fc5e5abbe2b6923ba32196613386c0941"
+    },
+    "curve": {
+      "episodes_reviewed": 83,
+      "decision_limit": 100000,
+      "criterion": "at least 40 complete episodes; last-two-10-episode mean drift <=10%, last-20 CV <=25%, final mean improves on initial mean",
+      "interpretation": "empirical training-curve plateau heuristic, not a proof of optimality or safety",
+      "initial_10_mean": -30374.4,
+      "final_10_mean": -30249.1,
+      "last_20_cv": 0.01045345438482572,
+      "last_two_10_relative_drift": 0.0019126279773131639,
+      "plateau_detected": true
+    }
+  },
+  "peak_lr3e4": {
+    "manifest": {
+      "scenario": "peak",
+      "total_timesteps": 100000,
+      "model_seed": 142,
+      "training_seeds": [
+        142,
+        143,
+        144
+      ],
+      "feature_schema": "all-lanes-cardinal-served-fraction-17-v1",
+      "timing": {
+        "decision_interval_s": 3.0,
+        "min_green_s": 12.0,
+        "max_green_s": 60.0,
+        "yellow_floor_s": 6.0
+      },
+      "hyperparameters": {
+        "learning_rate": 0.0003,
+        "buffer_size": 50000,
+        "learning_starts": 1000,
+        "batch_size": 64,
+        "train_freq": 4,
+        "target_update_interval": 1000,
+        "exploration_fraction": 0.5,
+        "exploration_final_eps": 0.05,
+        "seed": 142
+      },
+      "validation_seeds": [
+        101,
+        102,
+        103
+      ],
+      "test_seeds": [
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "training_control_tls_ids": [
+        "cluster_11484393853_11484393854_11484393855_11484393856_#11more"
+      ],
+      "source_sha256": {
+        "rl_agent/corridor.py": "20a2a134fa2107d6f55476a3193b2ec3d674792586923421e0890d616b0cc684",
+        "rl_agent/corridor_env.py": "28720826b3424275e5a7dafa5efb55719daef04db6cf0b4222fe66ad7fe03842",
+        "rl_agent/train_corridor.py": "7dc2be958c54f81e9c8b06b28f7594726bc01a313a2a8b30d95124c4b4285d14"
+      },
+      "input_sha256": {
+        "network/corridor.net.xml": "c5b50b1e897ae658bf0ddb5c6dad83e7f8abb14f5e8c93cf3ea2569c57b6c943",
+        "scenarios/model_validation/fixture_manifest.json": "d4ef0c2b4631ff842c5cbdc3f761988be48cfa22ed5af3f788045784885b53c7",
+        "scenarios/model_validation/peak.rou.xml": "6a1fb53a5c1cdc7ca0b9574e7b433a9fb28d428267b5ec7c8d3b8b6484291e97",
+        "scenarios/model_validation/peak.sumocfg": "8d1b5233ffdd8b2280417e0c97bf59872dab31bc20b39a5f4cb7b33818db3d5d",
+        "scenarios/model_validation/vtypes.rou.xml": "2eefdef1abd254bb805121a1abeed19b22bb3f17cb7a0e96185c9e8947a306ee"
+      },
+      "status": "complete",
+      "actual_timesteps": 100000,
+      "optimizer_updates": 24750,
+      "final_checkpoint": "corridor_dqn_peak_final.zip",
+      "final_checkpoint_sha256": "6bce9a2116f6de88cee55cf2566f2b571ed8fcd1a5c4f33fa9b7bf208b59cd1b"
+    },
+    "curve": {
+      "episodes_reviewed": 83,
+      "decision_limit": 100000,
+      "criterion": "at least 40 complete episodes; last-two-10-episode mean drift <=10%, last-20 CV <=25%, final mean improves on initial mean",
+      "interpretation": "empirical training-curve plateau heuristic, not a proof of optimality or safety",
+      "initial_10_mean": -31028.0,
+      "final_10_mean": -36718.2,
+      "last_20_cv": 0.36596930310431797,
+      "last_two_10_relative_drift": 0.1808786604044504,
+      "plateau_detected": false
+    }
+  },
+  "offpeak_lr1e3": {
+    "manifest": {
+      "scenario": "offpeak",
+      "total_timesteps": 100000,
+      "model_seed": 42,
+      "training_seeds": [
+        42,
+        43,
+        44
+      ],
+      "feature_schema": "all-lanes-cardinal-served-fraction-17-v1",
+      "timing": {
+        "decision_interval_s": 3.0,
+        "min_green_s": 12.0,
+        "max_green_s": 60.0,
+        "yellow_floor_s": 6.0
+      },
+      "hyperparameters": {
+        "learning_rate": 0.001,
+        "buffer_size": 50000,
+        "learning_starts": 1000,
+        "batch_size": 64,
+        "train_freq": 4,
+        "target_update_interval": 1000,
+        "exploration_fraction": 0.3,
+        "exploration_final_eps": 0.05,
+        "seed": 42
+      },
+      "validation_seeds": [
+        101,
+        102,
+        103
+      ],
+      "test_seeds": [
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "training_control_tls_ids": [
+        "cluster_11484393853_11484393854_11484393855_11484393856_#11more"
+      ],
+      "source_sha256": {
+        "rl_agent/corridor.py": "3c0b17148cfc97c2e3c0566757b95ce3ef450deade42654637988560bfe5ecf3",
+        "rl_agent/corridor_env.py": "28720826b3424275e5a7dafa5efb55719daef04db6cf0b4222fe66ad7fe03842",
+        "rl_agent/train_corridor.py": "57cb8e1fd1d0e92295035a07c2618a22b5dd58efb6f29fef742f80cbcb049c1a"
+      },
+      "input_sha256": {
+        "network/corridor.net.xml": "c5b50b1e897ae658bf0ddb5c6dad83e7f8abb14f5e8c93cf3ea2569c57b6c943",
+        "scenarios/model_validation/fixture_manifest.json": "d4ef0c2b4631ff842c5cbdc3f761988be48cfa22ed5af3f788045784885b53c7",
+        "scenarios/model_validation/offpeak.rou.xml": "8b4f22774f775012e6821f8972bf11416ffc403f4fb90370b019eab1d0554311",
+        "scenarios/model_validation/offpeak.sumocfg": "1e5acbdb34a033fb9aa872369ffa0a66dbaf651244fb9a7da631c8f37d04e107",
+        "scenarios/model_validation/vtypes.rou.xml": "2eefdef1abd254bb805121a1abeed19b22bb3f17cb7a0e96185c9e8947a306ee"
+      },
+      "status": "complete",
+      "actual_timesteps": 100000,
+      "optimizer_updates": 24750,
+      "final_checkpoint": "corridor_dqn_offpeak_final.zip",
+      "final_checkpoint_sha256": "c2bd5a1509e4f26a97abcfac0a67d54633255c111e07cb8f94dca852460129ec"
+    },
+    "curve": {
+      "episodes_reviewed": 83,
+      "decision_limit": 100000,
+      "criterion": "at least 40 complete episodes; last-two-10-episode mean drift <=10%, last-20 CV <=25%, final mean improves on initial mean",
+      "interpretation": "empirical training-curve plateau heuristic, not a proof of optimality or safety",
+      "initial_10_mean": -13790.4,
+      "final_10_mean": -11595.2,
+      "last_20_cv": 0.06206277285499909,
+      "last_two_10_relative_drift": 0.07973237611423695,
+      "plateau_detected": true
+    }
+  },
+  "offpeak_lr3e4": {
+    "manifest": {
+      "scenario": "offpeak",
+      "total_timesteps": 100000,
+      "model_seed": 142,
+      "training_seeds": [
+        142,
+        143,
+        144
+      ],
+      "feature_schema": "all-lanes-cardinal-served-fraction-17-v1",
+      "timing": {
+        "decision_interval_s": 3.0,
+        "min_green_s": 12.0,
+        "max_green_s": 60.0,
+        "yellow_floor_s": 6.0
+      },
+      "hyperparameters": {
+        "learning_rate": 0.0003,
+        "buffer_size": 50000,
+        "learning_starts": 1000,
+        "batch_size": 64,
+        "train_freq": 4,
+        "target_update_interval": 1000,
+        "exploration_fraction": 0.5,
+        "exploration_final_eps": 0.05,
+        "seed": 142
+      },
+      "validation_seeds": [
+        101,
+        102,
+        103
+      ],
+      "test_seeds": [
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "training_control_tls_ids": [
+        "cluster_11484393853_11484393854_11484393855_11484393856_#11more"
+      ],
+      "source_sha256": {
+        "rl_agent/corridor.py": "20a2a134fa2107d6f55476a3193b2ec3d674792586923421e0890d616b0cc684",
+        "rl_agent/corridor_env.py": "28720826b3424275e5a7dafa5efb55719daef04db6cf0b4222fe66ad7fe03842",
+        "rl_agent/train_corridor.py": "7dc2be958c54f81e9c8b06b28f7594726bc01a313a2a8b30d95124c4b4285d14"
+      },
+      "input_sha256": {
+        "network/corridor.net.xml": "c5b50b1e897ae658bf0ddb5c6dad83e7f8abb14f5e8c93cf3ea2569c57b6c943",
+        "scenarios/model_validation/fixture_manifest.json": "d4ef0c2b4631ff842c5cbdc3f761988be48cfa22ed5af3f788045784885b53c7",
+        "scenarios/model_validation/offpeak.rou.xml": "8b4f22774f775012e6821f8972bf11416ffc403f4fb90370b019eab1d0554311",
+        "scenarios/model_validation/offpeak.sumocfg": "1e5acbdb34a033fb9aa872369ffa0a66dbaf651244fb9a7da631c8f37d04e107",
+        "scenarios/model_validation/vtypes.rou.xml": "2eefdef1abd254bb805121a1abeed19b22bb3f17cb7a0e96185c9e8947a306ee"
+      },
+      "status": "complete",
+      "actual_timesteps": 100000,
+      "optimizer_updates": 24750,
+      "final_checkpoint": "corridor_dqn_offpeak_final.zip",
+      "final_checkpoint_sha256": "8defb9796fc353fca5967e77215741dbdfb553a87c91be185f99dd08e8cc32a9"
+    },
+    "curve": {
+      "episodes_reviewed": 83,
+      "decision_limit": 100000,
+      "criterion": "at least 40 complete episodes; last-two-10-episode mean drift <=10%, last-20 CV <=25%, final mean improves on initial mean",
+      "interpretation": "empirical training-curve plateau heuristic, not a proof of optimality or safety",
+      "initial_10_mean": -14120.5,
+      "final_10_mean": -14122.0,
+      "last_20_cv": 0.20785577784621773,
+      "last_two_10_relative_drift": 0.12158113334286601,
+      "plateau_detected": false
+    }
+  },
+  "v2": {
+    "curve": {
+      "episodes_reviewed": 83,
+      "decision_limit": 100000,
+      "criterion": "at least 40 complete episodes; last-two-10-episode mean drift <=10%, last-20 CV <=25%, final mean improves on initial mean",
+      "interpretation": "empirical training-curve plateau heuristic, not a proof of optimality or safety",
+      "initial_10_mean": -22304.6,
+      "final_10_mean": -20722.2,
+      "last_20_cv": 0.05700963145483151,
+      "last_two_10_relative_drift": 0.009896639896279686,
+      "plateau_detected": true
+    },
+    "feature_note": "Legacy 13-feature primary-lane reward; absolute returns are not comparable with the new all-lane models."
+  }
+}

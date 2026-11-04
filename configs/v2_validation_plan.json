@@ -1,0 +1,75 @@
+{
+  "validation_seeds": [
+    101,
+    102,
+    103
+  ],
+  "test_seeds": [
+    11,
+    12,
+    13,
+    14,
+    15
+  ],
+  "expected_completed": {
+    "peak": 1000,
+    "offpeak": 500
+  },
+  "selection_rule": "Require no collision detections/XML events/teleports, no unfinished or pending trips and exact expected completions on every validation seed; minimize mean completed-trip waiting time across validation seeds; tie-break lower training steps then candidate ID. Test seeds are excluded from selection.",
+  "config": "configs/evaluation.v2.example.json",
+  "training_seeds": [
+    42
+  ],
+  "candidates": [
+    {
+      "id": "v2_20000",
+      "checkpoint": "rl_agent/models/dqn_traffic_sumo_v2_20000_steps.zip",
+      "steps": 20000,
+      "monitor": "rl_agent/models/training_runs/20261103T234123_249581Z/monitor.csv",
+      "scenarios": [
+        "peak",
+        "offpeak"
+      ]
+    },
+    {
+      "id": "v2_40000",
+      "checkpoint": "rl_agent/models/dqn_traffic_sumo_v2_40000_steps.zip",
+      "steps": 40000,
+      "monitor": "rl_agent/models/training_runs/20261103T234123_249581Z/monitor.csv",
+      "scenarios": [
+        "peak",
+        "offpeak"
+      ]
+    },
+    {
+      "id": "v2_60000",
+      "checkpoint": "rl_agent/models/dqn_traffic_sumo_v2_60000_steps.zip",
+      "steps": 60000,
+      "monitor": "rl_agent/models/training_runs/20261103T234123_249581Z/monitor.csv",
+      "scenarios": [
+        "peak",
+        "offpeak"
+      ]
+    },
+    {
+      "id": "v2_80000",
+      "checkpoint": "rl_agent/models/dqn_traffic_sumo_v2_80000_steps.zip",
+      "steps": 80000,
+      "monitor": "rl_agent/models/training_runs/20261103T234123_249581Z/monitor.csv",
+      "scenarios": [
+        "peak",
+        "offpeak"
+      ]
+    },
+    {
+      "id": "v2_100000",
+      "checkpoint": "rl_agent/models/dqn_traffic_sumo_v2_100000_steps.zip",
+      "steps": 100000,
+      "monitor": "rl_agent/models/training_runs/20261103T234123_249581Z/monitor.csv",
+      "scenarios": [
+        "peak",
+        "offpeak"
+      ]
+    }
+  ]
+}

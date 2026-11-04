@@ -1,0 +1,23 @@
+{
+  "unit_tests_passed": 86,
+  "upstream_deprecation_warnings": 5,
+  "full_training_decisions": 500000,
+  "optimizer_updates": 123750,
+  "v2_validation_runs": 30,
+  "corridor_validation_runs": 60,
+  "v2_test_runs": 30,
+  "corridor_test_runs": 30,
+  "test_collision_events": 0,
+  "test_teleports": 0,
+  "test_unfinished_trips": 0,
+  "phase_dwells_audited": 21665,
+  "phase_violations": 0,
+  "controlled_signal_sites": 6,
+  "current_dashboard_script_exceptions": 0,
+  "current_dashboard_errors": 0,
+  "model_tensors_identical_after_attaching_validation_metadata": true,
+  "staged_checkpoint_bytes_match_published_hashes": true,
+  "training_source_snapshot_hashes_verified": true,
+  "real_sumo_quick_test": "3 controllers x 180 s",
+  "standalone_policy_command": "180 s verified"
+}

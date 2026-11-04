@@ -17,3 +17,4 @@ demonstrations/
 
 # Trainer logs are local; genuine checkpoints are reviewed separately.
 /rl_agent/models/training_runs/
+/rl_agent/models/dqn_traffic_sumo_v2_*_steps.zip

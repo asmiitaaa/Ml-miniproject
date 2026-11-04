@@ -62,6 +62,8 @@ def main():
         for controller in args.controllers:
             folder=out/controller;folder.mkdir();(folder/'frames').mkdir()
             options=dict(cfg['controllers'][controller])
+            if controller=='dqn' and cfg['scenarios'][args.scenario].get('dqn_checkpoint'):
+                options['checkpoint']=cfg['scenarios'][args.scenario]['dqn_checkpoint']
             netcopy=folder/'controlled.net.xml';prepare_network(network,netcopy,controller,options)
             with socket.socket() as port_socket:
                 port_socket.bind(('127.0.0.1',0));port=port_socket.getsockname()[1]
@@ -81,7 +83,7 @@ def main():
                     view=connection.gui.getIDList()[0]
                     tls=options.get('tls_id') or next(iter(options.get('control_tls_ids',[])),None)
                     junction=next((n for n in ET.parse(network).findall('junction') if n.get('id')==tls),None)
-                    if junction is not None:
+                    if junction is not None and len(options.get('control_tls_ids',[]))<=1:
                         x,y=float(junction.get('x')),float(junction.get('y'))
                         boundary=[x-150,y-150,x+150,y+150]
                     else:boundary=[v for corner in connection.simulation.getNetBoundary() for v in corner]

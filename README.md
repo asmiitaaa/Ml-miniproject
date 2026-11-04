@@ -1,5 +1,21 @@
 # Dynamic Traffic Congestion Control: Soham's Evaluation Work
 
+## Current trained agent
+
+Ananyaraj's agent work is now implemented and trained as well. Use the new independent corridor policy and selected peak/off-peak models:
+
+```powershell
+Set-Location C:\Users\soham\Ml-miniproject
+.\.venv\Scripts\python.exe scripts\quick_test.py --config configs\evaluation.corridor.json
+.\.venv\Scripts\python.exe -m streamlit run dashboard.py -- --results report/training/corridor_results
+# Watch the actual selected model control all mapped signals for 300 seconds
+.\.venv\Scripts\python.exe scripts\preview_gui.py --config configs\evaluation.corridor.json --controllers dqn --scenario peak --seconds 300 --every 15 --delay-ms 0 --pace-ms 100
+```
+
+Read [the agent completion report](docs/ANANYARAJ_COMPLETION.md) and [CHANGES.md](CHANGES.md). Five full training runs total 500,000 DQN decisions. The corridor model uses a new 17-feature all-lane contract with an explicit, checked mapping of all six signal sites; the legacy 13-feature v2 model remains separate. Both families were evaluated in complete 30-run comparisons. All vehicles completed with no collision events or teleports in those tests. The corridor DQN reduced waiting relative to fixed-time but did not outperform the actuated baseline. Demand remains synthetic and uncalibrated.
+
+The remainder of this README documents the historical v1 evaluation. Its tables, model and demonstration have been preserved.
+
 Evaluation code, parsers, charts, Streamlit dashboard, genuine SUMO-GUI demonstration, literature audit, and IEEE report sources. The original network, vehicle definitions, teammate branch, and model weights are preserved.
 
 ## Run a test on this computer

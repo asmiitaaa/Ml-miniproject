@@ -1,0 +1,11 @@
+scenario,controller,baseline,metric,n_pairs,zero_or_missing_pairs,improvement_pct_mean,improvement_pct_std,status
+offpeak,actuated,fixed,avg_waiting_time_s,5,0,56.012227541291836,1.0417114771140725,PASS
+offpeak,actuated,fixed,avg_trip_duration_s,5,0,21.02026794315241,0.504822084154083,PASS
+offpeak,actuated,fixed,avg_queue_length,5,0,53.035126002491175,0.9741092736215045,PASS
+offpeak,actuated,fixed,max_queue_length,5,0,25.000000000000004,11.84508853698357,PASS
+offpeak,actuated,fixed,co2_kg,5,0,13.174435358717691,0.4634536197752353,PASS
+peak,actuated,fixed,avg_waiting_time_s,5,0,49.35665404008638,2.4729842243702667,PASS
+peak,actuated,fixed,avg_trip_duration_s,5,0,18.63245674169932,1.2119724902642637,PASS
+peak,actuated,fixed,avg_queue_length,5,0,46.7509322791304,2.2789349872514824,PASS
+peak,actuated,fixed,max_queue_length,5,0,24.230769230769234,14.069016040942211,PASS
+peak,actuated,fixed,co2_kg,5,0,11.234834300784806,0.8026380235182885,PASS

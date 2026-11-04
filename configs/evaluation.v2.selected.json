@@ -1,0 +1,65 @@
+{
+  "experiment_label": "uncalibrated-v2-model-validation",
+  "project_root": "..",
+  "duration_s": 3600,
+  "step_length_s": 1,
+  "lateral_resolution_m": 0.4,
+  "seeds": [
+    11,
+    12,
+    13,
+    14,
+    15
+  ],
+  "scenarios": {
+    "peak": {
+      "sumocfg": "scenarios/model_validation/peak.sumocfg",
+      "demand_files": [
+        "scenarios/model_validation/fixture_manifest.json"
+      ],
+      "dqn_checkpoint": "models/dqn_traffic_sumo_v2_peak_best.zip"
+    },
+    "offpeak": {
+      "sumocfg": "scenarios/model_validation/offpeak.sumocfg",
+      "demand_files": [
+        "scenarios/model_validation/fixture_manifest.json"
+      ],
+      "dqn_checkpoint": "models/dqn_traffic_sumo_v2_offpeak_best.zip"
+    }
+  },
+  "controllers": {
+    "fixed": {
+      "control_tls_ids": [
+        "cluster_11484393853_11484393854_11484393855_11484393856_#11more"
+      ]
+    },
+    "actuated": {
+      "control_tls_ids": [
+        "cluster_11484393853_11484393854_11484393855_11484393856_#11more"
+      ],
+      "min_green_s": 12,
+      "max_green_s": 60,
+      "max_gap_s": 3
+    },
+    "dqn": {
+      "control_tls_ids": [
+        "cluster_11484393853_11484393854_11484393855_11484393856_#11more"
+      ],
+      "checkpoint": "models/dqn_traffic_sumo_v2_peak_best.zip",
+      "factory": "traffic_eval.agent_adapter:create_controller",
+      "tls_id": "cluster_11484393853_11484393854_11484393855_11484393856_#11more",
+      "lane_ids": [
+        "24480656#3_0",
+        "794634832#0_0",
+        "794634831#1_0",
+        "631316440#0_0"
+      ],
+      "decision_interval_s": 3,
+      "min_green_s": 12,
+      "signal_mode": "training-replay",
+      "timing_profile": "v2",
+      "yellow_s": 6
+    }
+  },
+  "collision_action": "teleport"
+}

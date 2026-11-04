@@ -5,3 +5,4 @@
 *.mp4 binary
 scenarios/model_validation/* -text
 report/results/*.csv -text
+report/training/source_snapshots/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
